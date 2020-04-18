@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from './Card.js';
-import './CardsList.css';
+import '../styles/CardsList.css';
 
 const CardsList = (props) => {
-
+  console.log('list',props.recipes)
     return (        
             <div className='container'>
-              {props.robots.map((oneRobot) => <Card key={oneRobot.id} oneRobot={oneRobot}/>) }
+              {props.recipes.map((oneRecipe) => <Card key={oneRecipe.id} oneRecipe={oneRecipe}/>) }
             </div>
     )
 }

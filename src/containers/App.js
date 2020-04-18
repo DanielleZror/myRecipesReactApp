@@ -1,7 +1,9 @@
 import React from 'react';
-import './App.css';
+import '../styles/App.css';
 import Nav from '../components/Navbar';
 import CardsList from '../components/CardsList'
+import axios from 'axios';
+
 
 const filteredRobot=[{id:1,
                 name: 'danielle',
@@ -9,15 +11,30 @@ const filteredRobot=[{id:1,
                 {id:2,
                   name: 'danielle',
                   user: 'something'}]
-function App() {
-  return (
-    <div >
-      <header >
-       <Nav />
-       <CardsList robots ={filteredRobot} />
-      </header>
-    </div>
-  );
+export default class App extends React.Component  {
+  state = {
+    recipes: []
+  }
+
+  componentDidMount() {
+    axios.get(`/api/all`)
+      .then(res => {
+        const recipes = res.data;
+        this.setState({ recipes });
+        console.log(recipes)
+      })
+  }
+
+  render() {
+    return (
+      <div >
+        <header >
+        <Nav />
+        <CardsList recipes ={this.state.recipes} />
+        </header>
+      </div>
+    );
+  }
 }
 
-export default App;
+
