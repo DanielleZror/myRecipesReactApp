@@ -1,13 +1,16 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+import '../styles/SearchBox.css'
 
-const Search = ({searchfield, searchChange }) => {
+const Search = (props) => {
   
     return (
-        <Form inline>
-            <FormControl id="searchInput" type="text" placeholder="Search" className="mr-sm-2 submit_on_enter" onChange={searchChange} />
-        </Form>
+       
+        <div className="center mr-sm-2">
+            <input 
+                type="search"
+                placeholder="search your recipes"
+                onChange={props.onChange}/> 
+        </div>
     )
 }
 

@@ -3,34 +3,46 @@ import '../styles/App.css';
 import Nav from '../components/Navbar';
 import CardsList from '../components/CardsList'
 import axios from 'axios';
+import Search from '../components/Search';
 
 
-const filteredRobot=[{id:1,
-                name: 'danielle',
-                user: 'something'},
-                {id:2,
-                  name: 'danielle',
-                  user: 'something'}]
+
 export default class App extends React.Component  {
-  state = {
-    recipes: []
+
+  constructor() {
+    super()
+    this.state = {
+      recipes: [],
+      searchField: ''
+    }
   }
+  
 
   componentDidMount() {
     axios.get(`/api/all`)
       .then(res => {
         const recipes = res.data;
         this.setState({ recipes });
-        console.log(recipes)
       })
   }
 
+   OnChangeSearch = (searchValue) => {
+    console.log(searchValue.target.value)
+    this.setState({searchField: searchValue.target.value})
+  }
+
   render() {
+    const { recipes, searchField } = this.state;
+    console.log('reder', recipes)
+    const filteredRecipes = recipes.filter((recipe) =>{
+      return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
+    })
     return (
       <div >
         <header >
         <Nav />
-        <CardsList recipes ={this.state.recipes} />
+        <Search onChange = {this.OnChangeSearch}/>
+        <CardsList recipes ={filteredRecipes} />
         </header>
       </div>
     );

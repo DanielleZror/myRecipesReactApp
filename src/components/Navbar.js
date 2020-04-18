@@ -3,8 +3,8 @@ import logo from '../logo.png';
 import '../styles/Navbar.css'
 import Search from './Search.js'
 import Navbar from 'react-bootstrap/Navbar'
-// import Form from 'react-bootstrap/Form';
-// import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
 import Nav from 'react-bootstrap/Nav';
 
 const MyNavbar = () => {
@@ -20,11 +20,10 @@ const MyNavbar = () => {
                     <Nav.Link href="#all">All</Nav.Link>
                     <Nav.Link href="#add">Add</Nav.Link>
                 </Nav> 
-                {/* <Search/> */}
-                {/* <Form inline>
-                    <FormControl id="searchInput" type="text" placeholder="Search" className="mr-sm-2 submit_on_enter" />
+                <Form inline>
+                    <FormControl id="searchInput" type="text" placeholder="Search in all recipes" className="mr-sm-2 submit_on_enter" />
                     <a id="userName" className="nav-link disabled">danielle</a>
-                </Form> */}
+                </Form>
             </Navbar.Collapse>  
         </Navbar>
     )
