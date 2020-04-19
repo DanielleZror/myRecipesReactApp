@@ -7,11 +7,11 @@ import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom'
-import { requestAllRecipes, searchRecipes } from './reducers'
+import { requestAllRecipes, searchRecipes, requestByIdRecipe } from './reducers'
 
 import './styles/index.css';
 
-const rootReducers = combineReducers({requestAllRecipes, searchRecipes})
+const rootReducers = combineReducers({requestAllRecipes, searchRecipes, requestByIdRecipe})
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 
 ReactDOM.render(
