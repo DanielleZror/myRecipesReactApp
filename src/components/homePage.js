@@ -1,6 +1,6 @@
 import React from 'react';
-import img from '../food1.jpg'
-import CardsList from './cardsList'
+import CardsList from './cardsListHomePage'
+import Carousel from './carousel'
 
 
 const addRecipePage = () => {
@@ -10,13 +10,26 @@ const addRecipePage = () => {
                 TimeHours: "1",
                 TimeMinutes: "14",
                 Preparation: "soooo yam",
-                Img:img}]
+                Img:'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'},
+                {Name:'danielle',
+                _id:'1213333', 
+                Description:'heloooo',
+                TimeHours: "1",
+                TimeMinutes: "14",
+                Preparation: "soooo yam",
+                Img:'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'},
+                {Name:'danielle',
+                _id:'1213232413', 
+                Description:'heloooo',
+                TimeHours: "1",
+                TimeMinutes: "14",
+                Preparation: "soooo yam",
+                Img:'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'}]
     
     return (
         <div >
-            <header >
+            <Carousel/>
             <CardsList recipes ={arr} />
-            </header>
       </div>
     )
 }

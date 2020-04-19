@@ -3,12 +3,33 @@ import '../styles/allDetailsCard.css';
 import Ingredient from './Ingredient';
 
 const Card = (props) => {
-    console.log('detailscard', props.oneRecipe.Ingredients)
+    console.log(props.oneRecipe.Ingredients)
     return (
         <div className="recipe-card">
-            <aside >
-                <img alt={props.oneRecipe.Name} src={props.oneRecipe.Img}/>
-                <article>
+            <div className="thumbnail" >
+                <img  className="left" alt={props.oneRecipe.Name} src={props.oneRecipe.Img}/>
+            </div>
+            <div  className="right">
+                <h1>{props.oneRecipe.Name}</h1>
+                <h3>{props.oneRecipe.Description}</h3>
+                <div classNmae="separator"></div>
+                <p className="preparation">
+                        <span className="title">Preparation method:</span>
+                        <br/>
+                        <span className="text">{props.oneRecipe.Preparation}</span>
+                    </p>
+            </div>
+            <ul>
+                <li>
+                    <i className="fa fa-eye fa-2x" />
+                    
+                </li>
+                <li ><i className="fas fa-clock"></i></li>
+                <li>{props.oneRecipe.TimeHours +" Hours " + props.oneRecipe.TimeMinutes + " Minuts"} </li>
+            </ul>
+            
+            
+                {/* <article>
                     <h2>{props.oneRecipe.Name}</h2>
                     <h3>{props.oneRecipe.Description}</h3>
                     <ul>
@@ -25,8 +46,8 @@ const Card = (props) => {
                         <br/>
                         <span className="text">{props.oneRecipe.Preparation}</span>
                     </p>
-                </article>   
-            </aside>
+                </article>    */}
+            
         </div>
     )
 }

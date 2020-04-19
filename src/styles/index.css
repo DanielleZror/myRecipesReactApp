@@ -4,6 +4,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #4d153699 !important;
+  justify-content:center;
+  align-items: center;
+  /* 212121 */
 }
 
 code {

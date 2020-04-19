@@ -3,9 +3,7 @@ import '../styles/Card.css';
 import {Route, Link} from 'react-router-dom';
 
 
-const Card = (props) => {
-    console.log('card', props.oneRecipe)
-    
+const Card = (props) => {    
     return (
         <Route>
             <div className='cardStyle '>

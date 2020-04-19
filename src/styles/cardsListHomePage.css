@@ -1,0 +1,20 @@
+.container{
+    width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 15px;
+    margin: 0 auto;
+  }
+
+  .bestRecipes{
+    visibility: visible;
+    animation-name: fadeIn;
+    background: linear-gradient(#4d153699,white);
+    padding: 150px 0;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    float: left;
+    width: 100%;
+  
+  }

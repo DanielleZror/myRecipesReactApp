@@ -8,14 +8,13 @@ import Search from './searchInMyRecipes.js';
 
 const mapStateToProps = (state) => {
   return {
-    recipes: state.requestAllRecipes.recipes,
-    isPending: state.requestAllRecipes.isPending,
-    searchField: state.searchRecipes.searchField
+    recipes: state.all.recipes,
+    isPending: state.all.isPending,
+    searchField: state.search.searchField
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log("mapDispatchToProps", dispatch)
   return {  
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
     onRequestAllRecipes: () => dispatch(requestAllRecipes())
@@ -29,20 +28,16 @@ class allRecipesPage extends React.Component  {
   }
 
   render() {
-    console.log("before", this.props)
     const { recipes, searchField,onSearchChange, isPending } = this.props;
-    console.log('reder', recipes)
     const filteredRecipes = recipes.filter((recipe) =>{
       return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
     })
     return (
       <div >
-        <header >
         <Search onChange = {onSearchChange}/>
         {isPending ? <h1>loading</h1> :
         <CardsList recipes ={filteredRecipes} />
         }
-        </header>
       </div>
     );
   }

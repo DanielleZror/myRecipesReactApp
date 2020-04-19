@@ -1,15 +1,90 @@
 .recipe-card {
 	background: #fff;
 	margin: 4em auto;
-	width: 90%;
-    max-width: 600px;
+	/* width: 90%;
+    max-width: 600px; */
+    height: 450px;
+  width: 900px;
     border-radius: 4px;
     border: 1px solid #bbb;
     font-family: 'Quicksand', sans-serif;
     color: #7C3B61;
+    -webkit-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+    position: relative;
   }
  
 
+  .thumbnail {
+	float : left;
+	position : relative; 
+	left : 30px;
+	top : -30px;
+	height : 320px;
+	width : 530px;
+	-webkit-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 60px 0px rgba(0,0,0,0.75);
+  overflow: hidden;
+}
+
+.recipe-card  img.left{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: auto;
+	width: 100%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+/* Right side of the card */
+.right{
+	margin-left : 590px;
+	margin-right : 20px;
+}
+.recipe-card h2{
+	padding-top : 8px;
+	margin-right : 6px;
+	text-align : right;
+	font-size : 0.8rem;
+  text-transform: capitalize;
+  color: #63555d !important;
+}
+
+.separator{
+	margin-top : 10px;
+  border : 1px solid #C3C3C3;
+}
+
+.recipe-card p{
+	text-align: justify;
+	padding-top : 10px;
+	font-size : 0.95rem;
+	line-height: 150%;
+	color : #4B4B4B;
+}
+.recipe-card h1
+{	padding-top : 15px;
+	font-size : 1.3rem;
+  color : #4B4B4B;
+    font-weight: 900 !important;
+    text-transform: capitalize;
+}
+.recipe-card ul{
+  margin-left : 250px;
+}
+
+.recipe-card li{
+	display: inline;
+	list-style: none;
+	padding-right: 40px;
+  color : #7B7B7B;
+}
+
+/* 
 aside {
     position: relative;
 }
@@ -74,4 +149,4 @@ text-transform: capitalize;
 
 .preparation {
     margin: 1em 0 0.5em;
-}
+} */

@@ -13,7 +13,6 @@ import {
   }
   
   export const searchRecipes = (state=initialStateSearch, action={}) => {
-    console.log("searchRecipes",state)
     switch (action.type) {
       case CHANGE_SEARCH_FIELD:
         return Object.assign({}, state, {searchField: action.payload})
@@ -47,7 +46,7 @@ const initialStateRecipes = {
     error: ''
   }
   
-  export const requestByIdRecipe = (state=initialStateRecipeById, action={}) => {
+  export const requestByIdRecipe = (state=initialStateRecipeById, action) => {
     switch (action.type) {
       case REQUEST_BY_ID_RECIPES_PENDING:
         return Object.assign({}, state, {isPending: true})

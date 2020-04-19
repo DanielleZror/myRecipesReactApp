@@ -1,5 +1,8 @@
 .cardStyle{
     background-color: white;
+    width: 270px;
+    height: 320px;
+    position: relative;
     border-radius: 4px;
     border: 1px solid #bbb;
     font-size: small;
@@ -7,6 +10,7 @@
     transition: all 0.3s linear;   
     font-family: 'Quicksand', sans-serif;
     text-transform: capitalize;
+    margin: 0 auto;
 }
 
 .text-part h5, .text-part h3{
@@ -64,10 +68,3 @@
     border-color: #CB8EB2;
   }
   
-  /* .btn{
-    background: #7C3B61;
-    border-color: #CB8EB2 !important;
-    color: white !important;
-    border-radius: 20px !important;
-  }
-   */

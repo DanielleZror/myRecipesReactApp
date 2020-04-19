@@ -2,65 +2,33 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
 import {requestByIdRecipe} from '../actions'
-import axios from 'axios';
-import img from '../food1.jpg'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    recipe: state.requestByIdRecipe.recipe,
-    isPending: state.requestByIdRecipe.isPending,
+    recipe: state.byid.recipe,
+    isPending: state.byid.isPending
+    ,id: ownProps
   }
 }
 
-const mapDispatchToProps = (dispatch ,id) => {
-  console.log("mapDispatchToProps", dispatch)
+const mapDispatchToProps = (dispatch) => {
   return {  
-    onRequestByIdRecipe: () => dispatch(requestByIdRecipe(id))
+    onRequestByIdRecipe: (id) => {dispatch(requestByIdRecipe(id))}
   }
 }
 
 class viewRecipePage extends React.Component  {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //       id: props.match.params.id,
-    //       recipe: []
-    //     }
-    //   }
-
+ 
     componentDidMount() {
-        // axios.get(`/api/byID`, { params: {
-        //     id: this.state.id}
-        //   })
-        //   .then(res => {
-        //     const recipe = res.data;
-        //     this.setState({ recipe});
-        //   })
-        this.props.onRequestByIdRecipe();
+        this.props.onRequestByIdRecipe(this.props.match.params.id);
       }
 
       render() {
-        // const arr = {Name:'danielle',
-        // _id:'121313', 
-        // Description:'heloooo',
-        // TimeHours: "1",
-        // TimeMinutes: "14",
-        // Preparation: "soooo yam",
-        // Img:img,
-        // Ingredients: [
-        //   {Amount: '12',
-        //   Unit: 'spoons',
-        //   Item:'suger'},
-        //    {Amount: '12',
-        //    Unit: 'spoons',
-        //    Item:'suger'}
-        // ]}
-
         const { recipe, isPending  } = this.props;
-        console.log('view', recipe)
+        console.log('view', this.props)
         return (
           <div >
-            {isPending ? <h1>Loading</h1> :
+            {isPending ? <h1>Loading</h1> : 
               <DetailsCard oneRecipe={recipe}/>
             }
           </div>

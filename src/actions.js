@@ -19,7 +19,7 @@ import {
       .catch(error => dispatch({ type: REQUEST_RECIPES_FAILED, payload: error }))
   }
 
-  export const requestByIdRecipe = () => (dispatch, id) => {
+  export const requestByIdRecipe = (id) => (dispatch) => {
     dispatch({ type: REQUEST_BY_ID_RECIPES_PENDING })
     axios.get(`/api/byID`, {params: {
                     id: id}})
