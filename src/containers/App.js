@@ -1,50 +1,34 @@
 import React from 'react';
 import '../styles/App.css';
-import Nav from '../components/Navbar';
-import CardsList from '../components/CardsList'
-import axios from 'axios';
-import Search from '../components/Search';
-
+import Nav from '../components/navbar';
+import {Switch, Route } from 'react-router-dom';
+import All from '../components/allRecipesPage'
+import Add from '../components/addRecipePage'
+import Home from '../components/homePage'
+import RecipePage from '../components/viewRecipePage'
+import notFound from '../pageNotFound'
 
 
 export default class App extends React.Component  {
 
-  constructor() {
-    super()
-    this.state = {
-      recipes: [],
-      searchField: ''
-    }
-  }
-  
 
-  componentDidMount() {
-    axios.get(`/api/all`)
-      .then(res => {
-        const recipes = res.data;
-        this.setState({ recipes });
-      })
-  }
-
-   OnChangeSearch = (searchValue) => {
-    console.log(searchValue.target.value)
-    this.setState({searchField: searchValue.target.value})
-  }
-
-  render() {
-    const { recipes, searchField } = this.state;
-    console.log('reder', recipes)
-    const filteredRecipes = recipes.filter((recipe) =>{
-      return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
-    })
+  render() { 
     return (
-      <div >
-        <header >
-        <Nav />
-        <Search onChange = {this.OnChangeSearch}/>
-        <CardsList recipes ={filteredRecipes} />
-        </header>
-      </div>
+      <Route>
+        <div >
+          <header >
+            <Nav />
+          </header>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/All' component={All} />     
+            <Route path='/Add' component={Add} />
+            <Route path={`/recipe/:id`} component={RecipePage}></Route>
+            {/* <Route path='/Saved' component={Saved} /> */}
+            <Route component={notFound}/>
+          </Switch>
+        </div>
+      </Route>
     );
   }
 }

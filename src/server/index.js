@@ -73,6 +73,7 @@ app.get('/api/search', function (req, res) {
 })
 
 app.get('/api/byID', function (req, res) {
+    console.log('server', req.query.id)
     var query = { _id: ObjectId( req.query.id), userID: req.query.userID };
     selectFromDB(sendRes, query);
     function sendRes(result) {

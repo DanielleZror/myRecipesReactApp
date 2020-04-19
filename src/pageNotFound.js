@@ -1,0 +1,15 @@
+import React from 'react';
+
+
+const addRecipePage = () => {
+
+    
+    return (
+            <div >
+                <h1>Not found</h1>
+            </div>
+    )
+}
+
+export default addRecipePage;
+

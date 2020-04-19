@@ -6,8 +6,14 @@
     text-align: center;
     transition: all 0.3s linear;   
     font-family: 'Quicksand', sans-serif;
+    text-transform: capitalize;
 }
 
+.text-part h5, .text-part h3{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .card-img {
     width: 100%;
     height: auto;
@@ -58,10 +64,10 @@
     border-color: #CB8EB2;
   }
   
-  .btn{
+  /* .btn{
     background: #7C3B61;
     border-color: #CB8EB2 !important;
     color: white !important;
     border-radius: 20px !important;
   }
-  
+   */
