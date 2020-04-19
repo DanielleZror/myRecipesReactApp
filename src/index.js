@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom'
-
+import { requestAllRecipes, searchRecipes } from './reducers'
 
 import './styles/index.css';
 
+const rootReducers = combineReducers({requestAllRecipes, searchRecipes})
+const store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
@@ -19,3 +27,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+

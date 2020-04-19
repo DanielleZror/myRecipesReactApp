@@ -1,4 +1,6 @@
 import React from 'react';
+// import { connect } from 'react-redux';
+// import {requestAllRecipes} from '../actions'
 import '../styles/App.css';
 import Nav from '../components/navbar';
 import {Switch, Route } from 'react-router-dom';
@@ -8,10 +10,7 @@ import Home from '../components/homePage'
 import RecipePage from '../components/viewRecipePage'
 import notFound from '../pageNotFound'
 
-
-export default class App extends React.Component  {
-
-
+class App extends React.Component  {
   render() { 
     return (
       <Route>
@@ -34,3 +33,4 @@ export default class App extends React.Component  {
 }
 
 
+export default App
