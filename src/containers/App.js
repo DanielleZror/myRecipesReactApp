@@ -1,13 +1,11 @@
 import React from 'react';
-// import { connect } from 'react-redux';
-// import {requestAllRecipes} from '../actions'
 import '../styles/App.css';
 import Nav from '../components/navbar';
 import {Switch, Route } from 'react-router-dom';
-import All from '../components/allRecipesPage'
-import Add from '../components/addRecipePage'
-import Home from '../components/homePage'
-import RecipePage from '../components/viewRecipePage'
+import All from '../components/AllRecipesPage/allRecipesPage'
+import Add from '../components/AddRecipePage/addRecipePage'
+import Home from '../components/HomePage/homePage'
+import RecipePage from '../components/ViewOneRecipePage/viewRecipePage'
 import notFound from '../pageNotFound'
 
 class App extends React.Component  {

@@ -1,9 +1,7 @@
 import React from 'react';
-import '../styles/App.css';
 import { connect } from 'react-redux';
-import {setSearchField, requestAllRecipes} from '../actions'
-import CardsList from './cardsList.js'
-import axios from 'axios';
+import {setSearchField, requestAllRecipes} from '../../actions'
+import CardsList from './cardsListAllPage.js'
 import Search from './searchInMyRecipes.js';
 
 const mapStateToProps = (state) => {

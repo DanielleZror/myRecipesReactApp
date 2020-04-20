@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/carousel.css';
+import './carousel.css';
 import Carousel from 'react-bootstrap/Carousel'
 
 const mainCarousel = () => {

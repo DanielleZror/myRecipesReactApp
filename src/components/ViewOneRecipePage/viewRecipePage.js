@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
-import {requestByIdRecipe} from '../actions'
+import {requestByIdRecipe} from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {

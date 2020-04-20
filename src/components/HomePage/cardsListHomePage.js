@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './cardHomePage.js';
-import '../styles/cardsListHomePage.css';
+import './cardsListHomePage.css';
 
 const CardsList = (props) => {
     return (        

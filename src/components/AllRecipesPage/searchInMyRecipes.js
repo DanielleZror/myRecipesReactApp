@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/SearchBox.css'
+import './SearchBox.css'
 
 const Search = (props) => {
   

@@ -1,12 +1,13 @@
 import React from 'react';
-import '../styles/cardHomePage.css';
-import {Route, Link} from 'react-router-dom';
+import './cardHomePage.css';
+import {Link} from 'react-router-dom';
+import Card from 'react-bootstrap/Card'
 
-const Card = (props) => {    
+const CardHomePage = (props) => {    
     return (
         // <div>
-        //     <div className='box '>
-                <div className="card" >
+            <div className='box '>
+                <Card >
                     <div className="imgBx">
                         <img src= {props.oneRecipe.Img}/>
                     </div>
@@ -17,11 +18,11 @@ const Card = (props) => {
                         
                         </h2>
                     </div>
-                </div>
-        //     </div>
+                </Card>
+         </div>
         // </div>
     )
 }
 
-export default Card;
+export default CardHomePage;
 
