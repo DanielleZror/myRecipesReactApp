@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
-import CardPreparation from './cardAddPreparation.js';
-import CardDetails from './cardAddDetails.js';
 import './addRecipePage.css';
 
 

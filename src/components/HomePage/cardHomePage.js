@@ -8,7 +8,7 @@ const CardHomePage = (props) => {
         <div className='home-card'>
             <Card >
                 <div className="imgBx">
-                    <img src= {props.oneRecipe.Img}/>
+                    <img src= {props.oneRecipe.Img} alt={props.oneRecipe.Name}/>
                 </div>
                 <div className="details">
                     <h2>

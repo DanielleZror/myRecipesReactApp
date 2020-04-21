@@ -8,8 +8,7 @@ import {
     REQUEST_BY_ID_RECIPES_FAILED,
     ADD_RECIPES_PENDING,
     ADD_RECIPES_SUCCESS,
-    ADD_RECIPES_FAILED,
-    ADD_RECIPES_TRIGER
+    ADD_RECIPES_FAILED
    } from './constants'
 
    const initialStateSearch = {
@@ -84,16 +83,3 @@ const initialStateRecipes = {
     }
   }
 
-//   const initialStateTrigerAddRecipe = {
-//     recipe: []
-//   }
-  
-// export const setRecipeToAdd = (state=initialStateTrigerAddRecipe, action) => {
-//   console.log('action set', action)
-//   switch (action.type) {
-//     case ADD_RECIPES_TRIGER:
-//       return Object.assign({}, state, {recipe: action.payload})
-//     default:
-//       return state
-//   }
-// }

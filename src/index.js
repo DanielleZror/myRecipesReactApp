@@ -6,9 +6,8 @@ import thunkMiddleware from 'redux-thunk';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Router, Route, BrowserRouter} from 'react-router-dom'
-import { requestAllRecipes, searchRecipes, requestByIdRecipe, requestAddRecipe, setRecipeToAdd } from './reducers'
-// import { r, requestByIdRecipe } from './reducers'
+import { Route, BrowserRouter} from 'react-router-dom'
+import { requestAllRecipes, searchRecipes, requestByIdRecipe, requestAddRecipe } from './reducers'
 import { createLogger } from 'redux-logger';
 
 import './styles/index.css';
