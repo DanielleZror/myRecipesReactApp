@@ -6,7 +6,7 @@ import {Route, Link} from 'react-router-dom';
 const Card = (props) => {    
     return (
         <Route>
-            <div className='cardStyle '>
+            <div className='all-card'>
                 <aside>
                 <div className="card-img" style={{backgroundImage:`url(${props.oneRecipe.Img})`}}>
                     <div className="overlay">

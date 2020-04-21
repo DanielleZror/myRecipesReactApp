@@ -14,7 +14,10 @@ const clientId = '328129129619-hb9ssc9ajkdqrfr82dsmtn27jhkjrqdj.apps.googleuserc
 
 
 app.use(express.static(path.join(__dirname, '../../build')))
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb',
+    extended: true
+}));
 app.use(bodyParser.urlencoded({
     extended: true,
     limit: '50mb'
@@ -82,7 +85,7 @@ app.get('/api/byID', function (req, res) {
 })
 
 app.post('/api/add', function (req, res) {
-    addToDB(sendRes, req.body)
+    addToDB(sendRes, req.body.recipe)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()

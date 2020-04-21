@@ -9,8 +9,6 @@ input{
     font-family: 'Quicksand', sans-serif;
     border-radius: 4px !important;
     border-color: #CB8EB2 !important;
-    height: 40px;
-    width:  220px;
 }
 
 input:focus {

@@ -6,8 +6,8 @@ import thunkMiddleware from 'redux-thunk';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom'
-import { requestAllRecipes, searchRecipes, requestByIdRecipe } from './reducers'
+import { Router, Route, BrowserRouter} from 'react-router-dom'
+import { requestAllRecipes, searchRecipes, requestByIdRecipe, requestAddRecipe, setRecipeToAdd } from './reducers'
 // import { r, requestByIdRecipe } from './reducers'
 import { createLogger } from 'redux-logger';
 
@@ -15,13 +15,16 @@ import './styles/index.css';
 import './styles/animate.css'
 
 const logger = createLogger()
-const rootReducers = combineReducers({all:requestAllRecipes, search:searchRecipes, byid:requestByIdRecipe})
+const rootReducers = combineReducers({all:requestAllRecipes,
+                                    search:searchRecipes,
+                                    byid:requestByIdRecipe,
+                                    add:requestAddRecipe})
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+        <Route path="/" component={App}/>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')

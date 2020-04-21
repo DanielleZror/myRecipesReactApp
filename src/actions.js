@@ -6,7 +6,11 @@ import {
     REQUEST_RECIPES_FAILED,
     REQUEST_BY_ID_RECIPES_PENDING,
     REQUEST_BY_ID_RECIPES_SUCCESS,
-    REQUEST_BY_ID_RECIPES_FAILED
+    REQUEST_BY_ID_RECIPES_FAILED,
+    ADD_RECIPES_PENDING,
+    ADD_RECIPES_SUCCESS,
+    ADD_RECIPES_FAILED,
+    ADD_RECIPES_TRIGER
    } from './constants'
 
 
@@ -26,3 +30,13 @@ import {
       .then(res => dispatch({ type: REQUEST_BY_ID_RECIPES_SUCCESS, payload: res.data }))
       .catch(error => dispatch({ type: REQUEST_BY_ID_RECIPES_FAILED, payload: error }))
   }
+
+  export const requestAddRecipe = (recipe) => (dispatch) =>{
+    dispatch({ type: ADD_RECIPES_PENDING })
+    axios.post(`/api/add`,{
+      recipe: recipe})
+      .then(res => dispatch({ type: ADD_RECIPES_SUCCESS, payload: res.data }))
+      .catch(error => dispatch({ type: ADD_RECIPES_FAILED, payload: error }))
+  }
+
+  export const setRecipeToAdd = (recipe) => ({ type: ADD_RECIPES_TRIGER, payload: recipe })

@@ -1,18 +1,18 @@
-.bestRecipes .container{
-    width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 15px;
-    margin: 0 auto;
+.list-home-page .container{
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-bottom: 50px;
+  padding-top: 70px;
   }
 
-  .bestRecipes{
+  .list-home-page{
     visibility: visible;
     animation-name: fadeIn;
     background: linear-gradient(#4d153699,white);
-    padding: 150px 0;
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     width: 100%;
+    padding-bottom: 100px;
  }
