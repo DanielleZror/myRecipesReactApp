@@ -51,8 +51,8 @@ app.get('/api/all', function (req, res) {
     }
 })
 
-app.get('/api/search', function (req, res) {
 
+app.get('/api/search', function (req, res) {
     var regex = new RegExp("." + req.query.search + ".");
     var query = {
         $and: [
@@ -70,7 +70,6 @@ app.get('/api/search', function (req, res) {
 
     selectFromDB(sendRes, query);
     function sendRes(result) {
-        console.log(result)
         res.send(result);
     }
 })
@@ -90,10 +89,7 @@ app.post('/api/add', function (req, res) {
         res.send(insertID)
         res.status(200).end()
     }
-
 })
-
-
 
 function connectToDB(callback) {
     MongoClient.connect(uri, function (err, db) {

@@ -8,3 +8,8 @@
 .navbar-brand {
     padding: 0;
 }
+
+#logOut {
+    color: gray;
+    cursor: pointer;
+}

@@ -10,7 +10,9 @@ import {
     ADD_RECIPES_PENDING,
     ADD_RECIPES_SUCCESS,
     ADD_RECIPES_FAILED,
-    ADD_RECIPES_TRIGER
+    ADD_RECIPES_TRIGER,
+    LOGIN_SUCCESS,
+    LOGIN_FAILED
    } from './constants'
 
 
@@ -39,4 +41,13 @@ import {
       .catch(error => dispatch({ type: ADD_RECIPES_FAILED, payload: error }))
   }
 
-  export const setRecipeToAdd = (recipe) => ({ type: ADD_RECIPES_TRIGER, payload: recipe })
+
+  // export const requestLogin =()=> (dispatch) => {
+  //  axios.post(`/api/add`,{
+  //     recipe: recipe})
+  //     .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
+  //     .catch(error => dispatch({ type: LOGIN_FAILED, payload: error }))
+  // }
+
+
+  

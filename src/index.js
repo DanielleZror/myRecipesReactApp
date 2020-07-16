@@ -1,17 +1,17 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import App from './containers/App';
-import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, BrowserRouter} from 'react-router-dom'
-import { requestAllRecipes, searchRecipes, requestByIdRecipe, requestAddRecipe } from './reducers'
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-
+import thunkMiddleware from 'redux-thunk';
+import { requestAddRecipe, requestAllRecipes, requestByIdRecipe, searchRecipes } from './reducers';
+import * as serviceWorker from './serviceWorker';
+import App from './containers/App';
+import './styles/animate.css';
 import './styles/index.css';
-import './styles/animate.css'
+
 
 const logger = createLogger()
 const rootReducers = combineReducers({all:requestAllRecipes,
@@ -23,7 +23,7 @@ const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-        <Route path="/" component={App}/>
+        <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')

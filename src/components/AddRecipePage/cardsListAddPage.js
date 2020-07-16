@@ -2,9 +2,6 @@ import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
 import './addRecipePage.css';
 
-
-
-
 class CardsList extends React.Component  {
   constructor(props) {
     super(props);
@@ -29,7 +26,6 @@ class CardsList extends React.Component  {
         this.setState({label: file.name})
      }; reader.readAsDataURL(file);
   }
-
 
   onSubmit =(event) =>
   {

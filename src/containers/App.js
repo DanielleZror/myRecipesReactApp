@@ -1,31 +1,28 @@
 import React from 'react';
 import '../styles/App.css';
-import Nav from '../components/navbar';
-import {Switch, Route ,BrowserRouter} from 'react-router-dom';
-import All from '../components/AllRecipesPage/allRecipesPage'
-import Add from '../components/AddRecipePage/addRecipePage'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../components/HomePage/homePage'
-import RecipePage from '../components/ViewOneRecipePage/viewRecipePage'
-import notFound from '../pageNotFound'
+import Login from '../components/LoginPage/LoginPage';
 
-class App extends React.Component  {
-  render() { 
+class App extends React.Component {
+  render() {
+    const PrivateRoute = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (
+        (sessionStorage.userData)
+          ? <Component {...props} />
+          : <Redirect to={{
+            pathname: '/Login',
+            state: { from: props.location }
+          }} />
+      )} />
+    )
     return (
-      <BrowserRouter >
-        <div >
-          <header >
-            <Nav />
-          </header>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/All' component={All} />     
-            <Route path='/Add' component={Add} />
-            <Route path={`/recipe/:id`} component={RecipePage}></Route>
-            {/* <Route path='/Saved' component={Saved} /> */}
-            <Route component={notFound}/>
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <div >
+        <Router>
+          <Route path='/Login' component={Login} />
+          <PrivateRoute exact path='/' component={Home} />
+        </Router>
+      </div>
     );
   }
 }

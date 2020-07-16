@@ -4,6 +4,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 const mainCarousel = () => {
     return (       
+        // TODO - think what photo to put in the carousel
         <div className="carousel-backgound fadeOut" >
             {/* style={{backgroundImage:`url(https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg)`}} */}
                 <Carousel className="fadeInDown">

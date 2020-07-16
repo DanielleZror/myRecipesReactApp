@@ -9,7 +9,7 @@
   .list-home-page{
     visibility: visible;
     animation-name: fadeIn;
-    background: linear-gradient(#4d153699,white);
+    background: linear-gradient(#4d153699, #887882);
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;

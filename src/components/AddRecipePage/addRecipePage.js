@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CardListAddPage from './cardsListAddPage.js';
 import './addRecipePage.css'
-import {requestAddRecipe, setRecipeToAdd} from '../../actions'
+import {requestAddRecipe} from '../../actions'
 import {Route, Redirect} from 'react-router-dom';
 
 
@@ -17,7 +17,6 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = (dispatch) => {
     return {  
-      onSaveRequest: (event) => dispatch(setRecipeToAdd(event)),
       onRequestAddRecipe: (recipe) => dispatch(requestAddRecipe(recipe))
     }
   }
@@ -29,7 +28,7 @@ const mapStateToProps = (state) => {
     render(){
         return (
             <Route>
-                <CardListAddPage onSave={this.props.onRequestAddRecipe} onChange={this.props.onSaveRequest}></CardListAddPage>
+                <CardListAddPage onSave={this.props.onRequestAddRecipe} ></CardListAddPage>
                 {this.props.isSucess ?  <Redirect from="/add" to ={`/recipe/${this.props.newId}`}></Redirect> : <h1>try again</h1>}
        
             </Route>
