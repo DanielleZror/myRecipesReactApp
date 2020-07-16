@@ -9,9 +9,8 @@ const assert = require('assert');
 const fs = require('fs');
 let mydb
 const {ObjectId} = require('mongodb'); 
-const apiKey = 'AIzaSyDwEjpZAX4FpLlsPEQbu7QxTPbwOSBmxVU'
-const clientId = '328129129619-hb9ssc9ajkdqrfr82dsmtn27jhkjrqdj.apps.googleusercontent.com'
-
+const RECIPES_COLLECTION = "recipes"
+const USERS_COLLECTION = "users"
 
 app.use(express.static(path.join(__dirname, '../../build')))
 app.use(bodyParser.json({
@@ -33,18 +32,9 @@ app.listen(8000, function () {
     console.log("Listening on port " + 8000)
 });
 
-
-app.get('/api/apiKey', function (req, res) {
-    res.send(apiKey);
-})
-
-app.get('/api/clientId', function (req, res) {
-    res.send(clientId);
-})
-
 app.get('/api/all', function (req, res) {
     var query = { userID: req.query.userID };
-    selectFromDB(sendRes, query);
+    selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         console.log(result)
         res.send(result);
@@ -68,7 +58,7 @@ app.get('/api/search', function (req, res) {
         ]
     }
 
-    selectFromDB(sendRes, query);
+    selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result);
     }
@@ -77,27 +67,27 @@ app.get('/api/search', function (req, res) {
 app.get('/api/byID', function (req, res) {
     console.log('server', req.query.id)
     var query = { _id: ObjectId( req.query.id), userID: req.query.userID };
-    selectFromDB(sendRes, query);
+    selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
     }
 })
 
 app.post('/api/add', function (req, res) {
-    addToDB(sendRes, req.body.recipe)
+    addToDB(sendRes, req.body.recipe, RECIPES_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()
     }
 })
 
-function connectToDB(callback) {
+function connectToDB(callback, collectionName) {
     MongoClient.connect(uri, function (err, db) {
         if (!err) {
             console.log("connected");
             mydb = db
             dbo = db.db("recipes");
-            callback(dbo.collection("recipes"))
+            callback(dbo.collection(collectionName))
         }
     })
 }
@@ -109,8 +99,8 @@ function closeConnction() {
     }
 }
 
-function selectFromDB(callback, query) {
-    connectToDB(find)
+function selectFromDB(callback, query, collectionName) {
+    connectToDB(find, collectionName)
     function find(collection) {
         collection.find(query).toArray(function (err, result) {
             if (err) throw err;
@@ -120,8 +110,8 @@ function selectFromDB(callback, query) {
     }
 }
 
-function addToDB(callback, document) {
-    connectToDB(insert)
+function addToDB(callback, document, collectionName) {
+    connectToDB(insert, collectionName)
     function insert(collection) {
         collection.insertOne(document, function (err, result) {
             if (err) throw err;

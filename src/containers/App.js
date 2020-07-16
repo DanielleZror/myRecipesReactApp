@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Home from '../components/HomePage/homePage'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import Dashboard from '../components/Dashboard'
 import Login from '../components/LoginPage/LoginPage';
 
 class App extends React.Component {
@@ -20,7 +20,7 @@ class App extends React.Component {
       <div >
         <Router>
           <Route path='/Login' component={Login} />
-          <PrivateRoute exact path='/' component={Home} />
+          <PrivateRoute exact path='/' component={Dashboard} />
         </Router>
       </div>
     );

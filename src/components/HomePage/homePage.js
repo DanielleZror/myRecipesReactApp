@@ -2,11 +2,12 @@ import React from 'react';
 import CardsList from './cardsListHomePage'
 import Carousel from './carousel'
 import Nav from '../navbar';
+import { Link, Switch, Route, HashRouter, useHistory } from 'react-router-dom';
+import RecipePage from '../ViewOneRecipePage/viewRecipePage'
+import All from '../AllRecipesPage/allRecipesPage'
+import Add from '../AddRecipePage/addRecipePage'
 
 export class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const arr = [{
@@ -39,9 +40,6 @@ export class HomePage extends React.Component {
 
         return (
             <div >
-                <header >
-                    <Nav />
-                </header>
                 <Carousel />
                 <CardsList recipes={arr} />
             </div>

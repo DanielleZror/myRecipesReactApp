@@ -1,13 +1,10 @@
 import React from 'react';
 import logo from '../logo.png';
 import '../styles/Navbar.css'
-import { Link, Switch, Route, BrowserRouter, useHistory  } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar'
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+import { Link, Switch, Route, HashRouter, useHistory } from 'react-router-dom';
+import { Form, FormControl, Navbar } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import RecipePage from './ViewOneRecipePage/viewRecipePage'
-import notFound from '../pageNotFound'
 import All from './AllRecipesPage/allRecipesPage'
 import Add from './AddRecipePage/addRecipePage'
 
@@ -17,11 +14,11 @@ const MyNavbar = () => {
 
     const logout = () => {
         sessionStorage.removeItem("userData")
-        history.push('/Login')        
+        history.push('/Login')
     }
 
     return (
-        <BrowserRouter >
+     //   <HashRouter >
             <div>
                 <Navbar className="Navbar navbar-dark" expand="lg">
                     <Navbar.Brand as={Link} to="/">
@@ -45,14 +42,8 @@ const MyNavbar = () => {
                 </Navbar>
 
             </div>
-            <Switch>
-                <Route path='/All' component={All} />
-                <Route path='/Add' component={Add} />
-                <Route path={`/recipe/:id`} component={RecipePage}></Route>
-                {/* <Route path='/Saved' component={Saved} /> */}
-                {/* <Route component={notFound}/> */}
-            </Switch>
-        </BrowserRouter>
+            
+      //  </HashRouter>
     )
 }
 
