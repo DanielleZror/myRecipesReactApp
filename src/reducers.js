@@ -8,7 +8,10 @@ import {
     REQUEST_BY_ID_RECIPES_FAILED,
     ADD_RECIPES_PENDING,
     ADD_RECIPES_SUCCESS,
-    ADD_RECIPES_FAILED
+    ADD_RECIPES_FAILED,
+    ADD_USER_PENDING,
+    ADD_USER_SUCCESS,
+    ADD_USER_FAILED
    } from './constants'
 
    const initialStateSearch = {
@@ -64,7 +67,7 @@ const initialStateRecipes = {
 
 
   const initialStateAddRecipe = {
-    newId: '',
+    newID: '',
     isSucess: false,
     error: ''
   }
@@ -75,7 +78,7 @@ const initialStateRecipes = {
       case ADD_RECIPES_PENDING:
         return Object.assign({}, state, {isSucess: false})
       case ADD_RECIPES_SUCCESS:
-        return Object.assign({}, state, {newId: action.payload, isSucess: true})
+        return Object.assign({}, state, {newID: action.payload, isSucess: true})
       case ADD_RECIPES_FAILED:
         return Object.assign({}, state, {error: action.payload, isSucess: false})
       default:
@@ -83,3 +86,22 @@ const initialStateRecipes = {
     }
   }
 
+  const initialStateAddUser = {
+    newId: '',
+    isSucess: false,
+    error: ''
+  }
+  
+  export const requestAddUser = (state=initialStateAddUser, action) => {
+    console.log('action add user', action)
+    switch (action.type) {
+      case ADD_USER_PENDING:
+        return Object.assign({}, state, {isSucess: false})
+      case ADD_USER_SUCCESS:
+        return Object.assign({}, state, {newId: action.payload, isSucess: true})
+      case ADD_USER_FAILED:
+        return Object.assign({}, state, {error: action.payload, isSucess: false})
+      default:
+        return state
+    }
+  }

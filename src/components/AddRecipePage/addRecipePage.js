@@ -2,37 +2,39 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CardListAddPage from './cardsListAddPage.js';
 import './addRecipePage.css'
-import {requestAddRecipe} from '../../actions'
-import {Route, Redirect} from 'react-router-dom';
+import { requestAddRecipe, requestResetAddState } from '../../actions'
+import { Redirect } from 'react-router-dom';
 
 
 const mapStateToProps = (state) => {
-    console.log('mapStateToProps', state)
-    return {
-      recipe: state.add.recipe,
-      isSucess: state.add.isSucess,
-      newId: state.add.newId
-    }
+  console.log('mapStateToProps', state)
+  return {
+    recipe: state.add.recipe,
+    isSucess: state.add.isSucess,
+    newID: state.add.newID
   }
+}
 
-  const mapDispatchToProps = (dispatch) => {
-    return {  
-      onRequestAddRecipe: (recipe) => dispatch(requestAddRecipe(recipe))
-    }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRequestAddRecipe: (recipe) => requestAddRecipe(recipe, dispatch),
+    onResetAddState: () => requestResetAddState(dispatch)
   }
+}
 
-
-  class AddRecipePage extends React.Component  {
-
-
-    render(){
-        return (
-            <Route>
-                <CardListAddPage onSave={this.props.onRequestAddRecipe} ></CardListAddPage>
-                {this.props.isSucess ?  <Redirect from="/add" to ={`/recipe/${this.props.newId}`}></Redirect> : <h1>try again</h1>}
-       
-            </Route>
-        )}
+class AddRecipePage extends React.Component {
+  render() {
+    if(this.props.isSucess) {
+      let newID = this.props.newID
+      this.props.onResetAddState()
+      return <Redirect from="/add" to={`/recipe/${newID}`}></Redirect>
+    }
+    return (
+      <div>
+        <CardListAddPage onSave={this.props.onRequestAddRecipe} ></CardListAddPage>
+      </div>
+    )
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddRecipePage);

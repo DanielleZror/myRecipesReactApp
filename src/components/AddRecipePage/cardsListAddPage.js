@@ -6,7 +6,8 @@ class CardsList extends React.Component  {
   constructor(props) {
     super(props);
     this.state = {
-      label: 'Choose a photo'
+      label: 'Choose a photo',
+      userID: JSON.parse(sessionStorage.userData).userID
     };
   }
   

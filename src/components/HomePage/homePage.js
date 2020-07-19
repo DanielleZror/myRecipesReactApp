@@ -1,11 +1,6 @@
 import React from 'react';
 import CardsList from './cardsListHomePage'
 import Carousel from './carousel'
-import Nav from '../navbar';
-import { Link, Switch, Route, HashRouter, useHistory } from 'react-router-dom';
-import RecipePage from '../ViewOneRecipePage/viewRecipePage'
-import All from '../AllRecipesPage/allRecipesPage'
-import Add from '../AddRecipePage/addRecipePage'
 
 export class HomePage extends React.Component {
 
@@ -37,7 +32,6 @@ export class HomePage extends React.Component {
             Preparation: "soooo yam",
             Img: 'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'
         }]
-
         return (
             <div >
                 <Carousel />

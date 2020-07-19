@@ -8,7 +8,7 @@ var uri = 'mongodb://localhost:27017/recipes';
 const assert = require('assert');
 const fs = require('fs');
 let mydb
-const {ObjectId} = require('mongodb'); 
+const { ObjectId } = require('mongodb');
 const RECIPES_COLLECTION = "recipes"
 const USERS_COLLECTION = "users"
 
@@ -66,7 +66,10 @@ app.get('/api/search', function (req, res) {
 
 app.get('/api/byID', function (req, res) {
     console.log('server', req.query.id)
-    var query = { _id: ObjectId( req.query.id), userID: req.query.userID };
+    var query = {
+        $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }]
+    }
+
     selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
@@ -77,6 +80,14 @@ app.post('/api/add', function (req, res) {
     addToDB(sendRes, req.body.recipe, RECIPES_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
+        res.status(200).end()
+    }
+})
+
+app.post('/api/addUser', function (req, res) {
+    createOrUpdate(sendRes, req.body.user, USERS_COLLECTION)
+    function sendRes(result) {
+        res.send(result)
         res.status(200).end()
     }
 })
@@ -119,6 +130,23 @@ function addToDB(callback, document, collectionName) {
             callback(result.insertedId.toString())
             closeConnction()
         })
+    }
+}
+
+function createOrUpdate(callback, user, collectionName) {
+    connectToDB(findAndModify, collectionName)
+    function findAndModify(collection) {
+        collection.findAndModify(
+            { userID: user.userID },
+            [['_id', 'asc']],
+            { $setOnInsert: { Name: user.Name, Email: user.Email } },
+            { new: true, upsert: true },
+            function (err, result) {
+                if (err) throw err;
+                callback(result)
+                closeConnction()
+            }
+        )
     }
 }
 

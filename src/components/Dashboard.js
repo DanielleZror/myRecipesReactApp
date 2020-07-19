@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from './navbar';
-import { Link, Switch, Route, HashRouter, useHistory } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import RecipePage from './ViewOneRecipePage/viewRecipePage';
 import All from './AllRecipesPage/allRecipesPage';
 import Add from './AddRecipePage/addRecipePage';

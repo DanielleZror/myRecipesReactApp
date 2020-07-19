@@ -15,14 +15,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {  
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-    onRequestAllRecipes: () => dispatch(requestAllRecipes())
+    onRequestAllRecipes: (userID) => requestAllRecipes(userID, dispatch)
   }
 }
 
 
 class allRecipesPage extends React.Component  {
   componentDidMount() {
-    this.props.onRequestAllRecipes();
+    this.props.onRequestAllRecipes(JSON.parse(sessionStorage.userData).userID);
   }
 
   render() {

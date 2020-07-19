@@ -13,14 +13,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {  
-    onRequestByIdRecipe: (id) => {dispatch(requestByIdRecipe(id))}
+    onRequestByIdRecipe: (id, userID) => requestByIdRecipe(id, userID, dispatch)
   }
 }
 
 class viewRecipePage extends React.Component  {
  
     componentDidMount() {
-        this.props.onRequestByIdRecipe(this.props.match.params.id);
+        this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
       }
 
       render() {
