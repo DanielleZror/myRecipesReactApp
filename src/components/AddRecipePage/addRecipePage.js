@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CardListAddPage from './cardsListAddPage.js';
+import CardListAddPage from './cardAddPage.js';
 import './addRecipePage.css'
 import { requestAddRecipe, requestResetAddState } from '../../actions'
 import { Redirect } from 'react-router-dom';
 
 
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps', state)
   return {
     recipe: state.add.recipe,
     isSucess: state.add.isSucess,
