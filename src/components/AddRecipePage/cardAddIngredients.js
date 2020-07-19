@@ -1,6 +1,7 @@
 import React from 'react';
 import './addRecipePage.css'
-import { MdRemove } from 'react-icons/md';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { IoMdAdd } from 'react-icons/io';
 
 
 class AddIngredients extends React.Component {
@@ -39,36 +40,42 @@ class AddIngredients extends React.Component {
     removeRow = (event) => {
         let ingredients = this.state.ingredients
         const idToRemove = parseInt(event.currentTarget.id.split('-')[1])
-        const index = ingredients.findIndex(x=> x.id === idToRemove)
+        const index = ingredients.findIndex(x => x.id === idToRemove)
         ingredients.splice(index, 1)
-        this.setState({ ingredients: ingredients})
+        this.setState({ ingredients: ingredients })
     }
 
     render() {
         return (
-            <div >
-                <table>
+            <div className="add-ingredients">
+                <table className="table-ingredients">
                     <tbody>
                         {this.state.ingredients.map((row) => (
                             <tr key={Math.random()}>
                                 <td>
-                                    <div id="inputFormRow">
-                                        <div className="input-group mb-3 group " id="group-0">
-                                            <input type="number" id={`amount-${row.id}`} className="form-control m-input" name="amount" onChange={this.onChange} placeholder={row.amount || "Amount"}
-                                                autoComplete="off" step="0.25" min="0" max="1000" />
-                                            <input type="text" id={`unit-${row.id}`} className="form-control m-input" placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} 
-                                                autoComplete="off" />
-                                            <input type="text" id={`item-${row.id}`} className="form-control m-input" placeholder={row.item || "Item"} name="item" onChange={this.onChange} 
-                                                autoComplete="off" />
-                                            <button className="btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}><MdRemove/></button>
-                                        </div>
-                                    </div>
+                                    <input type="number" id={`amount-${row.id}`} className="form-control add-input" name="amount"
+                                        onChange={this.onChange} placeholder={row.amount || "Amount"} autoComplete="off" step="0.25"
+                                        min="0" max="1000" />
+                                </td>
+                                <td>
+                                    <input type="text" id={`unit-${row.id}`} className="form-control add-input"
+                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" />
+                                </td>
+                                <td>
+                                    <input type="text" id={`item-${row.id}`} className="form-control add-input"
+                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" />
+                                </td>
+                                <td>
+                                    <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>
+                                        <RiDeleteBinLine /></button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <button id="addBtn" type="button" className="btn" onClick={this.addRow}>ADD</button>
+                <div className="add-div">
+                    <button id="addBtn" type="button" className="add-btn btn" onClick={this.addRow}><IoMdAdd /></button>
+                </div>
             </div>
         );
     }

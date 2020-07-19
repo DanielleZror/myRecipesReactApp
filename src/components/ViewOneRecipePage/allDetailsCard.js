@@ -3,7 +3,6 @@ import './allDetailsCard.css';
 import Ingredient from './Ingredient';
 
 const Card = (props) => {
-    console.log('detailscard', props.oneRecipe.Ingredients)
     return (
         <div className="recipe-card">
             <aside >

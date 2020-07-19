@@ -1,7 +1,7 @@
 import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
 import './addRecipePage.css';
-import {FaRegSave} from 'react-icons/fa';
+import { FaRegSave } from 'react-icons/fa';
 
 class CardsList extends React.Component {
   constructor(props) {
@@ -36,39 +36,41 @@ class CardsList extends React.Component {
   }
 
   saveIngredients = (event) => {
-    this.setState({ingredients: event})
+    this.setState({ ingredients: event })
   }
 
   render() {
-
     return (
-      <div className="list-add-page wow fadeIn">
+      <div className="add-page-card">
+        <h1 className="title-add-page">Add new recipe</h1>
+        <div className="separator"></div>
         <div className='container'>
-          <form onSubmit={this.onSubmit}>
-            <input type='text' className='form-control mb-2 mr-sm-2' id='Name' placeholder="The recipe's name"
+          <form className="add-form" onSubmit={this.onSubmit}>
+            <input type='text' className='form-control mb-2 mr-sm-2 add-input' id='Name' placeholder="The recipe's name"
               onChange={this.onChange} />
-            <textarea type='text' className='form-control mb-2 mr-sm-2' id='Description'
+            <textarea type='text' className='form-control mb-2 mr-sm-2 add-input' id='Description'
               placeholder='Write a short description' onChange={this.onChange}  ></textarea>
             <div className='form-row'>
               <div className='form-group col-md-3'>
-                <input id='TimeHours' name='h' type='number' className='form-control mb-2 mr-sm-2' min='0' max='24'
+                <input id='TimeHours' name='h' type='number' className='form-control mb-2 mr-sm-2 add-input' min='0' max='24'
                   placeholder='Hours' onChange={this.onChange} />
               </div>
               <div className='form-group col-md-3'>
-                <input id='TimeMinutes' name='m' type='number' className='form-control mb-2 mr-sm-2' min='0' max='59'
+                <input id='TimeMinutes' name='m' type='number' className='form-control mb-2 mr-sm-2 add-input' min='0' max='59'
                   placeholder='Minutes' onChange={this.onChange} />
               </div>
             </div>
             <div className='custom-file' id='myfile'>
-              <input type='file' className='form-control custom-file-input' onChange={this.onLoad} accept='image/*' id='Img' />
+              <input type='file' className='form-control custom-file-input add-input' onChange={this.onLoad} accept='image/*' id='Img' />
               <label className='custom-file-label' id='photo' htmlFor='Img' >{this.state.label}</label>
             </div>
-            <CardIngredients saveData={this.saveIngredients}/>
-            <textarea type='text' className='form-control mb-2 mr-sm-2' id='Preparation'
+            <div className="separator"></div>
+            <CardIngredients saveData={this.saveIngredients} />
+            <div className="separator"></div>
+            <textarea type='text' className='form-control mb-2 mr-sm-2 add-input' id='Preparation'
               placeholder='Write the preparation method' rows='6' onChange={this.onChange} ></textarea>
-            <div className='save-btn'>
-              <button id='saveBtn' type='submit' className='btn' onClick={this.onSubmit}>
-               <FaRegSave/>Save</button>
+            <div className='save-div'>
+              <button id='saveBtn' type='submit' className='save-btn btn' onClick={this.onSubmit}>Save</button>
             </div>
           </form>
 
