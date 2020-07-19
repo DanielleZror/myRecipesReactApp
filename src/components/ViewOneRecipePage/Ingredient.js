@@ -4,7 +4,7 @@ const Ingredient = (props) => {
     console.log("Ingredient", props)
     return (
         < >
-            <span className="text">{props.oneIngredient.Amount + " " + props.oneIngredient.Unit + " " + props.oneIngredient.Item}</span>
+            <span className="text">{props.oneIngredient.amount + " " + props.oneIngredient.unit + " " + props.oneIngredient.item}</span>
             <br/>
         </>
     )

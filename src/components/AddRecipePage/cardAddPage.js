@@ -9,7 +9,7 @@ class CardsList extends React.Component {
     this.state = {
       label: 'Choose a photo',
       userID: JSON.parse(sessionStorage.userData).userID,
-      ingredients: []
+      Ingredients: []
     };
   }
 

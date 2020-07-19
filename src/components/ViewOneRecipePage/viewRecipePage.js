@@ -6,8 +6,8 @@ import {requestByIdRecipe} from '../../actions'
 const mapStateToProps = (state, ownProps) => {
   return {
     recipe: state.byid.recipe,
-    isPending: state.byid.isPending
-    ,id: ownProps
+    isPending: state.byid.isPending,
+    id: ownProps
   }
 }
 
@@ -25,7 +25,6 @@ class viewRecipePage extends React.Component  {
 
       render() {
         const { recipe, isPending  } = this.props;
-        console.log('view', this.props)
         return (
           <div >
             {isPending ? <h1>Loading</h1> : 

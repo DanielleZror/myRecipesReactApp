@@ -41,7 +41,6 @@ app.get('/api/all', function (req, res) {
     }
 })
 
-
 app.get('/api/search', function (req, res) {
     var regex = new RegExp("." + req.query.search + ".");
     var query = {

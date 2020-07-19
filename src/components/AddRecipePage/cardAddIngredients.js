@@ -3,7 +3,6 @@ import './addRecipePage.css'
 import { MdRemove } from 'react-icons/md';
 
 
-
 class AddIngredients extends React.Component {
     constructor(props) {
         super(props)

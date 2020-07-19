@@ -22,7 +22,7 @@ const Card = (props) => {
                     <p className ="ingredients">
                         <span className="title" >Ingredients:</span>
                         <br/>
-                        {/* {props.oneRecipe.Ingredients.map((oneIngredient,counter) => <Ingredient key={counter} oneIngredient={oneIngredient}/>) } */}
+                        {props.oneRecipe.Ingredients.map((oneIngredient,counter) => <Ingredient key={counter} oneIngredient={oneIngredient}/>) }
                     </p>
                     
                 </article>   
