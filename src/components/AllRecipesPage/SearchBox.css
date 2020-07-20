@@ -1,17 +1,19 @@
 .center{
     text-align: center;
-    margin: 50px;
+    margin-top: 4em;
+    margin-bottom: 3em;
 }
 
 input{
-    width: 200px;
-    height: 30px;
+    width: 20em;
+    height: 2.5em;
     font-family: 'Quicksand', sans-serif;
     border-radius: 4px !important;
-    border-color: #CB8EB2 !important;
+    border-color: white !important;
 }
 
 input:focus {
-    outline-color: #7C3B61;
-    outline-style: auto;
+    outline: none !important;
+    border-color: white;
+    box-shadow: 0 0 10px white;
 }

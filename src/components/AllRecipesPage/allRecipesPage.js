@@ -27,7 +27,7 @@ class allRecipesPage extends React.Component  {
 
   render() {
     const { recipes, searchField,onSearchChange, isPending } = this.props;
-    const filteredRecipes = recipes.filter((recipe) =>{
+    const filteredRecipes = !searchField ? recipes : recipes.filter((recipe) =>{
       return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
     })
     return (

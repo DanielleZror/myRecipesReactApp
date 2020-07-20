@@ -1,28 +1,27 @@
 import React from 'react';
 import './CardAllPage.css';
-import {Route, Link} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
-
-const Card = (props) => {    
+const Card = (props) => {
     return (
         <Route>
             <div className='all-card'>
                 <aside>
-                <div className="card-img" style={{backgroundImage:`url(${props.oneRecipe.Img})`}}>
-                    <div className="overlay">
-                        <div className="overlay-content">
-                            <Link className="hover" to ={`/recipe/${props.oneRecipe._id}`}> View</Link>
+                    <div className="card-img" style={{ backgroundImage: `url(${props.oneRecipe.Img})` }}>
+                        <div className="overlay">
+                            <div className="overlay-content">
+                                <Link className="hover" to={`/recipe/${props.oneRecipe._id}`}> View</Link>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </aside>
                 <article>
                     <div className="text-part">
                         <h3>{props.oneRecipe.Name}</h3>
                         <h5>{props.oneRecipe.Description}</h5>
-                </div>
+                    </div>
                 </article>
-                
+
             </div>
         </Route>
     )

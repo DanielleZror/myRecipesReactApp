@@ -1,19 +1,12 @@
 .list-all-page .container {
     display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    margin-top: 50px;
-    margin-bottom: 50px;
+    grid-gap: 1.5em;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    margin-top: 3em;
+    margin-bottom: 3em;
 }
 
 
 .list-all-page{
-    visibility: visible;
-    animation-name: fadeIn;
-    background: linear-gradient(#4d153699,white);
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
     width: 100%;
-    padding-bottom: 100px;
  }
