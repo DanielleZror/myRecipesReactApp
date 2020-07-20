@@ -26,14 +26,19 @@ class AddIngredients extends React.Component {
             case ("unit"):
                 ingredients.find(row => row.id === index).unit = event.target.value
                 break;
+            default:
+                break;
         }
+        this.setState({ingredients: ingredients})
         this.props.saveData(this.state.ingredients)
     }
 
     addRow = () => {
         let ingredients = this.state.ingredients
         ingredients.push({ id: this.state.rows, amount: null, unit: null, item: null })
-        this.state.rows++
+        let numberOfRows = this.state.rows
+        numberOfRows++
+        this.setState({rows: numberOfRows})
         this.setState({ ingredients: ingredients })
     }
 
@@ -51,19 +56,19 @@ class AddIngredients extends React.Component {
                 <table className="table-ingredients">
                     <tbody>
                         {this.state.ingredients.map((row) => (
-                            <tr key={Math.random()}>
+                            <tr key={row.id}>
                                 <td>
                                     <input type="number" id={`amount-${row.id}`} className="form-control add-input" name="amount"
                                         onChange={this.onChange} placeholder={row.amount || "Amount"} autoComplete="off" step="0.25"
-                                        min="0" max="1000" />
+                                        min="0" max="1000" value={row.amount}/>
                                 </td>
                                 <td>
                                     <input type="text" id={`unit-${row.id}`} className="form-control add-input"
-                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" />
+                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" value={row.unit}/>
                                 </td>
                                 <td>
                                     <input type="text" id={`item-${row.id}`} className="form-control add-input"
-                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" />
+                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item}/>
                                 </td>
                                 <td>
                                     <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>

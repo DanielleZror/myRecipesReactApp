@@ -1,7 +1,6 @@
 import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
 import './addRecipePage.css';
-import { FaRegSave } from 'react-icons/fa';
 
 class CardsList extends React.Component {
   constructor(props) {
