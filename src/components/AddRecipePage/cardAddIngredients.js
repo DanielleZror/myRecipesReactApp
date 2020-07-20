@@ -60,15 +60,15 @@ class AddIngredients extends React.Component {
                                 <td>
                                     <input type="number" id={`amount-${row.id}`} className="form-control add-input" name="amount"
                                         onChange={this.onChange} placeholder={row.amount || "Amount"} autoComplete="off" step="0.25"
-                                        min="0" max="1000" value={row.amount}/>
+                                        min="0" max="1000" value={row.amount} required/>
                                 </td>
                                 <td>
                                     <input type="text" id={`unit-${row.id}`} className="form-control add-input"
-                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" value={row.unit}/>
+                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" value={row.unit} required/>
                                 </td>
                                 <td>
                                     <input type="text" id={`item-${row.id}`} className="form-control add-input"
-                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item}/>
+                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item} required/>
                                 </td>
                                 <td>
                                     <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>

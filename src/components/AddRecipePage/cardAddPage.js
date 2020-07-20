@@ -46,30 +46,30 @@ class CardsList extends React.Component {
         <div className='container'>
           <form className="add-form" onSubmit={this.onSubmit}>
             <input type='text' className='form-control mb-2 mr-sm-2 add-input' id='Name' placeholder="The recipe's name"
-              onChange={this.onChange} />
+              onChange={this.onChange} required/>
             <textarea type='text' className='form-control mb-2 mr-sm-2 add-input' id='Description'
-              placeholder='Write a short description' onChange={this.onChange}  ></textarea>
+              placeholder='Write a short description' onChange={this.onChange} required></textarea>
             <div className='form-row'>
               <div className='form-group col-md-3'>
                 <input id='TimeHours' name='h' type='number' className='form-control mb-2 mr-sm-2 add-input' min='0' max='24'
-                  placeholder='Hours' onChange={this.onChange} />
+                  placeholder='Hours' onChange={this.onChange} required/>
               </div>
               <div className='form-group col-md-3'>
                 <input id='TimeMinutes' name='m' type='number' className='form-control mb-2 mr-sm-2 add-input' min='0' max='59'
-                  placeholder='Minutes' onChange={this.onChange} />
+                  placeholder='Minutes' onChange={this.onChange} required/>
               </div>
             </div>
             <div className='custom-file' id='myfile'>
-              <input type='file' className='form-control custom-file-input add-input' onChange={this.onLoad} accept='image/*' id='Img' />
+              <input type='file' className='form-control custom-file-input add-input' onChange={this.onLoad} accept='image/*' id='Img' required/>
               <label className='custom-file-label' id='photo' htmlFor='Img' >{this.state.label}</label>
             </div>
             <div className="separator"></div>
             <CardIngredients saveData={this.saveIngredients} />
             <div className="separator"></div>
             <textarea type='text' className='form-control mb-2 mr-sm-2 add-input' id='Preparation'
-              placeholder='Write the preparation method' rows='6' onChange={this.onChange} ></textarea>
+              placeholder='Write the preparation method' rows='6' onChange={this.onChange} required></textarea>
             <div className='save-div'>
-              <button id='saveBtn' type='submit' className='save-btn btn' onClick={this.onSubmit}>Save</button>
+              <button id='saveBtn' type='submit' className='save-btn btn'>Save</button>
             </div>
           </form>
 
