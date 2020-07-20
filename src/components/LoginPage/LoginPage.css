@@ -1,7 +1,9 @@
-.login-btn:hover, .login-btn:focus, .login-btn:active, .login-btn.active{
+.login-btn:hover, .login-btn:active, .login-btn:focus, .login-btn.active{
         color: #fff !important;
         background-color: #CB8EB2 !important;
         border-color: #7C3B61 !important; 
+        outline: none !important;
+        box-shadow: 0 0 10px #CB8EB2;
 }
 
 .login-btn{
@@ -11,42 +13,42 @@
     border-radius: 20px !important;
     display: block;
   }
+  
+.container_login{
+  padding-top: 12em;
+}
 
-  .container_login{
-    padding-top: 12em;
-  }
+.login-card {
+  height: 350px;
+  width: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  -webkit-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
+  border-radius: 4px;
+}
 
-  .login-card {
-    height: 350px;
-    width: 350px;
-    margin-top: auto;
-    margin-bottom: auto;
-    background: #fff;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-    -webkit-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 93px 0px rgba(0,0,0,0.75);
-    border-radius: 4px;
-  }
+.brand_logo_container {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  top: -90px;
+  border-radius: 50%;
+  background: #2C272A;
+  padding: 10px;
+  text-align: center;
+}
 
-  .brand_logo_container {
-    position: absolute;
-    height: 200px;
-    width: 200px;
-    top: -90px;
-    border-radius: 50%;
-    background: #2C272A;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .brand_logo {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
+.brand_logo {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: 2px solid white;
+}

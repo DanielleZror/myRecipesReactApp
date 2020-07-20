@@ -92,9 +92,15 @@
   width: 100%;
 }
 
-.add-input{
+.add-input {
   border-radius: 4px !important;
   border-color: #CB8EB2 !important;
+}
+
+.add-input:focus, .save-btn:focus, .add-btn:focus { 
+  outline: none !important;
+  border-color: #CB8EB2;
+  box-shadow: 0 0 10px #CB8EB2;
 }
 
 #Preparation{
