@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class viewRecipePage extends React.Component  {
- 
     componentDidMount() {
         this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
       }

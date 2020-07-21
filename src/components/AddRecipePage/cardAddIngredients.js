@@ -71,8 +71,8 @@ class AddIngredients extends React.Component {
                                         placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item} required/>
                                 </td>
                                 <td>
-                                    <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>
-                                        <RiDeleteBinLine /></button>
+                                    {this.state.ingredients.length > 1 ? <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>
+                                        <RiDeleteBinLine /></button> : null}
                                 </td>
                             </tr>
                         ))}

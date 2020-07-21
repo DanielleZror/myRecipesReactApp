@@ -1,5 +1,5 @@
 import React from 'react';
-import './CardAllPage.css';
+import './Card.css';
 import { Route, Link } from 'react-router-dom';
 
 const Card = (props) => {
@@ -17,8 +17,8 @@ const Card = (props) => {
                 </aside>
                 <article>
                     <div className="text-part">
-                        <h3>{props.oneRecipe.Name}</h3>
-                        <h5>{props.oneRecipe.Description}</h5>
+                        <h3>{props.oneRecipe.Name || "Name"}</h3>
+                        <h5>{props.oneRecipe.Description || "Description"}</h5>
                     </div>
                 </article>
 
