@@ -12,7 +12,10 @@ import {
   ADD_RECIPES_FAILED,
   ADD_USER_PENDING,
   ADD_USER_SUCCESS,
-  ADD_USER_FAILED
+  ADD_USER_FAILED, 
+  LIKE_RECIPE_PENDING,
+  LIKE_RECIPE_SUCCESS,
+  LIKE_RECIPE_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
@@ -51,6 +54,7 @@ export const requestAddRecipe = (recipe, dispatch) => {
 export const requestResetAddState = (dispatch) => {
   dispatch({ type: ADD_RECIPES_PENDING })
 }
+
 export const requestAddUser = (user, dispatch) => {
   dispatch({ type: ADD_USER_PENDING })
   axios.post(`/api/addUser`, {
@@ -60,5 +64,13 @@ export const requestAddUser = (user, dispatch) => {
     .catch(error => dispatch({ type: ADD_USER_FAILED, payload: error }))
 }
 
+export const requestLikeRecipe = (like, dispatch) => {
+  dispatch({ type: LIKE_RECIPE_PENDING })
+  axios.post(`/api/likeRecipe`, {
+    like: like
+  })
+    .then(res => dispatch({ type: LIKE_RECIPE_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: LIKE_RECIPE_FAILED, payload: error }))
+}
 
 

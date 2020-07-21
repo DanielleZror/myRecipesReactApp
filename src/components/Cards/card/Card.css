@@ -1,6 +1,5 @@
 .all-card{
     background-color: white;
-    width: 20.5em;
     position: relative;
     border-radius: 4px;
     border: 1px solid white;
@@ -13,8 +12,15 @@
 
 .text-part h5, .text-part h3{
   white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-part h3{
+  color: #7C3B61;
+}
+
+.text-part h5{
+  color:#63555d
 }
 .card-img {
     width: 100%;
@@ -63,5 +69,14 @@
 .card-img .overlay .overlay-content a:hover, .card-img .overlay .overlay-content a.hover {
   background: #7C3B61;
   border-color: #CB8EB2;
+}
+
+.fa-icon {
+  height: 3em;
+  width: 3em;
+  color: brown;
+  position: absolute;
+  bottom: -33px;
+  left: -20px;
 }
 

@@ -1,8 +1,13 @@
 import React from 'react';
 import './Card.css';
 import { Route, Link } from 'react-router-dom';
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+
+
 
 const Card = (props) => {
+    
     return (
         <Route>
             <div className='all-card'>
@@ -14,6 +19,7 @@ const Card = (props) => {
                             </div>
                         </div>
                     </div>
+                    <FaRegHeart className="fa-icon" name={props.oneRecipe._id}/>
                 </aside>
                 <article>
                     <div className="text-part">

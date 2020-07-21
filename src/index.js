@@ -9,7 +9,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { requestAddUser, requestAddRecipe, requestAllRecipes, requestByIdRecipe, searchRecipes } from './reducers';
+import { requestAddUser, requestAddRecipe, requestAllRecipes, requestByIdRecipe, searchRecipes, requestLikeUser } from './reducers';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/App';
 import './styles/animate.css';

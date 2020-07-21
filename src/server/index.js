@@ -10,6 +10,7 @@ let mydb
 const { ObjectId } = require('mongodb');
 const RECIPES_COLLECTION = "recipes"
 const USERS_COLLECTION = "users"
+const SAVED_COLLECTION = "savedRecipes"
 
 app.use(express.static(path.join(__dirname, '../../build')))
 app.use(bodyParser.json({
@@ -63,7 +64,6 @@ app.get('/api/search', function (req, res) {
 })
 
 app.get('/api/byID', function (req, res) {
-    console.log('server', req.query.id)
     var query = {
         $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }]
     }
@@ -76,6 +76,14 @@ app.get('/api/byID', function (req, res) {
 
 app.post('/api/add', function (req, res) {
     addToDB(sendRes, req.body.recipe, RECIPES_COLLECTION)
+    function sendRes(insertID) {
+        res.send(insertID)
+        res.status(200).end()
+    }
+})
+
+app.post('/api/likeRecipe', function (req, res) {
+    addToDB(sendRes, req.body.like, SAVED_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()

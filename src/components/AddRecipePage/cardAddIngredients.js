@@ -3,7 +3,6 @@ import './addRecipePage.css'
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAdd } from 'react-icons/io';
 
-
 class AddIngredients extends React.Component {
     constructor(props) {
         super(props)
