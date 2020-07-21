@@ -73,7 +73,6 @@ const initialStateRecipes = {
   }
   
   export const requestAddRecipe = (state=initialStateAddRecipe, action) => {
-    console.log('action add', action)
     switch (action.type) {
       case ADD_RECIPES_PENDING:
         return Object.assign({}, state, {isSucess: false})
@@ -93,7 +92,6 @@ const initialStateRecipes = {
   }
   
   export const requestAddUser = (state=initialStateAddUser, action) => {
-    console.log('action add user', action)
     switch (action.type) {
       case ADD_USER_PENDING:
         return Object.assign({}, state, {isSucess: false})

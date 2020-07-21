@@ -5,6 +5,7 @@ import RecipePage from './ViewOneRecipePage/viewRecipePage';
 import All from './AllRecipesPage/allRecipesPage';
 import Add from './AddRecipePage/addRecipePage';
 import Home from './HomePage/homePage';
+import Saved from './SavedRecipesPage/savedRecipesPage'
 
 export class Dashboard extends React.Component {
 
@@ -19,7 +20,7 @@ export class Dashboard extends React.Component {
                     <Route path='/All' component={All} />
                     <Route path='/Add' component={Add} />
                     <Route path={`/recipe/:id`} component={RecipePage}></Route>
-                    {/* <Route path='/Saved' component={Saved} /> */}
+                    <Route path='/Saved' component={Saved} />
                 </Switch>
             </HashRouter>
         )

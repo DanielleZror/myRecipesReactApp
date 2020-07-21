@@ -25,7 +25,7 @@ const MyNavbar = () => {
                         <Nav.Link eventKey="1" as={Link} to="/">Home</Nav.Link>
                         <Nav.Link eventKey="2" as={Link} to="/all" >All</Nav.Link>
                         <Nav.Link eventKey="3" as={Link} to="/add">Add</Nav.Link>
-                        <Nav.Link eventKey="4" href="#saved">Saved</Nav.Link>
+                        <Nav.Link eventKey="4" as={Link} to="/saved">Saved</Nav.Link>
                     </Nav>
                     <Form inline>
                         <FormControl id="searchInput" type="text" placeholder="Search in all recipes" className="mr-sm-2 submit_on_enter" />

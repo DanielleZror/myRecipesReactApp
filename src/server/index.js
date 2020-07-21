@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -112,7 +111,7 @@ function closeConnction() {
 function selectFromDB(callback, query, collectionName) {
     connectToDB(find, collectionName)
     function find(collection) {
-        collection.find(query).toArray(function (err, result) {
+        collection.find(query).sort( { Date: -1 } ).toArray(function (err, result) {
             if (err) throw err;
             callback(result)
             closeConnction()
@@ -123,6 +122,7 @@ function selectFromDB(callback, query, collectionName) {
 function addToDB(callback, document, collectionName) {
     connectToDB(insert, collectionName)
     function insert(collection) {
+        document.Date = Date()
         collection.insertOne(document, function (err, result) {
             if (err) throw err;
             console.log(result.insertedId.toString())

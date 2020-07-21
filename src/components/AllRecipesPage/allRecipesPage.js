@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
 class allRecipesPage extends React.Component  {
   componentDidMount() {
     this.props.onRequestAllRecipes(JSON.parse(sessionStorage.userData).userID);
@@ -27,6 +26,7 @@ class allRecipesPage extends React.Component  {
 
   render() {
     const { recipes, searchField,onSearchChange, isPending } = this.props;
+    console.log(recipes)
     const filteredRecipes = !searchField ? recipes : recipes.filter((recipe) =>{
       return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
     })

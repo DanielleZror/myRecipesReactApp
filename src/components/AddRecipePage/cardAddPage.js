@@ -35,7 +35,7 @@ class CardsList extends React.Component {
   }
 
   saveIngredients = (event) => {
-    this.setState({ ingredients: event })
+    this.setState({ Ingredients: event })
   }
 
   render() {
