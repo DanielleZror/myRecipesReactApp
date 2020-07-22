@@ -17,7 +17,10 @@ import {
     LIKE_RECIPE_FAILED,
     UNLIKE_RECIPE_PENDING,
     UNLIKE_RECIPE_SUCCESS,
-    UNLIKE_RECIPE_FAILED
+    UNLIKE_RECIPE_FAILED,
+    REQUEST_SAVED_RECIPES_PENDING,
+    REQUEST_SAVED_RECIPES_SUCCESS,
+    REQUEST_SAVED_RECIPES_FAILED
    } from './constants'
 
    const initialStateSearch = {
@@ -144,6 +147,25 @@ const initialStateRecipes = {
         return Object.assign({}, state, {newId: action.payload, isSucess: true})
       case UNLIKE_RECIPE_FAILED:
         return Object.assign({}, state, {error: action.payload, isSucess: false})
+      default:
+        return state
+    }
+  }
+
+  const initialStateSavedRecipes = {
+    recipes: [],
+    isPending: true,
+    error: ''
+  }
+  
+  export const requestSavedRecipes = (state=initialStateSavedRecipes, action={}) => {
+    switch (action.type) {
+      case REQUEST_SAVED_RECIPES_PENDING:
+        return Object.assign({}, state, {isPending: true})
+      case REQUEST_SAVED_RECIPES_SUCCESS:
+        return Object.assign({}, state, {recipes: action.payload, isPending: false})
+      case REQUEST_SAVED_RECIPES_FAILED:
+        return Object.assign({}, state, {error: action.payload})
       default:
         return state
     }

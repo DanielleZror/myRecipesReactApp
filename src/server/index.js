@@ -32,8 +32,27 @@ app.listen(8000, function () {
     console.log("Listening on port " + 8000)
 });
 
-app.get('/api/all', function (req, res) {
-    let query = { $match: { userID: req.query.userID } };
+app.get('/api/recipe/allByUser', function (req, res) {
+    let match = { $match: { userID: req.query.userID } };
+    let query = createJoinQuery(match)
+    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
+    function sendRes(result) {
+        console.log(result)
+        res.send(result);
+    }
+})
+
+app.get('/api/recipe/allSavedByUser', function (req, res) {
+    let query = createSavedQuery(req.query.userID)
+    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
+    function sendRes(result) {
+        console.log(result)
+        res.send(result);
+    }
+})
+
+app.get('/api/allRecipes', function (req, res) {
+    let query = createJoinQuery({});
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
         console.log(result)
@@ -64,15 +83,16 @@ app.get('/api/search', function (req, res) {
     }
 })
 
-app.get('/api/byID', function (req, res) {
-    var query = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
+app.get('/api/recipe/recipeByID', function (req, res) {
+    let match = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
+    let query = createJoinQuery(match)
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
     }
 })
 
-app.post('/api/add', function (req, res) {
+app.post('/api/recipe/add', function (req, res) {
     addToDB(sendRes, req.body.recipe, RECIPES_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
@@ -80,7 +100,7 @@ app.post('/api/add', function (req, res) {
     }
 })
 
-app.post('/api/likeRecipe', function (req, res) {
+app.post('/api/recipe/likeRecipe', function (req, res) {
     let query = { userID: req.body.like.userID, recipeID: ObjectId(req.body.like.recipeID) }
     addToDB(sendRes, query, SAVED_COLLECTION)
     function sendRes(insertID) {
@@ -89,8 +109,8 @@ app.post('/api/likeRecipe', function (req, res) {
     }
 })
 
-app.post('/api/unlikeRecipe', function (req, res) {
-    let recipeID = ObjectId(req.body.unlike.recipeID) 
+app.post('/api/recipe/unlikeRecipe', function (req, res) {
+    let recipeID = ObjectId(req.body.unlike.recipeID)
     let query = { $and: [{ userID: req.body.unlike.userID }, { recipeID: recipeID }] }
     RemoveFromDB(sendRes, query, SAVED_COLLECTION)
     function sendRes(result) {
@@ -99,7 +119,7 @@ app.post('/api/unlikeRecipe', function (req, res) {
     }
 })
 
-app.post('/api/addUser', function (req, res) {
+app.post('/api/user/addUser', function (req, res) {
     createOrUpdate(sendRes, req.body.user, USERS_COLLECTION)
     function sendRes(result) {
         res.send(result)
@@ -166,16 +186,49 @@ function createOrUpdate(callback, user, collectionName) {
     }
 }
 
-function selectWithJoinFromDB(callback, match, collectionName) {
+function selectWithJoinFromDB(callback, query, collectionName) {
     connectToDB(join, collectionName)
     function join(collection) {
-        let query = createJoinQuery(match)
         collection.aggregate(query).sort({ Date: -1 }).toArray(function (err, result) {
             if (err) throw err;
             callback(result)
             closeConnction()
         })
     }
+}
+
+function createSavedQuery(userID) {
+    let joinQuery = [
+        {
+            $lookup:
+            {
+                from: "savedRecipes",
+                localField: "_id",
+                foreignField: "recipeID",
+                as: "RightTableData"
+            }
+        },
+        { $unwind: "$RightTableData" },
+        { $match: { "RightTableData.userID": userID } },
+        {
+            $project: {
+                "_id": "$_id",
+                "userID": "$userID",
+                "Name": "$Name",
+                "label": "$label",
+                "Ingredients": "$Ingredients",
+                "Description": "$Description",
+                "TimeHours": "$TimeHours",
+                "TimeMinutes": "$TimeMinutes",
+                "Img": "$Img",
+                "Preparation": "$Preparation",
+                "Date": "$Date",
+                isSaved: { $cond: [{ $eq: [userID, '$RightTableData.userID'] }, true, false] }
+            }
+        }
+    ]
+
+    return joinQuery
 }
 
 function createJoinQuery(match) {
@@ -203,7 +256,7 @@ function createJoinQuery(match) {
                 "Img": "$Img",
                 "Preparation": "$Preparation",
                 "Date": "$Date",
-                numOfSaves: {$size :"$RightTableData"},
+                numOfSaves: { $size: "$RightTableData" },
                 isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
             }
         }

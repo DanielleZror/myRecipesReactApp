@@ -18,14 +18,17 @@ import {
   LIKE_RECIPE_FAILED,
   UNLIKE_RECIPE_PENDING,
   UNLIKE_RECIPE_SUCCESS,
-  UNLIKE_RECIPE_FAILED
+  UNLIKE_RECIPE_FAILED,
+  REQUEST_SAVED_RECIPES_PENDING,
+  REQUEST_SAVED_RECIPES_SUCCESS,
+  REQUEST_SAVED_RECIPES_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
 
 export const requestAllRecipes = (userID, dispatch) => {
   dispatch({ type: REQUEST_RECIPES_PENDING })
-  axios.get(`/api/all`, {
+  axios.get(`/api/recipe/allByUser`, {
     params: {
       userID: userID
     }
@@ -36,7 +39,7 @@ export const requestAllRecipes = (userID, dispatch) => {
 
 export const requestByIdRecipe = (id, userID, dispatch) => {
   dispatch({ type: REQUEST_BY_ID_RECIPES_PENDING })
-  axios.get(`/api/byID`, {
+  axios.get(`/api/recipe/recipeByID`, {
     params: {
       id: id, userID: userID
     }
@@ -47,7 +50,7 @@ export const requestByIdRecipe = (id, userID, dispatch) => {
 
 export const requestAddRecipe = (recipe, dispatch) => {
   dispatch({ type: ADD_RECIPES_PENDING })
-  axios.post(`/api/add`, {
+  axios.post(`/api/recipe/add`, {
     recipe: recipe
   })
     .then(res => dispatch({ type: ADD_RECIPES_SUCCESS, payload: res.data }))
@@ -60,7 +63,7 @@ export const requestResetAddState = (dispatch) => {
 
 export const requestAddUser = (user, dispatch) => {
   dispatch({ type: ADD_USER_PENDING })
-  axios.post(`/api/addUser`, {
+  axios.post(`/api/user/addUser`, {
     user: user
   })
     .then(res => dispatch({ type: ADD_USER_SUCCESS, payload: res.data }))
@@ -69,7 +72,7 @@ export const requestAddUser = (user, dispatch) => {
 
 export const requestLikeRecipe = (like, dispatch) => {
   dispatch({ type: LIKE_RECIPE_PENDING })
-  axios.post(`/api/likeRecipe`, {
+  axios.post(`/api/recipe/likeRecipe`, {
     like: like
   })
     .then(res => dispatch({ type: LIKE_RECIPE_SUCCESS, payload: res.data }))
@@ -78,11 +81,20 @@ export const requestLikeRecipe = (like, dispatch) => {
 
 export const requestUnlikeRecipe = (unlike, dispatch) => {
   dispatch({ type: UNLIKE_RECIPE_PENDING })
-  axios.post(`/api/unlikeRecipe`, {
+  axios.post(`/api/recipe/unlikeRecipe`, {
     unlike: unlike
   })
     .then(res => dispatch({ type: UNLIKE_RECIPE_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: UNLIKE_RECIPE_FAILED, payload: error }))
 }
 
-
+export const requestSavedRecipes = (userID, dispatch) => {
+  dispatch({ type: REQUEST_SAVED_RECIPES_PENDING })
+  axios.get(`/api/recipe/allSavedByUser`, {
+    params: {
+      userID: userID
+    }
+  })
+    .then(res => dispatch({ type: REQUEST_SAVED_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REQUEST_SAVED_RECIPES_FAILED, payload: error }))
+}
