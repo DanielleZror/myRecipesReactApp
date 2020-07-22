@@ -10,7 +10,7 @@ class DetailsCard extends React.Component {
         super(props);
         this.state = {
             isSaved: props.oneRecipe.isSaved
-          };
+        };
     }
 
     handelLike = (event) => {
@@ -18,21 +18,20 @@ class DetailsCard extends React.Component {
             userID: JSON.parse(sessionStorage.userData).userID,
             recipeID: event.currentTarget.id
         }
-        this.setState({isSaved : !this.state.isSaved})
         this.props.onLike(likeObj)
+        this.setState({ isSaved: !this.state.isSaved }) 
     }
 
     handelUnlike = (event) => {
-        console.log(event)
         let likeObj = {
             userID: JSON.parse(sessionStorage.userData).userID,
             recipeID: event.currentTarget.id
         }
-        this.setState({isSaved : !this.state.isSaved})
         this.props.onUnlike(likeObj)
+        this.setState({ isSaved: !this.state.isSaved })
     }
 
-    render() {
+    render(){
         return (
             <div className="recipe-card">
                 <aside >
@@ -49,7 +48,7 @@ class DetailsCard extends React.Component {
                         <li>{(this.props.oneRecipe.TimeHours || 0) + " Hours " + (this.props.oneRecipe.TimeMinutes || 0) + " Minuts"} </li>
                         <li></li>
                         <li>  <FaRegHeart /></li>
-                        <li>{this.props.oneRecipe.numberOfSaves || 0}</li>
+                        <li>{this.props.oneRecipe.numOfSaves || 0}</li>
                     </ul>
                     <div className="separator"></div>
                     <p className="ingredients">

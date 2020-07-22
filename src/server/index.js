@@ -67,7 +67,6 @@ app.get('/api/search', function (req, res) {
 app.get('/api/byID', function (req, res) {
     var query = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION);
-    // selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
     }
@@ -82,7 +81,8 @@ app.post('/api/add', function (req, res) {
 })
 
 app.post('/api/likeRecipe', function (req, res) {
-    addToDB(sendRes, req.body.like, SAVED_COLLECTION)
+    let query = { userID: req.body.like.userID, recipeID: ObjectId(req.body.like.recipeID) }
+    addToDB(sendRes, query, SAVED_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()
@@ -90,7 +90,8 @@ app.post('/api/likeRecipe', function (req, res) {
 })
 
 app.post('/api/unlikeRecipe', function (req, res) {
-    let query = { $and: [{ userID: req.body.unlike.userID }, { recipeID: req.body.unlike.recipeID  }] }
+    let recipeID = ObjectId(req.body.unlike.recipeID) 
+    let query = { $and: [{ userID: req.body.unlike.userID }, { recipeID: recipeID }] }
     RemoveFromDB(sendRes, query, SAVED_COLLECTION)
     function sendRes(result) {
         res.send(result)
@@ -202,6 +203,7 @@ function createJoinQuery(match) {
                 "Img": "$Img",
                 "Preparation": "$Preparation",
                 "Date": "$Date",
+                numOfSaves: {$size :"$RightTableData"},
                 isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
             }
         }
