@@ -37,8 +37,8 @@ app.get('/api/recipe/allByUser', function (req, res) {
     let query = createJoinQuery(match)
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
-        console.log(result)
         res.send(result);
+        res.status(200).end()
     }
 })
 
@@ -46,8 +46,8 @@ app.get('/api/recipe/allSavedByUser', function (req, res) {
     let query = createSavedQuery(req.query.userID)
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
-        console.log(result)
         res.send(result);
+        res.status(200).end()
     }
 })
 
@@ -55,8 +55,8 @@ app.get('/api/allRecipes', function (req, res) {
     let query = createJoinQuery({});
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
-        console.log(result)
         res.send(result);
+        res.status(200).end()
     }
 })
 
@@ -162,7 +162,6 @@ function addToDB(callback, document, collectionName) {
         document.Date = Date()
         collection.insertOne(document, function (err, result) {
             if (err) throw err;
-            console.log(result.insertedId.toString())
             callback(result.insertedId.toString())
             closeConnction()
         })

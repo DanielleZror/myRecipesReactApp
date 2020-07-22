@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {setSearchField, requestAllRecipes, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
-import CardsList from './cardsListAllPage.js'
+import CardsList from '../CardsList/CardsList.js'
 import Search from './searchInMyRecipes.js';
 
 const mapStateToProps = (state) => {
@@ -35,7 +35,7 @@ class allRecipesPage extends React.Component  {
       <div >
         <Search onChange = {onSearchChange}/>
         {isPending ? <h1>loading</h1> :
-        <CardsList recipes ={filteredRecipes} onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>
+        <CardsList recipes ={filteredRecipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>
         }
       </div>
     );

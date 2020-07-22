@@ -18,7 +18,7 @@ class Card extends React.Component {
             recipeID: event.currentTarget.id
         }
         this.setState({ isSaved: !this.state.isSaved })
-        this.props.onLike(likeObj).than()
+        this.props.onLike(likeObj)
     }
 
     handelUnlike = (event) => {

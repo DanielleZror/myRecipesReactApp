@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { requestSavedRecipes } from '../../actions'
+import CardsList from '../CardsList/CardsList'
+import { requestSavedRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 
 
 const mapStateToProps = (state) => {
@@ -11,20 +12,23 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
-    onRrequestSavedRecipes: (userID) => requestSavedRecipes(userID, dispatch)
-    // onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
-    // onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
+  return {
+    onRrequestSavedRecipes: (userID) => requestSavedRecipes(userID, dispatch),
+    onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
+    onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
   }
 }
-class savedRecipesPage extends React.Component  {
+class savedRecipesPage extends React.Component {
   componentDidMount() {
     this.props.onRrequestSavedRecipes(JSON.parse(sessionStorage.userData).userID);
   }
   render() {
+    const { recipes, isPending, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
     return (
       <div >
-        <h1>saved</h1>
+        {isPending ? <h1>loading</h1> :
+          <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />
+        }
       </div>
     );
   }
