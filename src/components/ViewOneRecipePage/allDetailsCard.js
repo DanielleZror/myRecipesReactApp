@@ -5,7 +5,7 @@ import { FaRegClock } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
-class AddCard extends React.Component {
+class DetailsCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,4 +71,4 @@ class AddCard extends React.Component {
     }
 }
 
-export default AddCard;
+export default DetailsCard;

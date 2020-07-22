@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setSearchField, requestAllRecipes} from '../../actions'
+import {setSearchField, requestAllRecipes, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
 import CardsList from './cardsListAllPage.js'
 import Search from './searchInMyRecipes.js';
 
@@ -15,7 +15,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {  
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-    onRequestAllRecipes: (userID) => requestAllRecipes(userID, dispatch)
+    onRequestAllRecipes: (userID) => requestAllRecipes(userID, dispatch),
+    onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
+    onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
   }
 }
 
@@ -25,8 +27,7 @@ class allRecipesPage extends React.Component  {
   }
 
   render() {
-    const { recipes, searchField,onSearchChange, isPending } = this.props;
-    console.log(recipes)
+    const { recipes, searchField,onSearchChange, isPending, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
     const filteredRecipes = !searchField ? recipes : recipes.filter((recipe) =>{
       return (recipe.Name.toLowerCase().includes(searchField.toLowerCase()))
     })
@@ -34,7 +35,7 @@ class allRecipesPage extends React.Component  {
       <div >
         <Search onChange = {onSearchChange}/>
         {isPending ? <h1>loading</h1> :
-        <CardsList recipes ={filteredRecipes} />
+        <CardsList recipes ={filteredRecipes} onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>
         }
       </div>
     );
