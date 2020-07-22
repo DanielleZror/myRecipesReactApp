@@ -33,8 +33,8 @@ app.listen(8000, function () {
 });
 
 app.get('/api/all', function (req, res) {
-    var query = { userID: req.query.userID };
-    selectFromDB(sendRes, query, RECIPES_COLLECTION);
+    let query = {$match:  {userID : req.query.userID}};
+    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
         console.log(result)
         res.send(result);
@@ -42,6 +42,7 @@ app.get('/api/all', function (req, res) {
 })
 
 app.get('/api/search', function (req, res) {
+    //TODO change from selectFronDb to selectWithJoinFromDB
     var regex = new RegExp("." + req.query.search + ".");
     var query = {
         $and: [
@@ -64,11 +65,9 @@ app.get('/api/search', function (req, res) {
 })
 
 app.get('/api/byID', function (req, res) {
-    var query = {
-        $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }]
-    }
-
-    selectFromDB(sendRes, query, RECIPES_COLLECTION);
+    var query = {$match:  {$and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }]}} 
+    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION);
+    // selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
     }
@@ -119,7 +118,7 @@ function closeConnction() {
 function selectFromDB(callback, query, collectionName) {
     connectToDB(find, collectionName)
     function find(collection) {
-        collection.find(query).sort( { Date: -1 } ).toArray(function (err, result) {
+        collection.find(query).sort({ Date: -1 }).toArray(function (err, result) {
             if (err) throw err;
             callback(result)
             closeConnction()
@@ -157,4 +156,47 @@ function createOrUpdate(callback, user, collectionName) {
     }
 }
 
+function selectWithJoinFromDB(callback, match, collectionName) {
+    connectToDB(join, collectionName)
+    function join(collection) {
+        let query = createJoinQuery(match)
+        collection.aggregate(query).sort({ Date: -1 }).toArray(function (err, result) {
+            if (err) throw err;
+            callback(result)
+            closeConnction()
+        })
+    }
+}
 
+function createJoinQuery(match) {
+    let joinQuery = [
+        match,
+        {
+            $lookup:
+            {
+                from: "savedRecipes",
+                localField: "_id",
+                foreignField: "recipeID",
+                as: "RightTableData"
+            }
+        },
+        {
+            $project: {
+                "_id": "$_id",
+                "userID": "$userID",
+                "Name": "$Name",
+                "label": "$label",
+                "Ingredients": "$Ingredients",
+                "Description": "$Description",
+                "TimeHours": "$TimeHours",
+                "TimeMinutes": "$TimeMinutes",
+                "Img": "$Img",
+                "Preparation": "$Preparation",
+                "Date": "$Date",
+                isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
+            }
+        }
+    ]
+
+    return joinQuery
+}
