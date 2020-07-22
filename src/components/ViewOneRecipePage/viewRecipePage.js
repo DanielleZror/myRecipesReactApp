@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
-import { requestByIdRecipe, requestLikeRecipe } from '../../actions'
+import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onRequestByIdRecipe: (id, userID) => requestByIdRecipe(id, userID, dispatch),
-    onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch)
+    onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
+    onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
   }
 }
 
@@ -28,7 +29,7 @@ class viewRecipePage extends React.Component {
     return (
       <div >
         {isPending ? <h1>Loading</h1> :
-          <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe}/>
+          <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe} onUnlike={this.props.onRequestUnlikeRecipe}/>
         }
       </div>
     );

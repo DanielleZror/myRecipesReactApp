@@ -33,7 +33,7 @@ app.listen(8000, function () {
 });
 
 app.get('/api/all', function (req, res) {
-    let query = {$match:  {userID : req.query.userID}};
+    let query = { $match: { userID: req.query.userID } };
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
     function sendRes(result) {
         console.log(result)
@@ -65,7 +65,7 @@ app.get('/api/search', function (req, res) {
 })
 
 app.get('/api/byID', function (req, res) {
-    var query = {$match:  {$and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }]}} 
+    var query = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
     selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION);
     // selectFromDB(sendRes, query, RECIPES_COLLECTION);
     function sendRes(result) {
@@ -85,6 +85,15 @@ app.post('/api/likeRecipe', function (req, res) {
     addToDB(sendRes, req.body.like, SAVED_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
+        res.status(200).end()
+    }
+})
+
+app.post('/api/unlikeRecipe', function (req, res) {
+    let query = { $and: [{ userID: req.body.unlike.userID }, { recipeID: req.body.unlike.recipeID  }] }
+    RemoveFromDB(sendRes, query, SAVED_COLLECTION)
+    function sendRes(result) {
+        res.send(result)
         res.status(200).end()
     }
 })
@@ -199,4 +208,15 @@ function createJoinQuery(match) {
     ]
 
     return joinQuery
+}
+
+function RemoveFromDB(callback, query, collectionName) {
+    connectToDB(remove, collectionName)
+    function remove(collection) {
+        collection.remove(query, function (err, result) {
+            if (err) throw err;
+            callback(result)
+            closeConnction()
+        })
+    }
 }

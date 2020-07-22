@@ -14,7 +14,10 @@ import {
     ADD_USER_FAILED,
     LIKE_RECIPE_PENDING,
     LIKE_RECIPE_SUCCESS,
-    LIKE_RECIPE_FAILED
+    LIKE_RECIPE_FAILED,
+    UNLIKE_RECIPE_PENDING,
+    UNLIKE_RECIPE_SUCCESS,
+    UNLIKE_RECIPE_FAILED
    } from './constants'
 
    const initialStateSearch = {
@@ -113,13 +116,33 @@ const initialStateRecipes = {
     recipeID: ''
   }
   
-  export const requestLikeUser = (state=initialStateLikeRecipe, action) => {
+  export const requestLikeRecipe = (state=initialStateLikeRecipe, action) => {
     switch (action.type) {
       case LIKE_RECIPE_PENDING:
         return Object.assign({}, state, {isSucess: false})
       case LIKE_RECIPE_SUCCESS:
         return Object.assign({}, state, {newId: action.payload, isSucess: true})
       case LIKE_RECIPE_FAILED:
+        return Object.assign({}, state, {error: action.payload, isSucess: false})
+      default:
+        return state
+    }
+  }
+
+  
+  const initialStateUnLikeRecipe = {
+    userID: '',
+    isSucess: false,
+    recipeID: ''
+  }
+  
+  export const requestUnlikeRecipe = (state=initialStateUnLikeRecipe, action) => {
+    switch (action.type) {
+      case UNLIKE_RECIPE_PENDING:
+        return Object.assign({}, state, {isSucess: false})
+      case UNLIKE_RECIPE_SUCCESS:
+        return Object.assign({}, state, {newId: action.payload, isSucess: true})
+      case UNLIKE_RECIPE_FAILED:
         return Object.assign({}, state, {error: action.payload, isSucess: false})
       default:
         return state

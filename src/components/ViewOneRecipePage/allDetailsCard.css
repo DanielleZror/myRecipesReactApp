@@ -82,3 +82,13 @@ article{
 .preparation {
   margin: 1em 0 0.5em;
 } 
+
+.fa-icon-recipe {
+  height: 3em;
+  width: 3em;
+  color: brown;
+  position: absolute;
+  bottom: 273px;
+  left: -25px;
+  cursor: pointer;
+}

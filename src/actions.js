@@ -15,7 +15,10 @@ import {
   ADD_USER_FAILED, 
   LIKE_RECIPE_PENDING,
   LIKE_RECIPE_SUCCESS,
-  LIKE_RECIPE_FAILED
+  LIKE_RECIPE_FAILED,
+  UNLIKE_RECIPE_PENDING,
+  UNLIKE_RECIPE_SUCCESS,
+  UNLIKE_RECIPE_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
@@ -71,6 +74,15 @@ export const requestLikeRecipe = (like, dispatch) => {
   })
     .then(res => dispatch({ type: LIKE_RECIPE_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: LIKE_RECIPE_FAILED, payload: error }))
+}
+
+export const requestUnlikeRecipe = (unlike, dispatch) => {
+  dispatch({ type: UNLIKE_RECIPE_PENDING })
+  axios.post(`/api/unlikeRecipe`, {
+    unlike: unlike
+  })
+    .then(res => dispatch({ type: UNLIKE_RECIPE_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: UNLIKE_RECIPE_FAILED, payload: error }))
 }
 
 
