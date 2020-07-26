@@ -1,45 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { requestFavoriteRecipes } from '../../actions'
 import CardsList from './cardsListHomePage'
 import Carousel from './carousel'
 
-export class HomePage extends React.Component {
+
+const mapStateToProps = (state) => {
+    return {
+        favoriteRecipes: state.favorite.recipes,
+        isPending: state.favorite.isPending
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onRequestFavoriteRecipes: (userID) => requestFavoriteRecipes(userID, dispatch)
+    }
+}
+
+
+class HomePage extends React.Component {
+    componentDidMount() {
+        this.props.onRequestFavoriteRecipes(JSON.parse(sessionStorage.userData).userID);
+    }
 
     render() {
-        const arr = [{
-            Name: 'danielle',
-            _id: '121313',
-            Description: 'heloooo',
-            TimeHours: "1",
-            TimeMinutes: "14",
-            Preparation: "soooo yam",
-            Img: 'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'
-        },
-        {
-            Name: 'danielle',
-            _id: '1213333',
-            Description: 'heloooo',
-            TimeHours: "1",
-            TimeMinutes: "14",
-            Preparation: "soooo yam",
-            Img: 'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'
-        },
-        {
-            Name: 'danielle',
-            _id: '1213232413',
-            Description: 'heloooo',
-            TimeHours: "1",
-            TimeMinutes: "14",
-            Preparation: "soooo yam",
-            Img: 'https://eatforum.org/content/uploads/2018/05/table_with_food_top_view_900x700.jpg'
-        }]
+        const { favoriteRecipes, isPending } = this.props;
+   
         return (
             <div >
                 <Carousel />
-                <CardsList recipes={arr} />
+                {isPending ? <h1>loading</h1> :
+                    <CardsList recipes={favoriteRecipes} />}
             </div>
         )
     }
 }
 
-export default HomePage;
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 

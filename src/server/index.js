@@ -1,3 +1,5 @@
+const GLOBAL = require('../constants')
+// FAVORITES_RECIPES_NUMBER, RECIPES_COLLECTION, USERS_COLLECTION, SAVED_COLLECTION }
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -8,9 +10,6 @@ const assert = require('assert');
 const fs = require('fs');
 let mydb
 const { ObjectId } = require('mongodb');
-const RECIPES_COLLECTION = "recipes"
-const USERS_COLLECTION = "users"
-const SAVED_COLLECTION = "savedRecipes"
 
 app.use(express.static(path.join(__dirname, '../../build')))
 app.use(bodyParser.json({
@@ -32,10 +31,20 @@ app.listen(8000, function () {
     console.log("Listening on port " + 8000)
 });
 
+app.get('/api/recipe/favoriteRecipes', function (req, res) {
+    let match = { $match: { userID: req.query.userID } };
+    let query = createFavoriteQuery(match)
+    selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
+    function sendRes(result) {
+        res.send(result);
+        res.status(200).end()
+    }
+})
+
 app.get('/api/recipe/allByUser', function (req, res) {
     let match = { $match: { userID: req.query.userID } };
     let query = createJoinQuery(match)
-    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
+    selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
         res.status(200).end()
@@ -44,7 +53,7 @@ app.get('/api/recipe/allByUser', function (req, res) {
 
 app.get('/api/recipe/allSavedByUser', function (req, res) {
     let query = createSavedQuery(req.query.userID)
-    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
+    selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
         res.status(200).end()
@@ -53,7 +62,7 @@ app.get('/api/recipe/allSavedByUser', function (req, res) {
 
 app.get('/api/allRecipes', function (req, res) {
     let query = createJoinQuery({});
-    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION)
+    selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
         res.status(200).end()
@@ -77,7 +86,7 @@ app.get('/api/search', function (req, res) {
         ]
     }
 
-    selectFromDB(sendRes, query, RECIPES_COLLECTION);
+    selectFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result);
     }
@@ -86,14 +95,14 @@ app.get('/api/search', function (req, res) {
 app.get('/api/recipe/recipeByID', function (req, res) {
     let match = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
     let query = createJoinQuery(match)
-    selectWithJoinFromDB(sendRes, query, RECIPES_COLLECTION);
+    selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
     }
 })
 
 app.post('/api/recipe/add', function (req, res) {
-    addToDB(sendRes, req.body.recipe, RECIPES_COLLECTION)
+    addToDB(sendRes, req.body.recipe, GLOBAL.RECIPES_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()
@@ -102,7 +111,7 @@ app.post('/api/recipe/add', function (req, res) {
 
 app.post('/api/recipe/likeRecipe', function (req, res) {
     let query = { userID: req.body.like.userID, recipeID: ObjectId(req.body.like.recipeID) }
-    addToDB(sendRes, query, SAVED_COLLECTION)
+    addToDB(sendRes, query, GLOBAL.SAVED_COLLECTION)
     function sendRes(insertID) {
         res.send(insertID)
         res.status(200).end()
@@ -120,7 +129,7 @@ app.post('/api/recipe/unlikeRecipe', function (req, res) {
 })
 
 app.post('/api/user/addUser', function (req, res) {
-    createOrUpdate(sendRes, req.body.user, USERS_COLLECTION)
+    createOrUpdate(sendRes, req.body.user, GLOBAL.USERS_COLLECTION)
     function sendRes(result) {
         res.send(result)
         res.status(200).end()
@@ -262,6 +271,42 @@ function createJoinQuery(match) {
     ]
 
     return joinQuery
+}
+
+function createFavoriteQuery(match) {
+    let favoriteQuery = [
+        match,
+        {
+            $lookup:
+            {
+                from: "savedRecipes",
+                localField: "_id",
+                foreignField: "recipeID",
+                as: "RightTableData"
+            }
+        },
+        {
+            $project: {
+                "_id": "$_id",
+                "userID": "$userID",
+                "Name": "$Name",
+                "label": "$label",
+                "Ingredients": "$Ingredients",
+                "Description": "$Description",
+                "TimeHours": "$TimeHours",
+                "TimeMinutes": "$TimeMinutes",
+                "Img": "$Img",
+                "Preparation": "$Preparation",
+                "Date": "$Date",
+                numOfSaves: { $size: "$RightTableData" },
+                isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
+            }
+        },
+        { "$sort": { "numOfSaves": -1 } },
+        { $limit: GLOBAL.FAVORITES_RECIPES_NUMBER }
+    ]
+
+    return favoriteQuery
 }
 
 function RemoveFromDB(callback, query, collectionName) {

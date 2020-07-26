@@ -20,7 +20,10 @@ import {
     UNLIKE_RECIPE_FAILED,
     REQUEST_SAVED_RECIPES_PENDING,
     REQUEST_SAVED_RECIPES_SUCCESS,
-    REQUEST_SAVED_RECIPES_FAILED
+    REQUEST_SAVED_RECIPES_FAILED,
+    REQUEST_FAVORITE_RECIPES_PENDING,
+    REQUEST_FAVORITE_RECIPES_SUCCESS,
+    REQUEST_FAVORITE_RECIPES_FAILED
    } from './constants'
 
    const initialStateSearch = {
@@ -165,6 +168,25 @@ const initialStateRecipes = {
       case REQUEST_SAVED_RECIPES_SUCCESS:
         return Object.assign({}, state, {recipes: action.payload, isPending: false})
       case REQUEST_SAVED_RECIPES_FAILED:
+        return Object.assign({}, state, {error: action.payload})
+      default:
+        return state
+    }
+  }
+
+  const initialStateFavoriteRecipes = {
+    recipes: [],
+    isPending: true,
+    error: ''
+  }
+  
+  export const requestFavoriteRecipes = (state=initialStateFavoriteRecipes, action={}) => {
+    switch (action.type) {
+      case REQUEST_FAVORITE_RECIPES_PENDING:
+        return Object.assign({}, state, {isPending: true})
+      case REQUEST_FAVORITE_RECIPES_SUCCESS:
+        return Object.assign({}, state, {recipes: action.payload, isPending: false})
+      case REQUEST_FAVORITE_RECIPES_FAILED:
         return Object.assign({}, state, {error: action.payload})
       default:
         return state

@@ -21,7 +21,10 @@ import {
   UNLIKE_RECIPE_FAILED,
   REQUEST_SAVED_RECIPES_PENDING,
   REQUEST_SAVED_RECIPES_SUCCESS,
-  REQUEST_SAVED_RECIPES_FAILED
+  REQUEST_SAVED_RECIPES_FAILED,
+  REQUEST_FAVORITE_RECIPES_PENDING,
+  REQUEST_FAVORITE_RECIPES_SUCCESS,
+  REQUEST_FAVORITE_RECIPES_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
@@ -97,4 +100,15 @@ export const requestSavedRecipes = (userID, dispatch) => {
   })
     .then(res => dispatch({ type: REQUEST_SAVED_RECIPES_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: REQUEST_SAVED_RECIPES_FAILED, payload: error }))
+}
+
+export const requestFavoriteRecipes = (userID, dispatch) => {
+  dispatch({ type: REQUEST_FAVORITE_RECIPES_PENDING })
+  axios.get(`/api/recipe/favoriteRecipes`, {
+    params: {
+      userID: userID
+    }
+  })
+    .then(res => dispatch({ type: REQUEST_FAVORITE_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REQUEST_FAVORITE_RECIPES_FAILED, payload: error }))
 }
