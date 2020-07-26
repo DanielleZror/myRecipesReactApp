@@ -22,9 +22,9 @@ import {
   REQUEST_SAVED_RECIPES_PENDING,
   REQUEST_SAVED_RECIPES_SUCCESS,
   REQUEST_SAVED_RECIPES_FAILED,
-  REQUEST_FAVORITE_RECIPES_PENDING,
-  REQUEST_FAVORITE_RECIPES_SUCCESS,
-  REQUEST_FAVORITE_RECIPES_FAILED
+  REQUEST_POPULAR_RECIPES_PENDING,
+  REQUEST_POPULAR_RECIPES_SUCCESS,
+  REQUEST_POPULAR_RECIPES_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
@@ -102,13 +102,13 @@ export const requestSavedRecipes = (userID, dispatch) => {
     .catch(error => dispatch({ type: REQUEST_SAVED_RECIPES_FAILED, payload: error }))
 }
 
-export const requestFavoriteRecipes = (userID, dispatch) => {
-  dispatch({ type: REQUEST_FAVORITE_RECIPES_PENDING })
-  axios.get(`/api/recipe/favoriteRecipes`, {
+export const requestPopularRecipes = (userID, dispatch) => {
+  dispatch({ type: REQUEST_POPULAR_RECIPES_PENDING })
+  axios.get(`/api/recipe/popularRecipes`, {
     params: {
       userID: userID
     }
   })
-    .then(res => dispatch({ type: REQUEST_FAVORITE_RECIPES_SUCCESS, payload: res.data }))
-    .catch(error => dispatch({ type: REQUEST_FAVORITE_RECIPES_FAILED, payload: error }))
+    .then(res => dispatch({ type: REQUEST_POPULAR_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REQUEST_POPULAR_RECIPES_FAILED, payload: error }))
 }

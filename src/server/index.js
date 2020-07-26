@@ -1,5 +1,4 @@
 const GLOBAL = require('../constants')
-// FAVORITES_RECIPES_NUMBER, RECIPES_COLLECTION, USERS_COLLECTION, SAVED_COLLECTION }
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -31,9 +30,9 @@ app.listen(8000, function () {
     console.log("Listening on port " + 8000)
 });
 
-app.get('/api/recipe/favoriteRecipes', function (req, res) {
+app.get('/api/recipe/popularRecipes', function (req, res) {
     let match = { $match: { userID: req.query.userID } };
-    let query = createFavoriteQuery(match)
+    let query = createPopularQuery(match)
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
@@ -273,8 +272,8 @@ function createJoinQuery(match) {
     return joinQuery
 }
 
-function createFavoriteQuery(match) {
-    let favoriteQuery = [
+function createPopularQuery(match) {
+    let popularQuery = [
         match,
         {
             $lookup:
@@ -303,10 +302,10 @@ function createFavoriteQuery(match) {
             }
         },
         { "$sort": { "numOfSaves": -1 } },
-        { $limit: GLOBAL.FAVORITES_RECIPES_NUMBER }
+        { $limit: GLOBAL.POPULAR_RECIPES_NUMBER }
     ]
 
-    return favoriteQuery
+    return popularQuery
 }
 
 function RemoveFromDB(callback, query, collectionName) {

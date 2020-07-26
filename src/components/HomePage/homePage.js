@@ -1,37 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { requestFavoriteRecipes } from '../../actions'
+import { requestPopularRecipes } from '../../actions'
 import CardsList from './cardsListHomePage'
 import Carousel from './carousel'
 
 
 const mapStateToProps = (state) => {
     return {
-        favoriteRecipes: state.favorite.recipes,
-        isPending: state.favorite.isPending
+        popularRecipes: state.popular.recipes,
+        isPending: state.popular.isPending
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onRequestFavoriteRecipes: (userID) => requestFavoriteRecipes(userID, dispatch)
+        onRequestPopularRecipes: (userID) => requestPopularRecipes(userID, dispatch)
     }
 }
 
 
 class HomePage extends React.Component {
     componentDidMount() {
-        this.props.onRequestFavoriteRecipes(JSON.parse(sessionStorage.userData).userID);
+        this.props.onRequestPopularRecipes(JSON.parse(sessionStorage.userData).userID);
     }
 
     render() {
-        const { favoriteRecipes, isPending } = this.props;
+        const { popularRecipes, isPending } = this.props;
    
         return (
             <div >
                 <Carousel />
                 {isPending ? <h1>loading</h1> :
-                    <CardsList recipes={favoriteRecipes} />}
+                    <CardsList recipes={popularRecipes} />}
             </div>
         )
     }
