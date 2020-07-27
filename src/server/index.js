@@ -8,6 +8,7 @@ var uri = 'mongodb://localhost:27017/recipes';
 const assert = require('assert');
 const fs = require('fs');
 let mydb
+let countMydb = 0
 const { ObjectId } = require('mongodb');
 
 app.use(express.static(path.join(__dirname, '../../build')))
@@ -31,18 +32,17 @@ app.listen(8000, function () {
 });
 
 app.get('/api/recipe/popularRecipes', function (req, res) {
-    let match = { $match: { userID: req.query.userID } };
-    let query = createPopularQuery(match)
+    let query = createPopularQuery(req.query.userID)
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
-        res.status(200).end()
+        // res.status(200).end()
     }
 })
 
 app.get('/api/recipe/allByUser', function (req, res) {
     let match = { $match: { userID: req.query.userID } };
-    let query = createJoinQuery(match)
+    let query = createJoinQuery(match, req.query.userID)
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
@@ -59,12 +59,12 @@ app.get('/api/recipe/allSavedByUser', function (req, res) {
     }
 })
 
-app.get('/api/allRecipes', function (req, res) {
-    let query = createJoinQuery({});
+app.get('/api/recipe/allRecipes', function (req, res) {
+    let match = { $match: {} }
+    let query = createJoinQuery(match, req.query.userID);
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
     function sendRes(result) {
         res.send(result);
-        res.status(200).end()
     }
 })
 
@@ -93,7 +93,7 @@ app.get('/api/search', function (req, res) {
 
 app.get('/api/recipe/recipeByID', function (req, res) {
     let match = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
-    let query = createJoinQuery(match)
+    let query = createJoinQuery(match, req.query.userID)
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
     function sendRes(result) {
         res.send(result[0]);
@@ -136,20 +136,37 @@ app.post('/api/user/addUser', function (req, res) {
 })
 
 function connectToDB(callback, collectionName) {
-    MongoClient.connect(uri, function (err, db) {
-        if (!err) {
-            console.log("connected");
-            mydb = db
-            dbo = db.db("recipes");
-            callback(dbo.collection(collectionName))
-        }
-    })
+    if (!mydb) {
+        MongoClient.connect(uri, function (err, db) {
+            if (!err) {
+                if (!mydb) {
+                    mydb = db
+                    console.log("connected");
+                }
+                createCollection(callback, db, collectionName)
+            }
+        })
+    } else {
+        createCollection(callback, mydb, collectionName)
+    }
+}
+
+function createCollection(callback, db, collectionName) {
+    dbo = db.db("recipes");
+    countMydb++
+    callback(dbo.collection(collectionName))
 }
 
 function closeConnction() {
     if (mydb) {
-        mydb.close();
-        MongoClient.close;
+        if (countMydb > 0) {
+            countMydb--
+        }
+        if (countMydb === 0) {
+            console.log("close")
+            mydb.close();
+            MongoClient.close;
+        }
     }
 }
 
@@ -238,7 +255,7 @@ function createSavedQuery(userID) {
     return joinQuery
 }
 
-function createJoinQuery(match) {
+function createJoinQuery(match, userID) {
     let joinQuery = [
         match,
         {
@@ -264,7 +281,7 @@ function createJoinQuery(match) {
                 "Preparation": "$Preparation",
                 "Date": "$Date",
                 numOfSaves: { $size: "$RightTableData" },
-                isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
+                isSaved: { $cond: [{ $in: [userID, '$RightTableData.userID'] }, true, false] }
             }
         }
     ]
@@ -272,9 +289,8 @@ function createJoinQuery(match) {
     return joinQuery
 }
 
-function createPopularQuery(match) {
+function createPopularQuery(userID) {
     let popularQuery = [
-        match,
         {
             $lookup:
             {
@@ -298,7 +314,7 @@ function createPopularQuery(match) {
                 "Preparation": "$Preparation",
                 "Date": "$Date",
                 numOfSaves: { $size: "$RightTableData" },
-                isSaved: { $cond: [{ $in: ['$userID', '$RightTableData.userID'] }, true, false] }
+                isSaved: { $cond: [{ $in: [userID, '$RightTableData.userID'] }, true, false] }
             }
         },
         { "$sort": { "numOfSaves": -1 } },

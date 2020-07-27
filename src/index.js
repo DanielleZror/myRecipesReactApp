@@ -9,7 +9,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { requestAddUser, requestAddRecipe, requestAllRecipes, requestByIdRecipe, searchRecipes, requestSavedRecipes, requestPopularRecipes } from './reducers';
+import { requestAddUser, requestAddRecipe, requestAllRecipesByUser, requestByIdRecipe, searchRecipes, requestSavedRecipes, requestPopularRecipes, requestAllRecipes } from './reducers';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/App';
 import './styles/animate.css';
@@ -18,14 +18,15 @@ import './styles/index.css';
 const history = createHistory();
 const logger = createLogger()
 const rootReducers = combineReducers({
-  all: requestAllRecipes,
+  allByUser: requestAllRecipesByUser,
   search: searchRecipes,
   byid: requestByIdRecipe,
   add: requestAddRecipe,
   addUser: requestAddUser,
   routing: routerReducer,
   saved: requestSavedRecipes,
-  popular: requestPopularRecipes
+  popular: requestPopularRecipes,
+  all: requestAllRecipes
 })
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger, routerMiddleware(history)))
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {
   CHANGE_SEARCH_FIELD,
-  REQUEST_RECIPES_PENDING,
-  REQUEST_RECIPES_SUCCESS,
-  REQUEST_RECIPES_FAILED,
+  REQUEST_RECIPES_BY_USER_PENDING,
+  REQUEST_RECIPES_BY_USER_SUCCESS,
+  REQUEST_RECIPES_BY_USER_FAILED,
   REQUEST_BY_ID_RECIPES_PENDING,
   REQUEST_BY_ID_RECIPES_SUCCESS,
   REQUEST_BY_ID_RECIPES_FAILED,
@@ -24,20 +24,23 @@ import {
   REQUEST_SAVED_RECIPES_FAILED,
   REQUEST_POPULAR_RECIPES_PENDING,
   REQUEST_POPULAR_RECIPES_SUCCESS,
-  REQUEST_POPULAR_RECIPES_FAILED
+  REQUEST_POPULAR_RECIPES_FAILED,
+  REQUEST_RECIPES_PENDING,
+  REQUEST_RECIPES_SUCCESS,
+  REQUEST_RECIPES_FAILED
 } from './constants'
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCH_FIELD, payload: text })
 
-export const requestAllRecipes = (userID, dispatch) => {
-  dispatch({ type: REQUEST_RECIPES_PENDING })
+export const requestAllRecipesByUser = (userID, dispatch) => {
+  dispatch({ type: REQUEST_RECIPES_BY_USER_PENDING })
   axios.get(`/api/recipe/allByUser`, {
     params: {
       userID: userID
     }
   })
-    .then(res => dispatch({ type: REQUEST_RECIPES_SUCCESS, payload: res.data }))
-    .catch(error => dispatch({ type: REQUEST_RECIPES_FAILED, payload: error }))
+    .then(res => dispatch({ type: REQUEST_RECIPES_BY_USER_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REQUEST_RECIPES_BY_USER_FAILED, payload: error }))
 }
 
 export const requestByIdRecipe = (id, userID, dispatch) => {
@@ -111,4 +114,15 @@ export const requestPopularRecipes = (userID, dispatch) => {
   })
     .then(res => dispatch({ type: REQUEST_POPULAR_RECIPES_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: REQUEST_POPULAR_RECIPES_FAILED, payload: error }))
+}
+
+export const requestAllRecipes = (userID, dispatch) => {
+  dispatch({ type: REQUEST_RECIPES_PENDING })
+  axios.get(`/api/recipe/allRecipes`, {
+    params: {
+      userID: userID
+    }
+  })
+    .then(res => dispatch({ type: REQUEST_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REQUEST_RECIPES_FAILED, payload: error }))
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './cardHomePage.css';
+import './cardPopular.css';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 

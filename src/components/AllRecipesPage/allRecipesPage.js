@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setSearchField, requestAllRecipes, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
+import {setSearchField, requestAllRecipesByUser, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
 import CardsList from '../CardsList/CardsList.js'
 import Search from './searchInMyRecipes.js';
 
 const mapStateToProps = (state) => {
   return {
-    recipes: state.all.recipes,
-    isPending: state.all.isPending,
+    recipes: state.allByUser.recipes,
+    isPending: state.allByUser.isPending,
     searchField: state.search.searchField
   }
 }
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {  
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-    onRequestAllRecipes: (userID) => requestAllRecipes(userID, dispatch),
+    onRequestAllRecipesByUser: (userID) => requestAllRecipesByUser(userID, dispatch),
     onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
     onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
   }
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class allRecipesPage extends React.Component  {
   componentDidMount() {
-    this.props.onRequestAllRecipes(JSON.parse(sessionStorage.userData).userID);
+    this.props.onRequestAllRecipesByUser(JSON.parse(sessionStorage.userData).userID);
   }
 
   render() {

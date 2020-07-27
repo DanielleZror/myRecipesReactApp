@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './cardHomePage.js';
+import Card from './cardPopular.js';
 import './cardsListHomePage.css';
 
 const CardsList = (props) => {
