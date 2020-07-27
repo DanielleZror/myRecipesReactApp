@@ -1,8 +1,8 @@
 import React from 'react';
 import './Card.css';
 import { Route, Link } from 'react-router-dom';
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { GrView } from "react-icons/gr";
 
 class Card extends React.Component {
     constructor(props) {
@@ -39,12 +39,13 @@ class Card extends React.Component {
                         <div className="card-img" style={{ backgroundImage: `url(${this.props.oneRecipe.Img})` }}>
                             <div className="overlay">
                                 <div className="overlay-content">
-                                    <Link className="hover" to={`/recipe/${this.props.oneRecipe._id}`}> View</Link>
+                                    {this.state.isSaved ? <FaHeart className="fa-icon" id={this.props.oneRecipe._id} onClick={this.handelUnlike} />
+                                        : <FaRegHeart className="fa-icon" onClick={this.handelLike} id={this.props.oneRecipe._id} />}
+                                    <Link to={`/recipe/${this.props.oneRecipe._id}`}> <GrView className="view-icon" /></Link>
                                 </div>
                             </div>
                         </div>
-                        {this.state.isSaved ? <FaHeart className="fa-icon" id={this.props.oneRecipe._id} onClick={this.handelUnlike} />
-                            : <FaRegHeart className="fa-icon" onClick={this.handelLike} id={this.props.oneRecipe._id} />}
+
                     </aside>
                     <article>
                         <div className="text-part">

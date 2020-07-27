@@ -120,7 +120,7 @@ app.post('/api/recipe/likeRecipe', function (req, res) {
 app.post('/api/recipe/unlikeRecipe', function (req, res) {
     let recipeID = ObjectId(req.body.unlike.recipeID)
     let query = { $and: [{ userID: req.body.unlike.userID }, { recipeID: recipeID }] }
-    RemoveFromDB(sendRes, query, SAVED_COLLECTION)
+    RemoveFromDB(sendRes, query, GLOBAL.SAVED_COLLECTION)
     function sendRes(result) {
         res.send(result)
         res.status(200).end()
