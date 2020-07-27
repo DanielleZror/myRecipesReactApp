@@ -136,7 +136,7 @@ app.post('/api/user/addUser', function (req, res) {
 })
 
 function connectToDB(callback, collectionName) {
-    if (!mydb) {
+    if (!mydb || !mydb.isConnected()) {
         MongoClient.connect(uri, function (err, db) {
             if (!err) {
                 if (!mydb) {

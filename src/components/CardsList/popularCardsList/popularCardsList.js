@@ -1,10 +1,10 @@
 import React from 'react';
-import Card from './cardPopular.js';
-import './cardsListHomePage.css';
+import Card from '../../Cards/popularCard/populaCard';
+import './popularCardsList.css';
 
 const CardsList = (props) => {
     return (        
-            <div className="list-home-page wow fadeIn">
+            <div className={props.className}>
                 <div className='container'>
                 {props.recipes.map((oneRecipe) => <Card key={oneRecipe._id} oneRecipe={oneRecipe}/>) }
                 </div>

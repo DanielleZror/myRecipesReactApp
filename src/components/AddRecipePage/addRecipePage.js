@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CardListAddPage from './cardAddPage.js';
+import cardAddPage from './cardAddPage.js';
 import './addRecipePage.css'
 import { requestAddRecipe, requestResetAddState } from '../../actions'
 import { Redirect } from 'react-router-dom';
@@ -30,7 +30,7 @@ class AddRecipePage extends React.Component {
     }
     return (
       <div>
-        <CardListAddPage onSave={this.props.onRequestAddRecipe} ></CardListAddPage>
+        <cardAddPage onSave={this.props.onRequestAddRecipe} ></cardAddPage>
       </div>
     )
   }

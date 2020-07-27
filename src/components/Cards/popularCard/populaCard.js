@@ -1,11 +1,11 @@
 import React from 'react';
-import './cardPopular.css';
+import './populaCard.css';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 
 const CardHomePage = (props) => {
     return (
-        <div className='home-card'>
+        <div className="popular-card">
             <Card >
                 <div className="imgBx">
                     <img src={props.oneRecipe.Img} alt={props.oneRecipe.Name} />
