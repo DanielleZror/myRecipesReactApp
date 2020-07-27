@@ -6,8 +6,8 @@ const mainCardsList = (props) => {
     return (
         <div className={props.className}>
             <div className='container'>
-                {props.recipes.map((oneRecipe) => <Card key={oneRecipe._id} onLike={props.onLike}
-                    onUnlike={props.onUnlike} oneRecipe={oneRecipe} />)}
+                {props.recipes.map((oneRecipe, index) => <Card key={oneRecipe._id} onLike={props.onLike}
+                    onUnlike={props.onUnlike} oneRecipe={oneRecipe} index={index}/>)}
             </div>
         </div>
     )

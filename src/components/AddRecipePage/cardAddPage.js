@@ -2,7 +2,7 @@ import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
 import './addRecipePage.css';
 
-class CardsList extends React.Component {
+class AddCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,4 +82,4 @@ class CardsList extends React.Component {
 
 }
 
-export default CardsList;
+export default AddCard;

@@ -34,8 +34,8 @@ class mainCard extends React.Component {
 
     render() {
         return (
-            <div className='all-card'>
-                <Card >
+            // <div className='all-card'>
+                <Card className={this.props.index % 5 === 2 ? "double-size" : ""}>
                     <div className="imgBx">
                         <img src={this.props.oneRecipe.Img} alt={this.props.oneRecipe.Name} />
                     </div>
@@ -47,7 +47,7 @@ class mainCard extends React.Component {
                         </h2>
                     </div>
                 </Card>
-            </div>
+            // </div>
         )
     }
 }

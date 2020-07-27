@@ -34,11 +34,10 @@ class HomePage extends React.Component {
 
         return (
             <div>
-                <div >
-                    {/* <Carousel /> */}
+                {/* <div >
                     {popularIsPending ? <h1>loading</h1> :
                         <PopularCardsList recipes={popularRecipes} className={"list-popular-page"}/>}
-                </div>
+                </div> */}
                 <div>
                     {allIsPending ? <h1>loading</h1> :
                         <MainCardsList recipes={allRecipe} className={"list-main-page"}/>}

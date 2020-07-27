@@ -92,7 +92,7 @@ app.get('/api/search', function (req, res) {
 })
 
 app.get('/api/recipe/recipeByID', function (req, res) {
-    let match = { $match: { $and: [{ _id: ObjectId(req.query.id) }, { userID: req.query.userID }] } }
+    let match = { $match: { _id: ObjectId(req.query.id) } }
     let query = createJoinQuery(match, req.query.userID)
     selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
     function sendRes(result) {
@@ -184,7 +184,7 @@ function selectFromDB(callback, query, collectionName) {
 function addToDB(callback, document, collectionName) {
     connectToDB(insert, collectionName)
     function insert(collection) {
-        document.Date = Date()
+        document.Date = new Date().toJSON()
         collection.insertOne(document, function (err, result) {
             if (err) throw err;
             callback(result.insertedId.toString())
