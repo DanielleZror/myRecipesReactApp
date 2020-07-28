@@ -47,7 +47,7 @@ module.exports = {
                 $match: {
                     $or: [
                         { Description: { $regex: regex } },
-                        { Item: { $regex: regex } },
+                        { Ingredients: { $elemMatch: { item: { $regex: regex } } } },
                         { Name: { $regex: regex } },
                         { Preparation: { $regex: regex } }
                     ]
