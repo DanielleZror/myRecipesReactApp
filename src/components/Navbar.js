@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../logo.png';
 import '../styles/Navbar.css'
 import { Link, useHistory } from 'react-router-dom';
+import Search from './search'
 import { Form, FormControl, Navbar, Nav } from 'react-bootstrap';
 
 const MyNavbar = () => {
@@ -28,7 +29,8 @@ const MyNavbar = () => {
                         <Nav.Link eventKey="4" as={Link} to="/saved">Saved</Nav.Link>
                     </Nav>
                     <Form inline>
-                        <FormControl id="searchInput" type="text" placeholder="Search in all recipes" className="mr-sm-2 submit_on_enter" />
+                        <Search/>
+                        {/* <FormControl id="searchInput" type="search" placeholder="Search in all recipes" className="mr-sm-2 submit_on_enter" /> */}
                         <span id="userName" className="nav-link disabled">{JSON.parse(sessionStorage.userData).Name}</span>
                         <span id="logOut" className="nav-link" onClick={logout}>Logout</span>
                     </Form>

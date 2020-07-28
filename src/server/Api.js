@@ -42,19 +42,14 @@ module.exports = {
         })
 
         app.get('/api/search', function (req, res) {
-            var regex = new RegExp("." + req.query.search + ".");
+            var regex = new RegExp(req.query.search);
             var match = {
                 $match: {
-                    $and: [
-                        {
-                            $or: [
-                                { Description: regex },
-                                { Item: regex },
-                                { Name: regex },
-                                { Preparation: regex }
-                            ]
-                        },
-                        { userID: req.query.userID }
+                    $or: [
+                        { Description: { $regex: regex } },
+                        { Item: { $regex: regex } },
+                        { Name: { $regex: regex } },
+                        { Preparation: { $regex: regex } }
                     ]
                 }
             }

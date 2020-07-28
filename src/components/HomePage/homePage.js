@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class HomePage extends React.Component {
     componentDidMount() {
-        this.props.onRequestPopularRecipes(JSON.parse(sessionStorage.userData).userID);
+        // this.props.onRequestPopularRecipes(JSON.parse(sessionStorage.userData).userID);
         this.props.onRequestAllRecipes(JSON.parse(sessionStorage.userData).userID);
     }
 
