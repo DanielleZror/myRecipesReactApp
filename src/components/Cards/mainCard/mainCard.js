@@ -33,7 +33,8 @@ class mainCard extends React.Component {
 
     render() {
         return (
-            <div className={this.props.index % 5 === 2 ? " main-card double-size" : "main-card"}>
+            <div className={this.props.index % 5 === 1 ? "main-card double-size-col" :
+                (this.props.index % 10 === 2 ? "main-card double-size-row" : "main-card")}>
                 <aside>
                     <div className="imgBx" style={{ backgroundImage: `url(${this.props.oneRecipe.Img})` }}>
                         <div className="overlay">
@@ -44,7 +45,7 @@ class mainCard extends React.Component {
                                 <div className="details">
                                     <h2>
                                         <Link to={`/recipe/${this.props.oneRecipe._id}`}>
-                                            <span>{this.props.oneRecipe.Name}</span> </Link> 
+                                            <span>{this.props.oneRecipe.Name}</span> </Link>
                                         <span>{this.props.oneRecipe.Description}</span>
 
                                     </h2>
