@@ -1,9 +1,8 @@
 import React from 'react';
 import './mainCard.css';
-import { Route, Link } from 'react-router-dom';
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import Card from 'react-bootstrap/Card'
+import { Link } from 'react-router-dom';
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { GrView } from "react-icons/gr";
 
 class mainCard extends React.Component {
     constructor(props) {
@@ -34,20 +33,27 @@ class mainCard extends React.Component {
 
     render() {
         return (
-            // <div className='all-card'>
-                <Card className={this.props.index % 5 === 2 ? "double-size" : ""}>
-                    <div className="imgBx">
-                        <img src={this.props.oneRecipe.Img} alt={this.props.oneRecipe.Name} />
-                    </div>
-                    <div className="details">
-                        <h2>
-                            <Link to={`/recipe/${this.props.oneRecipe._id}`}> {this.props.oneRecipe.Name} </Link><br />
-                            <span>{this.props.oneRecipe.Description}</span>
+            <div className={this.props.index % 5 === 2 ? " main-card double-size" : "main-card"}>
+                <aside>
+                    <div className="imgBx" style={{ backgroundImage: `url(${this.props.oneRecipe.Img})` }}>
+                        <div className="overlay">
+                            <div className="overlay-content">
+                                {this.state.isSaved ? <FaHeart className="fa-icon" id={this.props.oneRecipe._id} onClick={this.handelUnlike} />
+                                    : <FaRegHeart className="fa-icon" onClick={this.handelLike} id={this.props.oneRecipe._id} />}
+                                <Link to={`/recipe/${this.props.oneRecipe._id}`}> <GrView className="view-icon" /></Link>
+                                <div className="details">
+                                    <h2>
+                                        <Link to={`/recipe/${this.props.oneRecipe._id}`}>
+                                            <span>{this.props.oneRecipe.Name}</span> </Link> 
+                                        <span>{this.props.oneRecipe.Description}</span>
 
-                        </h2>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </Card>
-            // </div>
+                </aside>
+            </div>
         )
     }
 }

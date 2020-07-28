@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.css';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
 
@@ -33,7 +33,6 @@ class Card extends React.Component {
 
     render() {
         return (
-            <Route>
                 <div className='all-card'>
                     <aside>
                         <div className="card-img" style={{ backgroundImage: `url(${this.props.oneRecipe.Img})` }}>
@@ -55,7 +54,6 @@ class Card extends React.Component {
                     </article>
 
                 </div>
-            </Route>
         )
     }
 }
