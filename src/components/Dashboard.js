@@ -2,6 +2,7 @@ import React from 'react';
 import Nav from './navbar';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import RecipePage from './ViewOneRecipePage/viewRecipePage';
+import SearchPage from './Search/searchResultPage';
 import All from './AllRecipesPage/allRecipesPage';
 import Add from './AddRecipePage/addRecipePage';
 import Home from './HomePage/homePage';
@@ -20,6 +21,7 @@ export class Dashboard extends React.Component {
                     <Route path='/All' component={All} />
                     <Route path='/Add' component={Add} />
                     <Route path={`/recipe/:id`} component={RecipePage}></Route>
+                    <Route path={`/search/:search`} component={SearchPage}></Route>
                     <Route path='/Saved' component={Saved} />
                 </Switch>
             </HashRouter>

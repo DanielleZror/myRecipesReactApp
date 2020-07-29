@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../logo.png';
 import '../styles/Navbar.css'
 import { Link, useHistory } from 'react-router-dom';
-import Search from './search'
+import Search from './Search/search'
 import { Form, FormControl, Navbar, Nav } from 'react-bootstrap';
 
 const MyNavbar = () => {

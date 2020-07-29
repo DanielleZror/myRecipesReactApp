@@ -23,12 +23,17 @@ class viewRecipePage extends React.Component {
   componentDidMount() {
     this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
   }
+  componentDidUpdate(prevProps){
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
+  }
+  }
 
   render() {
     const { recipe, isPending } = this.props;
     return (
       <div >
-        {isPending ? <h1>Loading</h1> :
+        {isPending ? <h1>Loading</h1> : recipe === "" ? <h1> Not found</h1>:
           <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe} onUnlike={this.props.onRequestUnlikeRecipe}/>
         }
       </div>
