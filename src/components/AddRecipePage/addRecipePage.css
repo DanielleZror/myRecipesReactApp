@@ -86,6 +86,8 @@
 
 .add-ingredients{
   margin: 1em 0 0.5em;
+  overflow: auto;
+  max-height: 200px;
 }
 
 .table-ingredients{
@@ -105,4 +107,23 @@
 
 #Preparation{
   margin: 1em 0 0.5em;
+}
+
+/* scrollbar style */
+/* the scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* the progress bar of the scrollbar- chrome */
+::-webkit-scrollbar-track {
+  border: 1px solid #C2A9C2;
+  border-radius: 10px;
+}
+
+/* draggable */
+::-webkit-scrollbar-thumb {
+  background: #6D586D;  
+  border-radius: 10px;
 }

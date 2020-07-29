@@ -28,7 +28,7 @@ class AddIngredients extends React.Component {
             default:
                 break;
         }
-        this.setState({ingredients: ingredients})
+        this.setState({ ingredients: ingredients })
         this.props.saveData(this.state.ingredients)
     }
 
@@ -37,7 +37,7 @@ class AddIngredients extends React.Component {
         ingredients.push({ id: this.state.rows, amount: null, unit: null, item: null })
         let numberOfRows = this.state.rows
         numberOfRows++
-        this.setState({rows: numberOfRows})
+        this.setState({ rows: numberOfRows })
         this.setState({ ingredients: ingredients })
     }
 
@@ -51,36 +51,40 @@ class AddIngredients extends React.Component {
 
     render() {
         return (
-            <div className="add-ingredients">
-                <table className="table-ingredients">
-                    <tbody>
-                        {this.state.ingredients.map((row) => (
-                            <tr key={row.id}>
-                                <td>
-                                    <input type="number" id={`amount-${row.id}`} className="form-control add-input" name="amount"
-                                        onChange={this.onChange} placeholder={row.amount || "Amount"} autoComplete="off" step="0.25"
-                                        min="0" max="1000" value={row.amount} required/>
-                                </td>
-                                <td>
-                                    <input type="text" id={`unit-${row.id}`} className="form-control add-input"
-                                        placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" value={row.unit} required/>
-                                </td>
-                                <td>
-                                    <input type="text" id={`item-${row.id}`} className="form-control add-input"
-                                        placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item} required/>
-                                </td>
-                                <td>
-                                    {this.state.ingredients.length > 1 ? <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>
-                                        <RiDeleteBinLine /></button> : null}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <div>
+                <div className="add-ingredients">
+                    <table className="table-ingredients">
+                        <tbody>
+                            {this.state.ingredients.map((row) => (
+                                <tr key={row.id}>
+                                    <td>
+                                        <input type="number" id={`amount-${row.id}`} className="form-control add-input" name="amount"
+                                            onChange={this.onChange} placeholder={row.amount || "Amount"} autoComplete="off" step="0.25"
+                                            min="0" max="1000" value={row.amount} required />
+                                    </td>
+                                    <td>
+                                        <input type="text" id={`unit-${row.id}`} className="form-control add-input"
+                                            placeholder={row.unit || "Unit"} name="unit" onChange={this.onChange} autoComplete="off" value={row.unit} required />
+                                    </td>
+                                    <td>
+                                        <input type="text" id={`item-${row.id}`} className="form-control add-input"
+                                            placeholder={row.item || "Item"} name="item" onChange={this.onChange} autoComplete="off" value={row.item} required />
+                                    </td>
+                                    <td>
+                                        {this.state.ingredients.length > 1 ? <button className="remove-btn btn-danger remove" type="button" id={`remove-${row.id}`} onClick={this.removeRow}>
+                                            <RiDeleteBinLine /></button> : null}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                </div>
                 <div className="add-div">
                     <button id="addBtn" type="button" className="add-btn btn" onClick={this.addRow}><IoMdAdd /></button>
                 </div>
             </div>
+
         );
     }
 };
