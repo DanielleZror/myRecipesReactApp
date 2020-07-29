@@ -4,7 +4,6 @@
     font-size: 1.2em;
 }
 
-
 .navbar-brand {
     padding: 0;
 }
@@ -13,3 +12,24 @@
     color: gray;
     cursor: pointer;
 }
+
+#searchInput {
+    width: 13em;
+    height: 2em;
+    margin-right: 1.5em;
+    border-color: #CB8EB2;
+}
+
+.search-icon {
+    color: #CB8EB2;
+}
+
+.input-group {
+    margin-right: 2em;
+}
+
+#searchInput:focus{ 
+    outline: none !important;
+    border-color: #CB8EB2;
+    box-shadow: 0 0 10px #CB8EB2;
+  }

@@ -18,8 +18,8 @@ class allRecipesPage extends React.Component {
         return (
             <form class="input-group">
                 <FormControl id="searchInput" type="search" ref={this.myRef} placeholder="Search in all recipes"
-                    onChange={this.onChange} className="mr-sm-2 submit_on_enter" />
-                <Link to={`/search/${this.state.searchField}`}> <FaSearch /></Link>
+                    onChange={this.onChange} />
+                <Link to={`/search/${this.state.searchField}`}> <FaSearch className="search-icon"/></Link>
             </form>
         );
     }
