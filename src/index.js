@@ -28,7 +28,7 @@ const rootReducers = combineReducers({
   saved: requestSavedRecipes,
   popular: requestPopularRecipes,
   all: requestAllRecipes,
-  search: requestSearchRecipes
+  searchAll: requestSearchRecipes
 })
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger, routerMiddleware(history)))
 

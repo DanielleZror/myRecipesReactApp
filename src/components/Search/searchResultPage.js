@@ -5,8 +5,8 @@ import { requestSearchRecipes, requestLikeRecipe, requestUnlikeRecipe } from '..
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        recipes: state.search.recipes,
-        isPending: state.search.isPending,
+        recipes: state.searchAll.recipes,
+        isPending: state.searchAll.isPending,
         search: ownProps
     }
 }

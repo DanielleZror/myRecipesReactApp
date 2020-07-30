@@ -44,8 +44,8 @@ class DetailsCard extends React.Component {
                     <h3>{this.props.oneRecipe.Description || "Description"}</h3>
                     <ul>
                         <li ><FaRegClock /></li>
-                        <li>{((this.props.oneRecipe.TimeHours || 0) != 0 ? `${this.props.oneRecipe.TimeHours} Hours ` : " ") +
-                            ((this.props.oneRecipe.TimeMinutes || 0) != 0 ? `${this.props.oneRecipe.TimeMinutes} Minuts` : " ")} </li>
+                        <li>{((this.props.oneRecipe.TimeHours || 0) !== 0 ? `${this.props.oneRecipe.TimeHours} Hours ` : " ") +
+                            ((this.props.oneRecipe.TimeMinutes || 0) !== 0 ? `${this.props.oneRecipe.TimeMinutes} Minuts` : " ")} </li>
                         <li></li>
                         <li>  <FaRegHeart /></li>
                         <li>{this.props.oneRecipe.numOfSaves || 0}</li>
