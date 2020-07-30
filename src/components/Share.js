@@ -2,9 +2,11 @@ import React from 'react';
 import '../styles/share.css'
 import { FaShareSquare, FaFacebook } from 'react-icons/fa'
 import { IoLogoWhatsapp } from 'react-icons/io'
-import { FiLink } from 'react-icons/fi'
+import { FiLink, FiMail } from 'react-icons/fi'
 
 const Share = () => {
+    let title = `Look at this recipe by ${JSON.parse(sessionStorage.userData).Name}`
+    let body = encodeURIComponent(window.location.href)
 
     const copyToClipboard = () => {
         const copyText = document.createElement('textarea');
@@ -16,10 +18,11 @@ const Share = () => {
         alert(`copy - ${window.location.href}`)
       };
 
-    let linkWhatsapp = `https://wa.me/?text=Look at this recipe by ${JSON.parse(sessionStorage.userData).Name} !!! 
-        ${encodeURIComponent(window.location.href)}`
+    let linkWhatsapp = `https://wa.me/?text=${title} !!! ${body}`
 
-    let linkFacebook = `https://www.facebook.com/share.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURI(`Look at this recipe by ${JSON.parse(sessionStorage.userData).Name}`)}`
+    let linkFacebook = `https://www.facebook.com/share.php?u=${body}`
+
+    let linkMail = `mailto:?subject=${title}&body=${body}`
 
     return (
         <div className="share-div">
@@ -32,6 +35,8 @@ const Share = () => {
                     <li><a target="_blank" href={linkFacebook}>
                         <FaFacebook className="social-icons facebook" /></a></li>
                     <li><FiLink className="social-icons link" onClick={copyToClipboard}/></li>
+                    <li><a target="_blank" href={linkMail}>
+                        <FiMail className="social-icons mail" /></a></li>
                 </ul>
             </div>
         </div>

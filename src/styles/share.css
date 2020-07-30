@@ -18,6 +18,9 @@
     color: limegreen;
 }
 
+.mail {
+    color: red;
+}
 .link {
     color: gray
 }
@@ -57,7 +60,7 @@ label {
     left: 40px;
     bottom: -12px;
     width: 48px;
-    border-color: red;
+    background-color: white;
     height: 150px;
     margin: 0;
     padding: 0;
