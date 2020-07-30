@@ -19,7 +19,7 @@ const Share = () => {
     let linkWhatsapp = `https://wa.me/?text=Look at this recipe by ${JSON.parse(sessionStorage.userData).Name} !!! 
         ${encodeURIComponent(window.location.href)}`
 
-    let linkFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)};src=sdkpreparse`
+    let linkFacebook = `https://www.facebook.com/share.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURI(`Look at this recipe by ${JSON.parse(sessionStorage.userData).Name}`)}`
 
     return (
         <div className="share-div">
