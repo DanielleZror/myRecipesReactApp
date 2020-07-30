@@ -2,6 +2,11 @@
     height: 1.7em;
     width: 1.7em;
     cursor: pointer;
+    color: #CB8EB2;
+}
+
+.share-icon:hover {
+    border-color: red;
 }
   
 .social-icons {
@@ -25,11 +30,9 @@
     color: gray
 }
 .share-div{
-    position: absolute;
-    right: -10px;
-    top: 395px;
-    width: 100px;
-    height: 100px;
+    float: right;
+    width: 34px;
+    height: 35px;
 }
 
 input[type="checkbox"]{
@@ -59,28 +62,19 @@ label {
     position: relative;
     left: 40px;
     bottom: -12px;
-    width: 48px;
+    width: 48px !important;
     background-color: white;
-    height: 150px;
+    height: 164px;
     margin: 0;
     padding: 0;
 }
 
 .social ul li {
+    margin: 0 !important;
     padding: 7px;
-    display: block;
+    display: block !important;
 }
 
 .social-icons:hover {
     color:rgba(0,0,0,.5);
 }
-
-/* .social ul:after {
-    content: "";
-    position: absolute;
-    bottom: 49px;
-    right: 34px;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid #ff0;
-    border-top: 10px solid transparent;
-} */
