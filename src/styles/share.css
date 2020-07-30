@@ -1,0 +1,83 @@
+.share-icon {
+    height: 1.7em;
+    width: 1.7em;
+    cursor: pointer;
+}
+  
+.social-icons {
+    height: 1.7em;
+    width: 2em;
+    cursor: pointer;
+}
+
+.facebook {
+    color: blue
+}
+
+.whatsapp {
+    color: limegreen;
+}
+
+.link {
+    color: gray
+}
+.share-div{
+    position: absolute;
+    right: -10px;
+    top: 395px;
+    width: 100px;
+    height: 100px;
+}
+
+input[type="checkbox"]{
+    display:none;
+}
+
+
+.checkbox-share:checked ~ .social {
+    opacity:1;
+    transform:scale(1) translateY(-90px);
+}
+
+label {
+    margin:0;
+}
+
+
+.social {
+    transform-origin: 13% -22%;
+    transform:scale(0) translateY(-190px);
+    opacity:0;
+    transition:.5s;
+    height: 0;
+}
+
+.social ul {
+    position: relative;
+    left: 40px;
+    bottom: -12px;
+    width: 48px;
+    border-color: red;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+}
+
+.social ul li {
+    padding: 7px;
+    display: block;
+}
+
+.social-icons:hover {
+    color:rgba(0,0,0,.5);
+}
+
+/* .social ul:after {
+    content: "";
+    position: absolute;
+    bottom: 49px;
+    right: 34px;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #ff0;
+    border-top: 10px solid transparent;
+} */

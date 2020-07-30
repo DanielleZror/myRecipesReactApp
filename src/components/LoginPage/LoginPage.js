@@ -51,7 +51,7 @@ class Login extends React.Component {
 
     if (isLogin) {
       this.props.onRequestAddUser(this.state.user)
-      from.hash = ""
+      // from.hash = ""
       return <Redirect to={from} />
     }
     return (

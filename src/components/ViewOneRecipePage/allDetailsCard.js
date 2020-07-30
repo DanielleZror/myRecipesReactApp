@@ -1,8 +1,8 @@
 import React from 'react';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
-import { FaRegClock } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa";
+import Share from '../Share'
+import { FaRegClock, FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 class DetailsCard extends React.Component {
@@ -40,6 +40,7 @@ class DetailsCard extends React.Component {
                 </aside>
                 {this.state.isSaved ? <FaHeart className="fa-icon-recipe" id={this.props.oneRecipe._id} onClick={this.handelUnlike} />
                     : <FaRegHeart className="fa-icon-recipe" onClick={this.handelLike} id={this.props.oneRecipe._id} />}
+                <Share/>
                 <article>
                     <h2>{this.props.oneRecipe.Name || "Name"}</h2>
                     <h3>{this.props.oneRecipe.Description || "Description"}</h3>
