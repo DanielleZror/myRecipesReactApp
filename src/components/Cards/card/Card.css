@@ -8,6 +8,13 @@
     transition: all 0.3s linear;   
     font-family: 'Quicksand', sans-serif;
     text-transform: capitalize;
+    width: 100%;
+    height: 100%;
+}
+
+.all-card aside {
+  position: relative;
+  height: 70%;
 }
 
 .text-part h5, .text-part h3{
@@ -25,7 +32,7 @@
 .card-img {
     width: 100%;
     border-radius: 0px;
-    height: auto;
+    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

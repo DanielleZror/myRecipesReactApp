@@ -1,6 +1,8 @@
 const API = require('./Api')
 var express = require('express');
+
 var app = express();
+
 var bodyParser = require('body-parser');
 var path = require('path');
 const assert = require('assert');
@@ -8,6 +10,7 @@ const fs = require('fs');
 
 
 app.use(express.static(path.join(__dirname, '../../build')))
+app.use('/images/', express.static(path.join(__dirname, '../../uploads')))
 app.use(bodyParser.json({
     limit: '50mb',
     extended: true
@@ -27,6 +30,7 @@ app.listen(8000, function () {
     console.log("Listening on port " + 8000)
     API.initApi(app)
 });
+
 
 
 

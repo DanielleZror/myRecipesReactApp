@@ -2,6 +2,18 @@ const { ObjectId } = require('mongodb');
 const GLOBAL = require('../constants')
 const QUERY = require('./Queries')
 const DB = require('./DB')
+var multer = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname + '-' + Date.now())
+    }
+})
+
+var upload = multer({ storage: storage });
+
 
 module.exports = {
     initApi: (app) => {
@@ -70,8 +82,10 @@ module.exports = {
             }
         })
 
-        app.post('/api/recipe/add', function (req, res) {
-            DB.addToDB(sendRes, req.body.recipe, GLOBAL.RECIPES_COLLECTION)
+        app.post('/api/recipe/add', upload.any(), (req, res) => {
+            let addQurey = JSON.parse(req.body.recipe)
+            addQurey.Img = req.files[0].filename
+            DB.addToDB(sendRes, addQurey, GLOBAL.RECIPES_COLLECTION)
             function sendRes(insertID) {
                 res.send(insertID)
                 res.status(200).end()

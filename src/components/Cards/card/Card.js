@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './Card.css';
+import LazyLoadImage from '../../LazyLoadImage'
 import { Link } from 'react-router-dom';
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
+import { STATIC_IMAGES_PATH } from '../../../constants'
 
 const Card = (props) => {
     const [isSaved, setIsSaved] = useState(props.oneRecipe.isSaved);
@@ -29,7 +31,7 @@ const Card = (props) => {
     return (
         <div className='all-card'>
             <aside>
-                <div className="card-img" style={{ backgroundImage: `url(${props.oneRecipe.Img})` }}>
+                <LazyLoadImage nameClass="card-img" src={STATIC_IMAGES_PATH + props.oneRecipe.Img}>
                     <div className="overlay">
                         <div className="overlay-content">
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />
@@ -37,8 +39,7 @@ const Card = (props) => {
                             <Link to={`/recipe/${props.oneRecipe._id}`}> <GrView className="view-icon" /></Link>
                         </div>
                     </div>
-                </div>
-
+                </LazyLoadImage>
             </aside>
             <article>
                 <div className="text-part">

@@ -1,7 +1,6 @@
 import React from 'react';
 import Card from '../../Cards/mainCard/mainCard';
 import './mainCardsList.css';
-import { render } from '@testing-library/react';
 
 class mainCardsList extends React.Component {
     constructor(props) {
@@ -25,7 +24,6 @@ class mainCardsList extends React.Component {
         this.recursive();
      }
 
-    //const mainCardsList = (props) => {
     render() {
         return (
             <div className={this.props.className} >

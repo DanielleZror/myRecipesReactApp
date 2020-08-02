@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './mainCard.css';
 import { Link } from 'react-router-dom';
+import LazyLoadImage from '../../LazyLoadImage'
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
-
+import { STATIC_IMAGES_PATH } from '../../../constants'
 
 const MainCard = (props) => {
 
@@ -30,24 +31,11 @@ const MainCard = (props) => {
         props.onUnlike(likeObj)
     }
 
-    const useProgressiveImage = (src) => {  
-        const [sourceLoaded, setSourceLoaded] = useState(null)
-      
-        useEffect(() => {
-          const img = new Image()
-          img.src = src
-          img.onload = () => setSourceLoaded(src)
-        }, [src])
-      
-        return sourceLoaded 
-      }
-
-    const loaded = useProgressiveImage(props.oneRecipe.Img)
     return (
         <div className={props.index % 5 === 1 ? "main-card double-size-col" :
             (props.index % 10 === 2 ? "main-card double-size-row" : "main-card")}>
             <aside>
-                <div className="imgBx" style={{ backgroundImage: `url(${loaded || "photo"})` }}>
+                <LazyLoadImage nameClass="imgBx" src={STATIC_IMAGES_PATH + props.oneRecipe.Img}>
                     <div className="overlay">
                         <div className="overlay-content">
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />
@@ -62,7 +50,7 @@ const MainCard = (props) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </LazyLoadImage>
             </aside>
         </div>
     )

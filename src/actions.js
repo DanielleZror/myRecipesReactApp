@@ -27,8 +27,10 @@ export const requestByIdRecipe = (id, userID, dispatch) => {
 
 export const requestAddRecipe = (recipe, dispatch) => {
   dispatch({ type: CONST.ADD_RECIPES_PENDING })
-  axios.post(`/api/recipe/add`, {
-    recipe: recipe
+  axios.post(`/api/recipe/add`, recipe , {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
   })
     .then(res => dispatch({ type: CONST.ADD_RECIPES_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: CONST.ADD_RECIPES_FAILED, payload: error }))
