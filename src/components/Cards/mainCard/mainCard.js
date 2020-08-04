@@ -16,7 +16,6 @@ const MainCard = (props) => {
             recipeID: event.currentTarget.id
         }
         setIsSaved(!isSaved)
-        // this.setState({ isSaved: !this.state.isSaved })
         props.onLike(likeObj)
     }
 
@@ -27,7 +26,6 @@ const MainCard = (props) => {
             recipeID: event.currentTarget.id
         }
         setIsSaved(!isSaved)
-        // this.setState({ isSaved: !this.state.isSaved })
         props.onUnlike(likeObj)
     }
 

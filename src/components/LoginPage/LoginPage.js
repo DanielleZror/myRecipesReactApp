@@ -51,7 +51,6 @@ class Login extends React.Component {
 
     if (isLogin) {
       this.props.onRequestAddUser(this.state.user)
-      // from.hash = ""
       return <Redirect to={from} />
     }
     return (
@@ -77,9 +76,6 @@ class Login extends React.Component {
                   // onFailure={responseGoogle}
                   cookiePolicy={'single_host_origin'}
                 />
-                {/* <a id="google-button" class="btn btn-block btn-social btn-google">
-                  <i class="fa fa-google"></i> Sign in with Google
-						</a> */}
               </div>
               <div className="mt-3">
                 <div className="d-flex justify-content-center links">

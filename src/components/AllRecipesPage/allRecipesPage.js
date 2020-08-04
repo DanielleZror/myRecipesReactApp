@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {setSearchField, requestAllRecipesByUser, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
 import CardsList from '../CardsList/CardsList.js'
 import Search from './searchInMyRecipes.js';
+import Loading from '../Loading'
 
 const mapStateToProps = (state) => {
   return {
@@ -34,7 +35,7 @@ class allRecipesPage extends React.Component  {
     return (
       <div >
         <Search onChange = {onSearchChange}/>
-        {isPending ? <h1>loading</h1> :
+        {isPending ? <Loading/>:
         <CardsList recipes ={filteredRecipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>
         }
       </div>

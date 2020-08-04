@@ -13,7 +13,7 @@ const Search = () => {
     }
 
     return (
-        <form class="input-group">
+        <form className="input-group">
             <FormControl id="searchInput" type="search" placeholder="Search in all recipes"
                 onChange={onChange} />
             <Link to={`/search/${searchField}`}> <FaSearch className="search-icon" /></Link>

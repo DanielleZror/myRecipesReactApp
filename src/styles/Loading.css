@@ -1,0 +1,16 @@
+.loading-span{
+    display: block;
+}
+
+.loading-div {
+    width: 14em;
+    height: 2em;
+    display: flex;
+    justify-content: space-around;
+    margin: 10em auto;
+}
+
+.loading-icon {
+    width: 2em;
+    height: 2em;
+}

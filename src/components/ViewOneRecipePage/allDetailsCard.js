@@ -45,7 +45,7 @@ const DetailsCard = (props) => {
                     <li>  <FaRegHeart /></li>
                     <li>{props.oneRecipe.numOfSaves || 0}</li>
                 </ul>
-                <Share />
+                <Share recipeName={props.oneRecipe.Name}/>
                 <div className="separator"></div>
                 <p className="ingredients">
                     <span className="title" >Ingredients:</span>

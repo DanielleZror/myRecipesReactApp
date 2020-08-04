@@ -14,7 +14,6 @@ import {
 } from './reducers';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/App';
-import './styles/animate.css';
 import './styles/index.css';
 
 const history = createHistory();

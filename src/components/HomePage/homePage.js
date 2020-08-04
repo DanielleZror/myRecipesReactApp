@@ -4,6 +4,7 @@ import { requestPopularRecipes, requestAllRecipes, requestLikeRecipe, requestUnl
 import PopularCardsList from '../CardsList/popularCardsList/popularCardsList'
 import MainCardsList from '../CardsList/mainCardsList/mainCardsList'
 import Carousel from './carousel'
+import Loading from '../Loading'
 
 
 const mapStateToProps = (state) => {
@@ -40,7 +41,7 @@ class HomePage extends React.Component {
                     {popularIsPending ? <h1>loading</h1> :
                         <PopularCardsList recipes={popularRecipes} className={"list-popular-page"}/>}
                 </div> */}
-                {allIsPending ? <h1>loading</h1> :
+                {allIsPending ? <Loading/> :
                     <MainCardsList recipes={allRecipe} className={"list-main-page"} onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>}
             </div>
         )

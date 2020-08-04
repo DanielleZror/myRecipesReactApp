@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CardsList from '../CardsList/CardsList.js'
+import Loading from '../Loading'
 import { requestSearchRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -36,7 +37,7 @@ class resultSearchPage extends React.Component {
 
         return (
             <div >
-                {isPending ? <h1>loading</h1> : recipes.length === 0 ? <h1>not found</h1> :
+                {isPending ? <Loading/> : recipes.length === 0 ? <h1>not found</h1> :
                     <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />
                 }
             </div>

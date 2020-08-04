@@ -17,16 +17,8 @@ class AddCard extends React.Component {
   }
 
   onLoad = (event) => {
-    var imgTo64;
-    var id = event.target.id
     var file = event.target.files[0]
-    this.setState({["file"]: file})
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      imgTo64 = (e.target.result).toString('base64')
-   //   this.setState({ [id]: imgTo64 });
-      this.setState({ label: file.name })
-    }; reader.readAsDataURL(file);
+    this.setState({file: file})
   }
 
   onSubmit = (event) => {

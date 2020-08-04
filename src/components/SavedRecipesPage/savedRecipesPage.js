@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CardsList from '../CardsList/CardsList'
 import { requestSavedRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
-
+import Loading from '../Loading'
 
 const mapStateToProps = (state) => {
   return {
@@ -26,7 +26,7 @@ class savedRecipesPage extends React.Component {
     const { recipes, isPending, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
     return (
       <div >
-        {isPending ? <h1>loading</h1> :
+        {isPending ? <Loading/> :
           <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />
         }
       </div>

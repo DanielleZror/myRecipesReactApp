@@ -4,8 +4,8 @@ import { FaShareSquare, FaFacebook } from 'react-icons/fa'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { FiLink, FiMail } from 'react-icons/fi'
 
-const Share = () => {
-    let title = `Look at this recipe by ${JSON.parse(sessionStorage.userData).Name}`
+const Share = (props) => {
+    let title = `Look at this recipe- ${props.recipeName}`
     let body = encodeURIComponent(window.location.href)
 
     const copyToClipboard = () => {
