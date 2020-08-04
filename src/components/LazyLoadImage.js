@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import logo from '../logo.png';
 
 const LazyLoadImage = (props) => {
     const [sourceLoaded, setSourceLoaded] = useState(null)
@@ -10,7 +11,7 @@ const LazyLoadImage = (props) => {
     }, [props.src])
 
     return (
-        <div className={props.nameClass} style={{ backgroundImage: `url(${sourceLoaded})` }}>
+        <div className={props.nameClass} style={{ backgroundImage: `url(${sourceLoaded || logo})` }}>
             {props.children}
         </div>
     )
