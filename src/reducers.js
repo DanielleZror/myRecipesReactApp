@@ -54,18 +54,21 @@ export const requestByIdRecipe = (state = initialStateRecipeById, action) => {
 
 const initialStateAddRecipe = {
   newID: '',
+  isPending: false,
   isSucess: false,
   error: ''
 }
 
 export const requestAddRecipe = (state = initialStateAddRecipe, action) => {
   switch (action.type) {
+    case CONST.ADD_RECIPES_RESET:
+      return Object.assign({}, state, { isSucess: false, isPending: false })
     case CONST.ADD_RECIPES_PENDING:
-      return Object.assign({}, state, { isSucess: false })
+      return Object.assign({}, state, { isSucess: false, isPending: true })
     case CONST.ADD_RECIPES_SUCCESS:
-      return Object.assign({}, state, { newID: action.payload, isSucess: true })
+      return Object.assign({}, state, { newID: action.payload, isSucess: true, isPending: false })
     case CONST.ADD_RECIPES_FAILED:
-      return Object.assign({}, state, { error: action.payload, isSucess: false })
+      return Object.assign({}, state, { error: action.payload, isSucess: false, isPending: false })
     default:
       return state
   }

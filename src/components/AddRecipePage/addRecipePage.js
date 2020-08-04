@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AddCard from './cardAddPage.js';
+import Loading from '../Loading'
 import './addRecipePage.css'
 import { requestAddRecipe, requestResetAddState } from '../../actions'
 import { Redirect } from 'react-router-dom';
@@ -10,7 +11,8 @@ const mapStateToProps = (state) => {
   return {
     recipe: state.add.recipe,
     isSucess: state.add.isSucess,
-    newID: state.add.newID
+    newID: state.add.newID,
+    isPending: state.add.isPending
   }
 }
 
@@ -30,7 +32,7 @@ class AddRecipePage extends React.Component {
     }
     return (
       <div>
-        <AddCard onSave={this.props.onRequestAddRecipe} ></AddCard>
+        {this.props.isPending ? <Loading/> : <AddCard onSave={this.props.onRequestAddRecipe} ></AddCard>}
       </div>
     )
   }

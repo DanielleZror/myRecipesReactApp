@@ -37,7 +37,7 @@ export const requestAddRecipe = (recipe, dispatch) => {
 }
 
 export const requestResetAddState = (dispatch) => {
-  dispatch({ type: CONST.ADD_RECIPES_PENDING })
+  dispatch({ type: CONST.ADD_RECIPES_RESET })
 }
 
 export const requestAddUser = (user, dispatch) => {
