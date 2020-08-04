@@ -114,3 +114,16 @@
   text-overflow: ellipsis;
 } 
 
+.more-photos{
+  position: absolute;
+  left: 0;
+  padding-left: 2px;
+  padding-top: 2px;
+  height: 2em;
+  width: 2em;
+  color: white;
+}
+
+.main-card:hover .more-photos {
+  visibility: hidden;
+}
