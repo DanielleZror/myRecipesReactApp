@@ -33,7 +33,7 @@ const MainCard = (props) => {
         <div className={props.index % 5 === 1 ? "main-card double-size-col" :
             (props.index % 10 === 2 ? "main-card double-size-row" : "main-card")}>
             <aside>
-                <LazyLoadImage nameClass="imgBx" src={STATIC_IMAGES_PATH + props.oneRecipe.Img}>
+                <LazyLoadImage nameClass="imgBx" src={STATIC_IMAGES_PATH + props.oneRecipe.Img[0]}>
                     <div className="overlay">
                         <div className="overlay-content">
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />

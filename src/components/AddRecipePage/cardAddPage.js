@@ -17,16 +17,23 @@ class AddCard extends React.Component {
   }
 
   onLoad = (event) => {
-    var file = event.target.files[0]
-    this.setState({ file: file })
-    this.setState({ label: file.name })
+    let files = []
+    let labels = ""
+    for (var f of event.target.files) {
+      files.push(f)
+      labels += f.name
+    }
+    this.setState({ files: files })
+    this.setState({ label: labels })
   }
 
   onSubmit = (event) => {
     event.preventDefault()
     var formData = new FormData();
-    formData.append('image', this.state.file, this.state.userID)
-    delete this.state.file
+    for (var f of this.state.files) {
+      formData.append('image', f, `${this.state.userID}-${f.name}`)
+    }
+    delete this.state.files
     delete this.state.label
     formData.append('recipe', JSON.stringify(this.state))
     this.props.onSave(formData)
@@ -58,7 +65,7 @@ class AddCard extends React.Component {
               </div>
             </div>
             <div className='custom-file' id='myfile' >
-              <input type='file' name="photo" className='form-control custom-file-input add-input' onChange={this.onLoad} accept='image/*' id='Img' required />
+              <input type='file' name="photo" className='form-control custom-file-input add-input' onChange={this.onLoad} accept='image/*' id='Img' required multiple />
               <label className='custom-file-label' id='photo' htmlFor='Img' >{this.state.label}</label>
             </div>
             <div className="separator"></div>

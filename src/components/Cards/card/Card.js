@@ -31,7 +31,7 @@ const Card = (props) => {
     return (
         <div className='all-card'>
             <aside>
-                <LazyLoadImage nameClass="card-img" src={STATIC_IMAGES_PATH + props.oneRecipe.Img}>
+                <LazyLoadImage nameClass="card-img" src={ STATIC_IMAGES_PATH + props.oneRecipe.Img[0]}>
                     <div className="overlay">
                         <div className="overlay-content">
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />

@@ -5,6 +5,7 @@ import Share from '../Share'
 import { FaRegClock, FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { STATIC_IMAGES_PATH } from '../../constants'
+import logo from '../../logo.png';
 
 const DetailsCard = (props) => {
     const [isSaved, setIsSaved] = useState(props.oneRecipe.isSaved);
@@ -30,7 +31,7 @@ const DetailsCard = (props) => {
     return (
         <div className="recipe-card">
             <aside >
-                <img alt={props.oneRecipe.Name || "Name"} src={STATIC_IMAGES_PATH + props.oneRecipe.Img || "Photo"} />
+                <img alt={props.oneRecipe.Name || "Name"} src={STATIC_IMAGES_PATH + props.oneRecipe.Img[0] || logo} />
             </aside>
             {isSaved ? <FaHeart className="fa-icon-recipe" id={props.oneRecipe._id} onClick={handelUnlike} />
                 : <FaRegHeart className="fa-icon-recipe" onClick={handelLike} id={props.oneRecipe._id} />}

@@ -84,7 +84,9 @@ module.exports = {
 
         app.post('/api/recipe/add', upload.any(), (req, res) => {
             let addQurey = JSON.parse(req.body.recipe)
-            addQurey.Img = req.files[0].filename
+            // addQurey.Img = req.files[0].filename
+            addQurey.Img = []
+            req.files.map(x => addQurey.Img.push(x.filename))
             DB.addToDB(sendRes, addQurey, GLOBAL.RECIPES_COLLECTION)
             function sendRes(insertID) {
                 res.send(insertID)
