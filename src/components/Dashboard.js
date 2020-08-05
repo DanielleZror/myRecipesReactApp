@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from './navbar';
+import Nav from './Navbar/navbar';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import RecipePage from './ViewOneRecipePage/viewRecipePage';
 import SearchPage from './Search/searchResultPage';

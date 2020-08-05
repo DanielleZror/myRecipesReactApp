@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/share.css'
+import './share.css'
 import { FaShareSquare, FaFacebook } from 'react-icons/fa'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import { FiLink, FiMail } from 'react-icons/fi'

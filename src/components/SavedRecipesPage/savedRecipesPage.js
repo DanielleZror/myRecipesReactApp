@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CardsList from '../CardsList/CardsList'
 import { requestSavedRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 
 const mapStateToProps = (state) => {
   return {

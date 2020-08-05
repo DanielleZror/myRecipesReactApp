@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Loading.css'
+import './Loading.css'
 import { motion } from 'framer-motion'
 import { FaPizzaSlice, FaHamburger, FaBirthdayCake, FaCarrot, FaIceCream } from "react-icons/fa"
 

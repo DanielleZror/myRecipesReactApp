@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AddCard from './cardAddPage.js';
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 import './addRecipePage.css'
 import { requestAddRecipe, requestResetAddState } from '../../actions'
 import { Redirect } from 'react-router-dom';

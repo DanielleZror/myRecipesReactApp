@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CardsList from '../CardsList/CardsList.js'
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 import { requestSearchRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {

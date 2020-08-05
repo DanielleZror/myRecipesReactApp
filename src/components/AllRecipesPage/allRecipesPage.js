@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {setSearchField, requestAllRecipesByUser, requestLikeRecipe, requestUnlikeRecipe} from '../../actions'
 import CardsList from '../CardsList/CardsList.js'
 import Search from './searchInMyRecipes.js';
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 
 const mapStateToProps = (state) => {
   return {

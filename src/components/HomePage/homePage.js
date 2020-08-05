@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { requestPopularRecipes, requestAllRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 import PopularCardsList from '../CardsList/popularCardsList/popularCardsList'
 import MainCardsList from '../CardsList/mainCardsList/mainCardsList'
-import Loading from '../Loading'
+import Loading from '../Loading/Loading'
 
 
 const mapStateToProps = (state) => {

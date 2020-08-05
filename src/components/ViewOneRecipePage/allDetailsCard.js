@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
-import Share from '../Share'
+import Share from '../Share/Share'
 import { FaRegClock, FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Carousel from './carousel'
