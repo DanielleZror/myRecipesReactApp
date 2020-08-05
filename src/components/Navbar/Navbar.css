@@ -8,6 +8,20 @@
     padding: 0;
 }
 
+.nav-icon {
+    animation: logo-spin 7s linear;
+}
+
+@keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  } 
+  
+
 #logOut {
     color: gray;
     cursor: pointer;
@@ -32,4 +46,4 @@
     outline: none !important;
     border-color: #CB8EB2;
     box-shadow: 0 0 10px #CB8EB2;
-  }
+}

@@ -4,7 +4,7 @@ import './SearchBox.css'
 const Search = (props) => {
   
     return (
-        <div className="center mr-sm-2">
+        <div className="center">
             <input 
                 type="search"
                 placeholder="search in your recipes"
