@@ -11,7 +11,7 @@ const LazyLoadImage = (props) => {
     }, [props.src])
 
     return (
-        <div className={props.nameClass} style={{ backgroundImage: `url(${sourceLoaded || logo})` }}>
+        <div className={props.nameClass} style={{ backgroundImage: `url("${sourceLoaded || logo}")` }}>
             {props.children}
         </div>
     )
