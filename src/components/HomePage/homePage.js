@@ -4,7 +4,7 @@ import { requestPopularRecipes, requestAllRecipes, requestLikeRecipe, requestUnl
 import PopularCardsList from '../CardsList/popularCardsList/popularCardsList'
 import MainCardsList from '../CardsList/mainCardsList/mainCardsList'
 import Loading from '../Loading/Loading'
-
+import NotFound from '../NotFound/notFound'
 
 const mapStateToProps = (state) => {
     return {
@@ -40,8 +40,8 @@ class HomePage extends React.Component {
                     {popularIsPending ? <h1>loading</h1> :
                         <PopularCardsList recipes={popularRecipes} className={"list-popular-page"}/>}
                 </div> */}
-                {allIsPending ? <Loading/> :
-                    <MainCardsList recipes={allRecipe} className={"list-main-page"} onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe}/>}
+                {allIsPending ? <Loading /> : allRecipe.length === 0 ? <NotFound /> :
+                    <MainCardsList recipes={allRecipe} className={"list-main-page"} onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />}
             </div>
         )
     }

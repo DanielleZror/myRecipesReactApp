@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CardsList from '../CardsList/CardsList'
 import { requestSavedRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 import Loading from '../Loading/Loading'
+import NotFound from '../NotFound/notFound'
 
 const mapStateToProps = (state) => {
   return {
@@ -26,7 +27,7 @@ class savedRecipesPage extends React.Component {
     const { recipes, isPending, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
     return (
       <div >
-        {isPending ? <Loading/> :
+        {isPending ? <Loading /> : recipes.length === 0 ? <NotFound /> :
           <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />
         }
       </div>

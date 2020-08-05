@@ -26,7 +26,7 @@ export const requestAllRecipesByUser = (state = initialStateRecipesByUser, actio
     case CONST.REQUEST_RECIPES_BY_USER_SUCCESS:
       return Object.assign({}, state, { recipes: action.payload, isPending: false })
     case CONST.REQUEST_RECIPES_BY_USER_FAILED:
-      return Object.assign({}, state, { error: action.payload })
+      return Object.assign({}, state, { error: action.payload, isPending: false })
     default:
       return state
   }
@@ -45,7 +45,7 @@ export const requestByIdRecipe = (state = initialStateRecipeById, action) => {
     case CONST.REQUEST_BY_ID_RECIPES_SUCCESS:
       return Object.assign({}, state, { recipe: action.payload, isPending: false })
     case CONST.REQUEST_BY_ID_RECIPES_FAILED:
-      return Object.assign({}, state, { error: action.payload })
+      return Object.assign({}, state, { error: action.payload, isPending: false })
     default:
       return state
   }

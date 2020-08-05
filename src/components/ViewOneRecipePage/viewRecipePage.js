@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
 import Loading from '../Loading/Loading'
+import NotFound from '../NotFound/notFound'
 import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -34,7 +35,7 @@ class viewRecipePage extends React.Component {
     const { recipe, isPending } = this.props;
     return (
       <div >
-        {isPending ? <Loading /> : recipe === "" ? <h1> Not found</h1> :
+        {isPending ? <Loading /> : recipe.length === 0 ? <NotFound /> :
           <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe} onUnlike={this.props.onRequestUnlikeRecipe} />
         }
       </div>
