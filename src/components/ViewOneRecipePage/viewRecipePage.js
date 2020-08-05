@@ -1,14 +1,16 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
 import Loading from '../Loading/Loading'
 import NotFound from '../NotFound/notFound'
-import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
+import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe, requestDeleteRecipe } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
     recipe: state.byid.recipe,
     isPending: state.byid.isPending,
+    isDeleteSucess: state.deleteRecipe.isSucess,
     id: ownProps
   }
 }
@@ -17,7 +19,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onRequestByIdRecipe: (id, userID) => requestByIdRecipe(id, userID, dispatch),
     onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
-    onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
+    onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch),
+    onRequestDeleteRecipe: (id, images, userID) => requestDeleteRecipe(id, images, userID, dispatch),
+
   }
 }
 
@@ -32,11 +36,15 @@ class viewRecipePage extends React.Component {
   }
 
   render() {
-    const { recipe, isPending } = this.props;
+    const { recipe, isPending, isDeleteSucess } = this.props;
+    if(isDeleteSucess) {
+      return <Redirect to={`/`}></Redirect>
+    }
     return (
       <div >
         {isPending ? <Loading /> : recipe.length === 0 ? <NotFound /> :
-          <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe} onUnlike={this.props.onRequestUnlikeRecipe} />
+          <DetailsCard oneRecipe={recipe} onLike={this.props.onRequestLikeRecipe} onUnlike={this.props.onRequestUnlikeRecipe}
+            onDelete={this.props.onRequestDeleteRecipe} />
         }
       </div>
     );

@@ -1,0 +1,14 @@
+.edit-delete-div{
+    float: right;
+}
+
+.icon {
+    margin-right: 1em;
+    height: 1.7em;
+    width: 1.7em;
+    cursor: pointer;
+}
+
+.delete-icon {
+    color: red;
+}

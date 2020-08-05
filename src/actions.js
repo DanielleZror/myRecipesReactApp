@@ -27,13 +27,24 @@ export const requestByIdRecipe = (id, userID, dispatch) => {
 
 export const requestAddRecipe = (recipe, dispatch) => {
   dispatch({ type: CONST.ADD_RECIPES_PENDING })
-  axios.post(`/api/recipe/add`, recipe , {
+  axios.post(`/api/recipe/add`, recipe, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   })
     .then(res => dispatch({ type: CONST.ADD_RECIPES_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: CONST.ADD_RECIPES_FAILED, payload: error }))
+}
+
+export const requestDeleteRecipe = (id, images, userID, dispatch) => {
+  dispatch({ type: CONST.DELETE_RECIPES_PENDING })
+  axios.post(`/api/recipe/delete`, {
+    id: id,
+    images: images,
+    userID: userID
+  })
+    .then(res => dispatch({ type: CONST.DELETE_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: CONST.DELETE_RECIPES_FAILED, payload: error }))
 }
 
 export const requestResetAddState = (dispatch) => {

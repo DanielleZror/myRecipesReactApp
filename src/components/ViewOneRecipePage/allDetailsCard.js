@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
 import Share from '../Share/Share'
-import { FaRegClock, FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegClock, FaRegHeart, FaHeart } from "react-icons/fa";
 import Carousel from './carousel'
+import EditDelete from './EditDeleteRecipe'
 
 const DetailsCard = (props) => {
     const [isSaved, setIsSaved] = useState(props.oneRecipe.isSaved);
@@ -30,8 +30,7 @@ const DetailsCard = (props) => {
     return (
         <div className="recipe-card">
             <aside >
-                <Carousel images={props.oneRecipe.Img}/>
-                {/* <img alt={props.oneRecipe.Name || "Name"} src={STATIC_IMAGES_PATH + props.oneRecipe.Img[0] || logo} /> */}
+                <Carousel images={props.oneRecipe.Img} />
             </aside>
             {isSaved ? <FaHeart className="fa-icon-recipe" id={props.oneRecipe._id} onClick={handelUnlike} />
                 : <FaRegHeart className="fa-icon-recipe" onClick={handelLike} id={props.oneRecipe._id} />}
@@ -46,7 +45,8 @@ const DetailsCard = (props) => {
                     <li>  <FaRegHeart /></li>
                     <li>{props.oneRecipe.numOfSaves || 0}</li>
                 </ul>
-                <Share recipeName={props.oneRecipe.Name}/>
+                <Share recipeName={props.oneRecipe.Name} />
+                {props.oneRecipe.userID === JSON.parse(sessionStorage.userData).userID ? <EditDelete oneRecipe={props.oneRecipe} onDelete={props.onDelete}/> : null}
                 <div className="separator"></div>
                 <p className="ingredients">
                     <span className="title" >Ingredients:</span>

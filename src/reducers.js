@@ -208,3 +208,22 @@ export const requestSearchRecipes = (state = initialStateSearchRecipes, action =
       return state
   }
 }
+
+const initialStateDeleteRecipe = {
+  isSucess: false,
+  recipeID: '',
+  images: []
+}
+
+export const requestDeleteRecipe = (state = initialStateDeleteRecipe, action) => {
+  switch (action.type) {
+    case CONST.DELETE_RECIPES_PENDING:
+      return Object.assign({}, state, { isSucess: false })
+    case CONST.DELETE_RECIPES_SUCCESS:
+      return Object.assign({}, state, { newId: action.payload, isSucess: true })
+    case CONST.DELETE_RECIPES_FAILED:
+      return Object.assign({}, state, { error: action.payload, isSucess: false })
+    default:
+      return state
+  }
+}

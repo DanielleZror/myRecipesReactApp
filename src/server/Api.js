@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 const GLOBAL = require('../constants')
 const QUERY = require('./Queries')
 const DB = require('./DB')
+const fs = require('fs');
 var multer = require('multer')
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -123,6 +124,26 @@ module.exports = {
 
         app.post('/api/user/addUser', function (req, res) {
             DB.createOrUpdate(sendRes, req.body.user, GLOBAL.USERS_COLLECTION)
+            function sendRes(result) {
+                res.send(result)
+                res.status(200).end()
+            }
+        })
+
+        app.post('/api/recipe/delete', function (req, res) {
+            let recipeQuery =  { $and: [{ userID: req.body.userID }, { _id: ObjectId(req.body.id) }] }
+            let savedQuery = { recipeID: ObjectId(req.body.id)  }
+            DB.RemoveFromDB(deleteSaved, recipeQuery, GLOBAL.RECIPES_COLLECTION)
+            function deleteSaved() {
+                DB.RemoveFromDB(sendRes, savedQuery, GLOBAL.SAVED_COLLECTION)
+                deleteImages()
+            }
+            function deleteImages() {
+                for (var file of req.body.images) {
+                    let path = `C:\/Users\/danie\/Desktop\/git\/my-recipes\/uploads\/${file}`
+                    fs.unlinkSync(path);
+                }
+            }
             function sendRes(result) {
                 res.send(result)
                 res.status(200).end()

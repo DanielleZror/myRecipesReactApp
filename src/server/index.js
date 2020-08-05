@@ -5,8 +5,7 @@ var app = express();
 
 var bodyParser = require('body-parser');
 var path = require('path');
-const assert = require('assert');
-const fs = require('fs');
+// const assert = require('assert');
 
 
 app.use(express.static(path.join(__dirname, '../../build')))
