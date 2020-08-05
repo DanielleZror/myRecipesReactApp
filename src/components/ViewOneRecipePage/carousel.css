@@ -1,14 +1,9 @@
 .carousel-backgound{
     width: 100%;
-    padding: 10vh;
-    background: linear-gradient(#887882, #4d153699);
-
+    height: 100%;
 }
 .carousel{
     background-size:cover;
-    opacity: 1;
-    width: 60%;
-    margin:auto;
 }
 
 .carousel-item img{
