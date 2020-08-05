@@ -7,7 +7,7 @@ const mainCarousel = (props) => {
     return (
         <div className="carousel-backgound" >
             <Carousel controls={props.images.length > 1} indicators={props.images.length > 1} wrap={false}>
-                {props.images.map((image) => <Carousel.Item><img src={STATIC_IMAGES_PATH + image} /></Carousel.Item>)}
+                {props.images.map((image, i) => <Carousel.Item><img src={STATIC_IMAGES_PATH + image} alt={i}/></Carousel.Item>)}
             </Carousel>
         </div>
     )

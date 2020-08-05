@@ -37,7 +37,7 @@ class AddIngredients extends React.Component {
         ingredients.push({ id: this.state.rows, amount: null, unit: null, item: null })
         let numberOfRows = this.state.rows
         numberOfRows++
-        this.setState({ rows: numberOfRows })
+        this.setState({ rows: numberOfRows }, (() => { document.getElementById(`amount-${this.state.rows - 1}`).focus() }))
         this.setState({ ingredients: ingredients })
     }
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { requestPopularRecipes, requestAllRecipes, requestLikeRecipe, requestUnlikeRecipe } from '../../actions'
 import PopularCardsList from '../CardsList/popularCardsList/popularCardsList'
 import MainCardsList from '../CardsList/mainCardsList/mainCardsList'
-import Carousel from './carousel'
 import Loading from '../Loading'
 
 

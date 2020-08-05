@@ -97,6 +97,7 @@
 .add-input {
   border-radius: 4px !important;
   border-color: #CB8EB2 !important;
+  margin-bottom: .5rem !important;
 }
 
 .add-input:focus, .save-btn:focus, .add-btn:focus { 
@@ -107,6 +108,11 @@
 
 #Preparation{
   margin: 1em 0 0.5em;
+}
+
+.files-not-valid {
+  border-color: red;
+  color: red;
 }
 
 /* scrollbar style */
