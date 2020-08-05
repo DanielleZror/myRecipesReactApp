@@ -110,9 +110,13 @@
   margin: 1em 0 0.5em;
 }
 
+.custom-file-label{
+  border-color: #CB8EB2 !important;
+}
+
 .files-not-valid {
-  border-color: red;
-  color: red;
+  border-color: red !important;
+  color: red !important;
 }
 
 /* scrollbar style */

@@ -12,7 +12,16 @@ var storage = multer.diskStorage({
     }
 })
 
-var upload = multer({ storage: storage });
+var upload = multer({
+    storage: storage,
+    // fileFilter: function (req, file, callback) {
+    //     var ext = file.originalname.split('.').pop();
+    //     if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+    //         return callback(new Error('Only images are allowed'))
+    //     }
+    //     callback(null, true)
+    // }
+});
 
 
 module.exports = {
@@ -84,7 +93,6 @@ module.exports = {
 
         app.post('/api/recipe/add', upload.any(), (req, res) => {
             let addQurey = JSON.parse(req.body.recipe)
-            // addQurey.Img = req.files[0].filename
             addQurey.Img = []
             req.files.map(x => addQurey.Img.push(x.filename))
             DB.addToDB(sendRes, addQurey, GLOBAL.RECIPES_COLLECTION)

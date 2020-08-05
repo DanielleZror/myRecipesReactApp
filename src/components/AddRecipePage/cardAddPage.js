@@ -79,7 +79,8 @@ class AddCard extends React.Component {
             <div className='custom-file' id='myfile' >
               <input type='file' name="photo"
                 className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required multiple />
-              <label className={this.state.filesValidetion ? 'custom-file-label' : 'custom-file-label files-not-valid'} id='photo' htmlFor='Img' >{this.state.label}</label>
+              <label className={this.state.filesValidetion ? 'custom-file-label' : 'custom-file-label files-not-valid'}
+                id='photo' htmlFor='Img' >{this.state.label}</label>
             </div>
             <div className="separator"></div>
             <CardIngredients saveData={this.saveIngredients} />
