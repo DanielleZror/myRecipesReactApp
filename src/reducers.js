@@ -220,10 +220,12 @@ const initialStateDeleteRecipe = {
 
 export const requestDeleteRecipe = (state = initialStateDeleteRecipe, action) => {
   switch (action.type) {
+    case CONST.DELETE_RECIPES_RESET:
+      return Object.assign({}, state, { isSucess: false })
     case CONST.DELETE_RECIPES_PENDING:
       return Object.assign({}, state, { isSucess: false })
     case CONST.DELETE_RECIPES_SUCCESS:
-      return Object.assign({}, state, { newId: action.payload, isSucess: true })
+      return Object.assign({}, state, { isSucess: true })
     case CONST.DELETE_RECIPES_FAILED:
       return Object.assign({}, state, { error: action.payload, isSucess: false })
     default:

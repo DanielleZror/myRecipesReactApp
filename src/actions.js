@@ -29,6 +29,10 @@ export const requestResetByIdRecipeState = (dispatch) => {
   dispatch({ type: CONST.REQUEST_BY_ID_RECIPES_RESET })
 }
 
+export const requestResetDeleteRecipeState = (dispatch) => {
+  dispatch({ type: CONST.DELETE_RECIPES_RESET })
+}
+
 export const resetResetUpdateState = (dispatch) => {
   dispatch({ type: CONST.UPDATE_RECIPES_RESET })
 }

@@ -13,6 +13,13 @@ var storage = multer.diskStorage({
     }
 })
 
+function deleteImages(files) {
+    for (var file of files) {
+        let path = `C:\/Users\/danie\/Desktop\/git\/my-recipes\/uploads\/${file}`
+        fs.unlinkSync(path);
+    }
+}
+
 var upload = multer({
     storage: storage,
     // fileFilter: function (req, file, callback) {
@@ -137,14 +144,18 @@ module.exports = {
         app.post('/api/recipe/update', upload.any(), function (req, res) {
             let data = JSON.parse(req.body.recipe)
             let recipeID = data.recipeID
-            let query = { $and: [{ userID: data.userID }, { _id: ObjectId(data.recipeID)}] }
+            let query = { $and: [{ userID: data.userID }, { _id: ObjectId(data.recipeID) }] }
             delete data.recipeID
             delete data.userID
             let setObj = {}
-            setObj.Img = []
-            req.files.map(x => setObj.Img.push(x.filename))
-            Object.keys(data).forEach(key => setObj[key]= data[key])
-            let updateData = {$set: setObj}
+            if (req.files.length > 0) {
+                setObj.Img = []
+                req.files.map(x => setObj.Img.push(x.filename))
+                deleteImages(JSON.parse(req.body.oldImages))
+            }
+            Object.keys(data).forEach(key => setObj[key] = data[key])
+            setObj.Date = new Date().toJSON()
+            let updateData = { $set: setObj }
             DB.UpdateOne(sendRes, query, updateData, GLOBAL.RECIPES_COLLECTION)
             function sendRes() {
                 res.send(recipeID)
@@ -158,13 +169,7 @@ module.exports = {
             DB.RemoveFromDB(deleteSaved, recipeQuery, GLOBAL.RECIPES_COLLECTION)
             function deleteSaved() {
                 DB.RemoveFromDB(sendRes, savedQuery, GLOBAL.SAVED_COLLECTION)
-                deleteImages()
-            }
-            function deleteImages() {
-                for (var file of req.body.images) {
-                    let path = `C:\/Users\/danie\/Desktop\/git\/my-recipes\/uploads\/${file}`
-                    fs.unlinkSync(path);
-                }
+                deleteImages(req.body.images)
             }
             function sendRes(result) {
                 res.send(result)

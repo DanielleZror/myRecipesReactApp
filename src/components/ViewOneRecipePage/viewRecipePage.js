@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DetailsCard from './allDetailsCard.js'
 import Loading from '../Loading/Loading'
 import NotFound from '../NotFound/notFound'
-import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe, requestDeleteRecipe } from '../../actions'
+import { requestByIdRecipe, requestLikeRecipe, requestUnlikeRecipe, requestDeleteRecipe, requestResetDeleteRecipeState } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
     onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
     onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch),
     onRequestDeleteRecipe: (id, images, userID) => requestDeleteRecipe(id, images, userID, dispatch),
+    onRequestResetDeleteRecipeState: () => requestResetDeleteRecipeState(dispatch)
 
   }
 }
@@ -28,10 +29,13 @@ const mapDispatchToProps = (dispatch) => {
 class viewRecipePage extends React.Component {
   componentDidMount() {
     this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
+    this.props.onRequestResetDeleteRecipeState()
+    
   }
   componentDidUpdate(prevProps) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.props.onRequestByIdRecipe(this.props.match.params.id, JSON.parse(sessionStorage.userData).userID);
+      this.props.onRequestResetDeleteRecipeState()
     }
   }
 

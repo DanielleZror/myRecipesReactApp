@@ -80,17 +80,21 @@ class AddCard extends React.Component {
       document.getElementById("Img").focus()
     } else {
       var formData = new FormData();
-      for (var f of this.state.files) {
-        formData.append('image', f, `${this.state.userID}-${f.name}`)
+      if (this.state.files) {
+        for (var f of this.state.files) {
+          formData.append('image', f, `${this.state.userID}-${f.name}`)
+        }
+        formData.append('oldImages', JSON.stringify(this.props.recipeToEdit.Img))
+        delete this.state.files
       }
-      delete this.state.files
+
       delete this.state.label
       delete this.state.filesValidetion
 
       let objToSave = this.state
       if (this.props.mode === "edit") {
-        let editObj = {recipeID: this.props.idToEdit}
-        objToSave = {...this.state, ...editObj}
+        let editObj = { recipeID: this.props.idToEdit }
+        objToSave = { ...this.state, ...editObj }
       }
       formData.append('recipe', JSON.stringify(objToSave))
       console.log(formData.getAll('recipe'))
@@ -128,7 +132,7 @@ class AddCard extends React.Component {
                 </div>
                 <div className='custom-file' id='myfile' >
                   <input type='file' name="photo"
-                    className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required multiple />
+                    className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required={this.props.mode === "add" ? true : false} multiple />
                   <label className={this.state.filesValidetion ? 'custom-file-label' : 'custom-file-label files-not-valid'}
                     id='photo' htmlFor='Img' >{this.state.label || (this.props.recipeToEdit.Img ? this.props.recipeToEdit.Img.length + " files" : null) || "Choose..."}</label>
                 </div>

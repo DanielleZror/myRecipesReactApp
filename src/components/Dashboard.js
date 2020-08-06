@@ -5,7 +5,6 @@ import RecipePage from './ViewOneRecipePage/viewRecipePage';
 import SearchPage from './Search/searchResultPage';
 import All from './AllRecipesPage/allRecipesPage';
 import Add from './AddRecipePage/addRecipePage';
-import Edit from './EditRecipe/EditRecipePage'
 import Home from './HomePage/homePage';
 import Saved from './SavedRecipesPage/savedRecipesPage'
 
