@@ -97,7 +97,6 @@ class AddCard extends React.Component {
         objToSave = { ...this.state, ...editObj }
       }
       formData.append('recipe', JSON.stringify(objToSave))
-      console.log(formData.getAll('recipe'))
       this.props.onSave(formData)
     }
   }
