@@ -25,6 +25,13 @@ export const requestByIdRecipe = (id, userID, dispatch) => {
     .catch(error => dispatch({ type: CONST.REQUEST_BY_ID_RECIPES_FAILED, payload: error }))
 }
 
+export const requestResetByIdRecipeState = (dispatch) => {
+  dispatch({ type: CONST.REQUEST_BY_ID_RECIPES_RESET })
+}
+
+export const resetResetUpdateState = (dispatch) => {
+  dispatch({ type: CONST.UPDATE_RECIPES_RESET })
+}
 export const requestAddRecipe = (recipe, dispatch) => {
   dispatch({ type: CONST.ADD_RECIPES_PENDING })
   axios.post(`/api/recipe/add`, recipe, {
@@ -45,6 +52,17 @@ export const requestDeleteRecipe = (id, images, userID, dispatch) => {
   })
     .then(res => dispatch({ type: CONST.DELETE_RECIPES_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: CONST.DELETE_RECIPES_FAILED, payload: error }))
+}
+
+export const requestUpdateRecipe = (updateData, dispatch) => {
+  dispatch({ type: CONST.UPDATE_RECIPES_PENDING })
+  axios.post(`/api/recipe/update`, updateData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+    .then(res => dispatch({ type: CONST.UPDATE_RECIPES_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: CONST.UPDATE_RECIPES_FAILED, payload: error }))
 }
 
 export const requestResetAddState = (dispatch) => {

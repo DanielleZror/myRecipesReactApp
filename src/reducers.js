@@ -35,17 +35,20 @@ export const requestAllRecipesByUser = (state = initialStateRecipesByUser, actio
 const initialStateRecipeById = {
   recipe: [],
   isPending: true,
+  isSucess: false,
   error: ''
 }
 
 export const requestByIdRecipe = (state = initialStateRecipeById, action) => {
   switch (action.type) {
+    case CONST.REQUEST_BY_ID_RECIPES_RESET:
+      return Object.assign({}, state, { isPending: false, recipe: [], isSucess: false })
     case CONST.REQUEST_BY_ID_RECIPES_PENDING:
-      return Object.assign({}, state, { isPending: true })
+      return Object.assign({}, state, { isPending: true, isSucess: false })
     case CONST.REQUEST_BY_ID_RECIPES_SUCCESS:
-      return Object.assign({}, state, { recipe: action.payload, isPending: false })
+      return Object.assign({}, state, { recipe: action.payload, isPending: false, isSucess: true })
     case CONST.REQUEST_BY_ID_RECIPES_FAILED:
-      return Object.assign({}, state, { error: action.payload, isPending: false })
+      return Object.assign({}, state, { error: action.payload, isPending: false, isSucess: false, recipe: [] })
     default:
       return state
   }
@@ -222,6 +225,27 @@ export const requestDeleteRecipe = (state = initialStateDeleteRecipe, action) =>
     case CONST.DELETE_RECIPES_SUCCESS:
       return Object.assign({}, state, { newId: action.payload, isSucess: true })
     case CONST.DELETE_RECIPES_FAILED:
+      return Object.assign({}, state, { error: action.payload, isSucess: false })
+    default:
+      return state
+  }
+}
+
+const initialStateUpdateUser = {
+  isSucess: false,
+  recipeID: '',
+  error: ''
+}
+
+export const requestUpdateRecipe = (state = initialStateUpdateUser, action) => {
+  switch (action.type) {
+    case CONST.UPDATE_RECIPES_RESET:
+      return Object.assign({}, state, { isSucess: false })
+    case CONST.UPDATE_RECIPES_PENDING:
+      return Object.assign({}, state, { isSucess: false })
+    case CONST.UPDATE_RECIPES_SUCCESS:
+      return Object.assign({}, state, { recipeID: action.payload, isSucess: true })
+    case CONST.UPDATE_RECIPES_FAILED:
       return Object.assign({}, state, { error: action.payload, isSucess: false })
     default:
       return state

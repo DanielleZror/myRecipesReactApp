@@ -88,7 +88,11 @@ module.exports = {
             let query = QUERY.createJoinQuery(match, req.query.userID)
             DB.selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
             function sendRes(result) {
-                res.send(result[0]);
+                if (result.length === 0) {
+                    res.status(500).send('not found');
+                } else {
+                    res.send(result[0]);
+                }
             }
         })
 
@@ -130,9 +134,27 @@ module.exports = {
             }
         })
 
+        app.post('/api/recipe/update', upload.any(), function (req, res) {
+            let data = JSON.parse(req.body.recipe)
+            let recipeID = data.recipeID
+            let query = { $and: [{ userID: data.userID }, { _id: ObjectId(data.recipeID)}] }
+            delete data.recipeID
+            delete data.userID
+            let setObj = {}
+            setObj.Img = []
+            req.files.map(x => setObj.Img.push(x.filename))
+            Object.keys(data).forEach(key => setObj[key]= data[key])
+            let updateData = {$set: setObj}
+            DB.UpdateOne(sendRes, query, updateData, GLOBAL.RECIPES_COLLECTION)
+            function sendRes() {
+                res.send(recipeID)
+                res.status(200).end()
+            }
+        })
+
         app.post('/api/recipe/delete', function (req, res) {
-            let recipeQuery =  { $and: [{ userID: req.body.userID }, { _id: ObjectId(req.body.id) }] }
-            let savedQuery = { recipeID: ObjectId(req.body.id)  }
+            let recipeQuery = { $and: [{ userID: req.body.userID }, { _id: ObjectId(req.body.id) }] }
+            let savedQuery = { recipeID: ObjectId(req.body.id) }
             DB.RemoveFromDB(deleteSaved, recipeQuery, GLOBAL.RECIPES_COLLECTION)
             function deleteSaved() {
                 DB.RemoveFromDB(sendRes, savedQuery, GLOBAL.SAVED_COLLECTION)

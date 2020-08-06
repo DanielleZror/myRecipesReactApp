@@ -9,7 +9,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import {
-  requestAddUser, requestAddRecipe, requestAllRecipesByUser, requestByIdRecipe, requestDeleteRecipe,
+  requestAddUser, requestAddRecipe, requestAllRecipesByUser, requestByIdRecipe, requestDeleteRecipe, requestUpdateRecipe,
   searchRecipes, requestSavedRecipes, requestPopularRecipes, requestAllRecipes, requestSearchRecipes
 } from './reducers';
 import * as serviceWorker from './serviceWorker';
@@ -28,7 +28,8 @@ const rootReducers = combineReducers({
   popular: requestPopularRecipes,
   all: requestAllRecipes,
   searchAll: requestSearchRecipes,
-  deleteRecipe: requestDeleteRecipe
+  deleteRecipe: requestDeleteRecipe,
+  update:requestUpdateRecipe
 })
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger, routerMiddleware(history)))
 

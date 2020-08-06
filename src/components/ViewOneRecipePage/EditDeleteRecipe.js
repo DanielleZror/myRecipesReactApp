@@ -1,5 +1,6 @@
 import React from 'react';
 import './editDeleteRecipe.css'
+import { Link } from 'react-router-dom';
 import { GrEdit } from 'react-icons/gr';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
@@ -12,7 +13,7 @@ const EditDeleteRecipe = (props) => {
 
     return (
         <div className="edit-delete-div">
-            <GrEdit className="icon" />
+            <Link to={`/edit/${props.oneRecipe._id}`}> <GrEdit className="icon" /></Link>
             <RiDeleteBinLine className="icon delete-icon" onClick={handleDelete}/>
         </div>
     )

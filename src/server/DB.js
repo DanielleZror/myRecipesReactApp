@@ -99,6 +99,17 @@ module.exports = {
                 closeConnction()
             })
         }
+    },
+
+    UpdateOne: (callback, query, updateData, collectionName) => {
+        connectToDB(update, collectionName)
+        function update(collection) {
+            collection.updateOne(query, updateData, function (err, result) {
+                if (err) throw err;
+                callback(result)
+                closeConnction()
+            })
+        }
     }
 
 }
