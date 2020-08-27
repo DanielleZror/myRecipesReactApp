@@ -124,6 +124,22 @@ class AddCard extends React.Component {
                 <textarea type='text' className='form-control add-input' id='Description' name="Description"
                   value={this.state.Description || this.props.recipeToEdit.Description || ""}
                   placeholder='Write a short description' onChange={this.onChange} required></textarea>
+                <div className="num_dishes" >
+                  <input id="NumberOfDishes" name="NumberOfDishes" type='number' className='form-control add-input' min='0' max='100'
+                    placeholder="Number of dishes" onChange={this.onChange} value={this.state.NumberOfDishes || this.props.recipeToEdit.NumberOfDishes || ""} required />
+                </div>
+                <div className="separator"></div>
+                {/* <div className='form-row'>
+                  <div className='form-group col-md-3'>
+                  <label htmlFor='TimeHours'>Cooking time </label>
+                    <input id='TimeHours' name='TimeHours' type='number' className='form-control add-input' min='0' max='24'
+                      placeholder='Hours' onChange={this.onChange} value={this.state.TimeHours || this.props.recipeToEdit.TimeHours || ""} required />
+                  </div>
+                  <div className='form-group col-md-3'>
+                    <input id='TimeMinutes' name='TimeMinutes' type='number' className='form-control add-input' min='0' max='59'
+                      placeholder='Minutes' onChange={this.onChange} value={this.state.TimeMinutes || this.props.recipeToEdit.TimeMinutes || ""} required />
+                  </div>
+                </div> */}
                 <div className='form-row'>
                   <div className='form-group col-md-3'>
                     <input id='TimeHours' name='TimeHours' type='number' className='form-control add-input' min='0' max='24'
@@ -134,6 +150,7 @@ class AddCard extends React.Component {
                       placeholder='Minutes' onChange={this.onChange} value={this.state.TimeMinutes || this.props.recipeToEdit.TimeMinutes || ""} required />
                   </div>
                 </div>
+                <div className="separator"></div>
                 <div className='custom-file' id='myfile' >
                   <input type='file' name="photo"
                     className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required={this.props.mode === ADD_MODE ? true : false} multiple />
@@ -143,7 +160,7 @@ class AddCard extends React.Component {
                 <div className="separator"></div>
                 <CardIngredients saveData={this.saveIngredients} value={this.props.recipeToEdit.Ingredients} />
                 <div className="separator"></div>
-                <CardPreparation saveData={this.savePreparation} value={this.props.recipeToEdit.Preparation}/>
+                <CardPreparation saveData={this.savePreparation} value={this.props.recipeToEdit.Preparation} />
                 <div className='save-div'>
                   <button id='saveBtn' type='submit' className='save-btn btn'>Save</button>
                 </div>

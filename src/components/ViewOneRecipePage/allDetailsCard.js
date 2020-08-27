@@ -4,6 +4,7 @@ import Ingredient from './Ingredient';
 import Preparation from './Preparation'
 import Share from '../Share/Share'
 import { FaRegClock, FaRegHeart, FaHeart } from "react-icons/fa";
+import { GiHotMeal } from "react-icons/gi";
 import Carousel from './carousel'
 import EditDelete from './EditDeleteRecipe'
 
@@ -39,12 +40,15 @@ const DetailsCard = (props) => {
                 <h2>{props.oneRecipe.Name || "Name"}</h2>
                 <h3>{props.oneRecipe.Description || "Description"}</h3>
                 <ul>
-                    <li ><FaRegClock /></li>
+                    <li> <FaRegClock /></li>
                     <li>{((parseInt(props.oneRecipe.TimeHours) || 0) !== 0 ? `${props.oneRecipe.TimeHours} Hours ` : " ") +
                         ((parseInt(props.oneRecipe.TimeMinutes) || 0) !== 0 ? `${props.oneRecipe.TimeMinutes} Minuts` : " ")} </li>
                     <li></li>
-                    <li>  <FaRegHeart /></li>
+                    <li> <FaRegHeart /></li>
                     <li>{props.oneRecipe.numOfSaves || 0}</li>
+                    <li></li>
+                    <li> <GiHotMeal /></li>
+                    <li>{props.oneRecipe.NumberOfDishes || 0}</li>
                 </ul>
                 <Share recipeName={props.oneRecipe.Name} />
                 {props.oneRecipe.userID === JSON.parse(sessionStorage.userData).userID ?
