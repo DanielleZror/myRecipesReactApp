@@ -7,6 +7,7 @@ import All from './AllRecipesPage/allRecipesPage';
 import Add from './AddRecipePage/addRecipePage';
 import Home from './HomePage/homePage';
 import Saved from './SavedRecipesPage/savedRecipesPage'
+import User from './UserPage/UserDataPage'
 
 export class Dashboard extends React.Component {
 
@@ -24,6 +25,7 @@ export class Dashboard extends React.Component {
                     <Route path={`/edit/:id`} component={Add}></Route>
                     <Route path={`/search/:search`} component={SearchPage}></Route>
                     <Route path='/Saved' component={Saved} />
+                    <Route path={`/user/:id`} component={User}></Route>
                 </Switch>
             </HashRouter>
         )

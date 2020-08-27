@@ -16,17 +16,18 @@ export const searchRecipes = (state = initialStateSearch, action = {}) => {
 const initialStateRecipesByUser = {
   recipes: [],
   isPending: true,
+  isSucess: false,
   error: ''
 }
 
 export const requestAllRecipesByUser = (state = initialStateRecipesByUser, action = {}) => {
   switch (action.type) {
     case CONST.REQUEST_RECIPES_BY_USER_PENDING:
-      return Object.assign({}, state, { isPending: true })
+      return Object.assign({}, state, { isPending: true, isSucess: false, recipes: [] })
     case CONST.REQUEST_RECIPES_BY_USER_SUCCESS:
-      return Object.assign({}, state, { recipes: action.payload, isPending: false })
+      return Object.assign({}, state, { recipes: action.payload, isPending: false,  isSucess: true })
     case CONST.REQUEST_RECIPES_BY_USER_FAILED:
-      return Object.assign({}, state, { error: action.payload, isPending: false })
+      return Object.assign({}, state, { error: action.payload, isPending: false, isSucess: false, recipes: [] })
     default:
       return state
   }

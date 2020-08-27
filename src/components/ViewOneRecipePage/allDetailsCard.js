@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
 import Preparation from './Preparation'
@@ -52,7 +53,7 @@ const DetailsCard = (props) => {
                     <li>{props.oneRecipe.NumberOfDishes || 0}</li>
                     <li></li>
                     <li> <FaRegUserCircle /></li>
-                    <li><User /></li>
+                    <li><User userID={props.oneRecipe.userID}/></li>
 
                 </ul>
                 <Share recipeName={props.oneRecipe.Name} />

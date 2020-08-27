@@ -38,7 +38,7 @@ const Card = (props) => {
                     <div className="overlay">
                         <div className="overlay-content">
                             <div className="user-link">
-                                <Link to={`/user/${props.oneRecipe.userID}`}> <User /> </Link>
+                                <User key={props.oneRecipe._id} userID={props.oneRecipe.userID} />
                             </div>
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />
                                 : <FaRegHeart className="fa-icon" onClick={handelLike} id={props.oneRecipe._id} />}
