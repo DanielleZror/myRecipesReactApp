@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
+import Preparation from './Preparation'
 import Share from '../Share/Share'
 import { FaRegClock, FaRegHeart, FaHeart } from "react-icons/fa";
 import Carousel from './carousel'
@@ -46,7 +47,8 @@ const DetailsCard = (props) => {
                     <li>{props.oneRecipe.numOfSaves || 0}</li>
                 </ul>
                 <Share recipeName={props.oneRecipe.Name} />
-                {props.oneRecipe.userID === JSON.parse(sessionStorage.userData).userID ? <EditDelete oneRecipe={props.oneRecipe} onDelete={props.onDelete}/> : null}
+                {props.oneRecipe.userID === JSON.parse(sessionStorage.userData).userID ?
+                    <EditDelete oneRecipe={props.oneRecipe} onDelete={props.onDelete} /> : null}
                 <div className="separator"></div>
                 <p className="ingredients">
                     <span className="title" >Ingredients:</span>
@@ -57,9 +59,11 @@ const DetailsCard = (props) => {
                 <p className="preparation">
                     <span className="title" >Preparation:</span>
                     <br />
-                    <div className="preparation-div">
+                    {props.oneRecipe.Preparation ?
+                        <Preparation Preparation={props.oneRecipe.Preparation} /> : null}
+                    {/* <div className="preparation-div">
                         <span className="text">{props.oneRecipe.Preparation || "Preparation"}</span>
-                    </div>
+                    </div> */}
                 </p>
             </article>
         </div>

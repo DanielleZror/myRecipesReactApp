@@ -59,6 +59,9 @@ module.exports = {
     REQUEST_SEARCH_FAILED: 'REQUEST_SEARCH_FAILED',
 
     STATIC_IMAGES_PATH: '/images/',
-    MAX_FILES: 3
+    MAX_FILES: 3,
+
+    EDIT_MODE: "edit",
+    ADD_MODE: "add"
 
 }

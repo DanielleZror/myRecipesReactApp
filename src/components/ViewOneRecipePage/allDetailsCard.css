@@ -94,6 +94,10 @@ article{
   max-height: 320px;
 }
 
+.preparation-div td:last-child {
+  padding-left: 15px;
+}
+
 .fa-icon-recipe {
   height: 3em;
   width: 3em;

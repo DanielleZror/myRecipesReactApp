@@ -137,3 +137,18 @@
   background: #6D586D;  
   border-radius: 10px;
 }
+
+.table-preparation {
+  width: 100%;
+}
+
+.add-preparation {
+  margin: 1em 0 .5em;
+  overflow: auto;
+  max-height: 300px;
+}
+
+.table-preparation td:last-child {
+  width: 1%;
+}
+

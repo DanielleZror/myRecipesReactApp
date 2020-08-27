@@ -1,9 +1,10 @@
 import React from 'react';
 import CardIngredients from './cardAddIngredients.js';
+import CardPreparation from './cardAddPreparation'
 import Loading from '../Loading/Loading'
 import NotFound from '../NotFound/notFound'
 import './addRecipePage.css';
-import { MAX_FILES } from '../../constants'
+import { MAX_FILES, EDIT_MODE, ADD_MODE } from '../../constants'
 import { requestByIdRecipe, requestResetByIdRecipeState } from '../../actions'
 import { connect } from 'react-redux';
 
@@ -35,7 +36,7 @@ class AddCard extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.mode === "edit") {
+    if (this.props.mode === EDIT_MODE) {
       this.props.onRequestByIdRecipe(this.props.idToEdit, JSON.parse(sessionStorage.userData).userID)
       if (!this.props.isPending) {
       }
@@ -44,11 +45,11 @@ class AddCard extends React.Component {
     }
   }
   componentDidUpdate(prevProps) {
-    if (this.props.mode === "edit" && this.props.idToEdit !== prevProps.idToEdit) {
+    if (this.props.mode === EDIT_MODE && this.props.idToEdit !== prevProps.idToEdit) {
       this.props.onRequestByIdRecipe(this.props.idToEdit, JSON.parse(sessionStorage.userData).userID);
       if (!this.props.isPending) {
       }
-    } else if (this.props.mode === "add" && this.props.mode !== prevProps.mode) {
+    } else if (this.props.mode === ADD_MODE && this.props.mode !== prevProps.mode) {
       this.props.onRequestResetByIdRecipeState()
     }
   }
@@ -92,7 +93,7 @@ class AddCard extends React.Component {
       delete this.state.filesValidetion
 
       let objToSave = this.state
-      if (this.props.mode === "edit") {
+      if (this.props.mode === EDIT_MODE) {
         let editObj = { recipeID: this.props.idToEdit }
         objToSave = { ...this.state, ...editObj }
       }
@@ -105,12 +106,16 @@ class AddCard extends React.Component {
     this.setState({ Ingredients: event })
   }
 
+  savePreparation = (event) => {
+    this.setState({ Preparation: event })
+  }
+
   render() {
     return (
       <>
-        {this.props.mode === "edit" && this.props.isPending ? <Loading /> : this.props.mode === "edit" && !this.props.isSucess ? <NotFound /> :
+        {this.props.mode === EDIT_MODE && this.props.isPending ? <Loading /> : this.props.mode === EDIT_MODE && !this.props.isSucess ? <NotFound /> :
           <div className="add-page-card">
-            <h1 className="title-add-page">{this.props.mode === "add" ? "Add new recipe" : `Edit - ${this.props.recipeToEdit.Name}`}</h1>
+            <h1 className="title-add-page">{this.props.mode === ADD_MODE ? "Add new recipe" : `Edit - ${this.props.recipeToEdit.Name}`}</h1>
             <div className="separator"></div>
             <div className='container'>
               <form className="add-form" onSubmit={this.onSubmit}>
@@ -131,15 +136,16 @@ class AddCard extends React.Component {
                 </div>
                 <div className='custom-file' id='myfile' >
                   <input type='file' name="photo"
-                    className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required={this.props.mode === "add" ? true : false} multiple />
+                    className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img' required={this.props.mode === ADD_MODE ? true : false} multiple />
                   <label className={this.state.filesValidetion ? 'custom-file-label' : 'custom-file-label files-not-valid'}
                     id='photo' htmlFor='Img' >{this.state.label || (this.props.recipeToEdit.Img ? this.props.recipeToEdit.Img.length + " files" : null) || "Choose..."}</label>
                 </div>
                 <div className="separator"></div>
                 <CardIngredients saveData={this.saveIngredients} value={this.props.recipeToEdit.Ingredients} />
                 <div className="separator"></div>
-                <textarea type='text' className='form-control add-input' id='Preparation' name="Preparation"
-                  placeholder='Write the preparation method' rows='6' onChange={this.onChange} value={this.state.Preparation || this.props.recipeToEdit.Preparation || ""} required></textarea>
+                <CardPreparation saveData={this.savePreparation} value={this.props.recipeToEdit.Preparation}/>
+                {/* <textarea type='text' className='form-control add-input' id='Preparation' name="Preparation"
+                  placeholder='Write the preparation method' rows='6' onChange={this.onChange} value={this.state.Preparation || this.props.recipeToEdit.Preparation || ""} required></textarea> */}
                 <div className='save-div'>
                   <button id='saveBtn' type='submit' className='save-btn btn'>Save</button>
                 </div>
