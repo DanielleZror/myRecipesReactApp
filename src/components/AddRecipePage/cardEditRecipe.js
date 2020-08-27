@@ -144,8 +144,6 @@ class AddCard extends React.Component {
                 <CardIngredients saveData={this.saveIngredients} value={this.props.recipeToEdit.Ingredients} />
                 <div className="separator"></div>
                 <CardPreparation saveData={this.savePreparation} value={this.props.recipeToEdit.Preparation}/>
-                {/* <textarea type='text' className='form-control add-input' id='Preparation' name="Preparation"
-                  placeholder='Write the preparation method' rows='6' onChange={this.onChange} value={this.state.Preparation || this.props.recipeToEdit.Preparation || ""} required></textarea> */}
                 <div className='save-div'>
                   <button id='saveBtn' type='submit' className='save-btn btn'>Save</button>
                 </div>

@@ -61,9 +61,6 @@ const DetailsCard = (props) => {
                     <br />
                     {props.oneRecipe.Preparation ?
                         <Preparation Preparation={props.oneRecipe.Preparation} /> : null}
-                    {/* <div className="preparation-div">
-                        <span className="text">{props.oneRecipe.Preparation || "Preparation"}</span>
-                    </div> */}
                 </p>
             </article>
         </div>
