@@ -78,7 +78,7 @@ module.exports = {
                         { Description: { $regex: regex } },
                         { Ingredients: { $elemMatch: { item: { $regex: regex } } } },
                         { Name: { $regex: regex } },
-                        { Preparation: { $regex: regex } }
+                        { Preparation: { $elemMatch: { details: { $regex: regex } } } }
                     ]
                 }
             }
