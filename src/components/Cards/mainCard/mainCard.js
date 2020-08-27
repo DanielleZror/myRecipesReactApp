@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './mainCard.css';
 import { Link } from 'react-router-dom';
 import LazyLoadImage from '../../LazyLoadImage'
+import User from '../../UserPage/UserName'
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { IoMdPhotos } from "react-icons/io";
 import { GrView } from "react-icons/gr";
@@ -38,6 +39,9 @@ const MainCard = (props) => {
                     {props.oneRecipe.Img.length > 1 ? <IoMdPhotos className="more-photos" /> : null}
                     <div className="overlay">
                         <div className="overlay-content">
+                            <div className="user-link-main">
+                                <Link to={`/user/${props.oneRecipe.userID}`}> <User /></Link>
+                            </div>
                             {isSaved ? <FaHeart className="fa-icon" id={props.oneRecipe._id} onClick={handelUnlike} />
                                 : <FaRegHeart className="fa-icon" onClick={handelLike} id={props.oneRecipe._id} />}
                             <Link to={`/recipe/${props.oneRecipe._id}`}> <GrView className="view-icon" /></Link>

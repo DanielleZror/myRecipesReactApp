@@ -3,10 +3,11 @@ import './allDetailsCard.css';
 import Ingredient from './Ingredient';
 import Preparation from './Preparation'
 import Share from '../Share/Share'
-import { FaRegClock, FaRegHeart, FaHeart } from "react-icons/fa";
+import { FaRegClock, FaRegHeart, FaHeart, FaRegUserCircle } from "react-icons/fa";
 import { GiHotMeal } from "react-icons/gi";
 import Carousel from './carousel'
 import EditDelete from './EditDeleteRecipe'
+import User from '../UserPage/UserName'
 
 const DetailsCard = (props) => {
     const [isSaved, setIsSaved] = useState(props.oneRecipe.isSaved);
@@ -49,6 +50,10 @@ const DetailsCard = (props) => {
                     <li></li>
                     <li> <GiHotMeal /></li>
                     <li>{props.oneRecipe.NumberOfDishes || 0}</li>
+                    <li></li>
+                    <li> <FaRegUserCircle /></li>
+                    <li><User /></li>
+
                 </ul>
                 <Share recipeName={props.oneRecipe.Name} />
                 {props.oneRecipe.userID === JSON.parse(sessionStorage.userData).userID ?

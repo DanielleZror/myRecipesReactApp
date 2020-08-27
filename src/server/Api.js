@@ -141,6 +141,18 @@ module.exports = {
             }
         })
 
+        app.get('/api/user', function (req, res) {
+            let query = { userID: req.query.userID } 
+            DB.selectFromDB(sendRes, query, GLOBAL.USERS_COLLECTION);
+            function sendRes(result) {
+                if (result.length === 0) {
+                    res.status(500).send('not found');
+                } else {
+                    res.send(result[0]);
+                }
+            }
+        })
+
         app.post('/api/recipe/update', upload.any(), function (req, res) {
             let data = JSON.parse(req.body.recipe)
             let recipeID = data.recipeID

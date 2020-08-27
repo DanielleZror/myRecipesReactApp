@@ -56,8 +56,8 @@
 }
 
 .card-img .overlay .overlay-content {
-  line-height: 224px;
   width: 100%;
+  height: 100%;
   text-align: center;
   color: #fff;
 }
@@ -87,4 +87,19 @@
   height: 2em;
   width: 2em;
   color: white;
+}
+
+.user-link span{
+  font-weight: 500;
+  font-size: 16px;
+  color: #CB8EB2;
+  display: none;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
+.user-link{
+  padding-top: 10px;
+  padding-bottom: 40px;
 }

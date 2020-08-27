@@ -42,7 +42,7 @@ module.exports = {
     selectFromDB: (callback, query, collectionName) => {
         connectToDB(find, collectionName)
         function find(collection) {
-            collection.find(query).sort({ Date: -1 }).toArray(function (err, result) {
+            collection.find(query).toArray(function (err, result) {
                 if (err) throw err;
                 callback(result)
                 closeConnction()

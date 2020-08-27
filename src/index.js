@@ -10,7 +10,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import {
   requestAddUser, requestAddRecipe, requestAllRecipesByUser, requestByIdRecipe, requestDeleteRecipe, requestUpdateRecipe,
-  searchRecipes, requestSavedRecipes, requestPopularRecipes, requestAllRecipes, requestSearchRecipes
+  searchRecipes, requestSavedRecipes, requestPopularRecipes, requestAllRecipes, requestSearchRecipes, requestUserData
 } from './reducers';
 import * as serviceWorker from './serviceWorker';
 import App from './containers/App';
@@ -29,7 +29,8 @@ const rootReducers = combineReducers({
   all: requestAllRecipes,
   searchAll: requestSearchRecipes,
   deleteRecipe: requestDeleteRecipe,
-  update:requestUpdateRecipe
+  update:requestUpdateRecipe,
+  user: requestUserData
 })
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger, routerMiddleware(history)))
 

@@ -145,3 +145,15 @@ export const requestSearchRecipes = (userID, search, dispatch) => {
     .then(res => dispatch({ type: CONST.REQUEST_SEARCH_SUCCESS, payload: res.data }))
     .catch(error => dispatch({ type: CONST.REQUEST_SEARCH_FAILED, payload: error }))
 }
+
+
+export const requestUserData = (userID, dispatch) => {
+  dispatch({ type: CONST.REQUEST_USER_DATA_PENDING })
+  axios.get(`/api/user`, {
+    params: {
+      userID: userID
+    }
+  })
+    .then(res => dispatch({ type: CONST.REQUEST_USER_DATA_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: CONST.REQUEST_USER_DATA_FAILED, payload: error }))
+}
