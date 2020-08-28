@@ -12,7 +12,7 @@ const DetailsCard = (props) => {
                 <h3>{props.user.Email || "Email"}</h3>
                 <div className="separator"></div>
                 <ul>
-                    <li> <AiOutlineNumber /> {props.numberOfRecipes} </li>
+                    <li> <AiOutlineNumber /> {props.numberOfRecipes || props.user.numOfRecipes} </li>
                     <li> <GiShadowFollower /> num of followers </li>
                     <li> <GiShadowFollower /> num of following </li>
                 </ul>

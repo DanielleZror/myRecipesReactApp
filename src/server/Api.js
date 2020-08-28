@@ -71,7 +71,7 @@ module.exports = {
         })
 
         app.get('/api/search', function (req, res) {
-            var regex = new RegExp(req.query.search);
+            var regex = new RegExp(req.query.search, "i");
             var match = {
                 $match: {
                     $or: [
@@ -91,9 +91,10 @@ module.exports = {
         })
 
         app.get('/api/user/search', function (req, res) {
-            var regex = new RegExp(req.query.search);
-            let query = { Name: { $regex: regex } } 
-            DB.selectFromDB(sendRes, query, GLOBAL.USERS_COLLECTION);
+            var regex = new RegExp(req.query.search, "i");
+            let match = { $match: { Name: { $regex: regex } } }
+            let query = QUERY.userJoinQuery(match)
+            DB.selectWithJoinFromDB(sendRes, query, GLOBAL.USERS_COLLECTION);
             function sendRes(result) {
                 res.send(result);
             }
@@ -151,7 +152,7 @@ module.exports = {
         })
 
         app.get('/api/user', function (req, res) {
-            let query = { userID: req.query.userID } 
+            let query = { userID: req.query.userID }
             DB.selectFromDB(sendRes, query, GLOBAL.USERS_COLLECTION);
             function sendRes(result) {
                 if (result.length === 0) {

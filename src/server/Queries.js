@@ -103,5 +103,30 @@ module.exports = {
         ]
 
         return joinQuery
+    },
+
+    userJoinQuery: (match) => {
+        let joinQuery = [
+            match,
+            {
+                $lookup:
+                {
+                    from: "recipes",
+                    localField: "userID",
+                    foreignField: "userID",
+                    as: "RightTableData"
+                }
+            },
+            {
+                $project: {
+                    "userID": "$userID",
+                    "Name": "$Name",
+                    "Email": "$Email",
+                    numOfRecipes: { $size: "$RightTableData" }
+                }
+            }
+        ]
+
+        return joinQuery
     }
 }
