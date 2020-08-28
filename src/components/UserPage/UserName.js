@@ -5,9 +5,7 @@ import { requestUserData } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isPending: state.user.isPending,
-    data: state.user.data,
-    isSucess: state.user.isSucess,
+    users: state.user.users,
     userID: ownProps.userID
   }
 }
@@ -20,15 +18,17 @@ const mapDispatchToProps = (dispatch) => {
 
 class allRecipesPage extends React.Component {
   componentDidMount() {
-    this.props.onRequestUserData(this.props.userID);
+    if (!this.props.users[this.props.userID]) {
+      this.props.onRequestUserData(this.props.userID);
+    }
   }
 
   render() {
     return (
       <>
-        {this.props.isPending || !this.props.isSucess ? <span> User Name</span> :
-          <Link to={`/user/${this.props.userID}`}><span> {this.props.data.Name}</span></Link>
-        }
+        { !this.props.users[this.props.userID] || this.props.users[this.props.userID].isPending || !this.props.users[this.props.userID].isSucess ?
+          <span> User Name</span> :
+          <Link to={`/user/${this.props.userID}`}><span> {this.props.users[this.props.userID].data.Name}</span></Link> }
       </>
     );
   }

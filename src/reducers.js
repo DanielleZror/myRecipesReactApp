@@ -25,7 +25,7 @@ export const requestAllRecipesByUser = (state = initialStateRecipesByUser, actio
     case CONST.REQUEST_RECIPES_BY_USER_PENDING:
       return Object.assign({}, state, { isPending: true, isSucess: false, recipes: [] })
     case CONST.REQUEST_RECIPES_BY_USER_SUCCESS:
-      return Object.assign({}, state, { recipes: action.payload, isPending: false,  isSucess: true })
+      return Object.assign({}, state, { recipes: action.payload, isPending: false, isSucess: true })
     case CONST.REQUEST_RECIPES_BY_USER_FAILED:
       return Object.assign({}, state, { error: action.payload, isPending: false, isSucess: false, recipes: [] })
     default:
@@ -256,21 +256,30 @@ export const requestUpdateRecipe = (state = initialStateUpdateUser, action) => {
 }
 
 const initialStateUserById = {
-  data: {},
-  isPending: true,
-  isSucess: false,
-  error: ''
+  users: {}
+  // data: {},
+  // isPending: true,
+  // isSucess: false,
+  // error: ''
 }
 
 export const requestUserData = (state = initialStateUserById, action) => {
   switch (action.type) {
     case CONST.REQUEST_USER_DATA_PENDING:
-      return Object.assign({}, state, { isPending: true, isSucess: false })
+      // state.users[action.userID] = { data: {}, isPending: true, isSucess: false }
+      // return state
+      // Object.assign(myState, myState, {users: {...myState.users, ["danielle2"]: amitPayload}})
+      return Object.assign({},  { users: { ...state.users, [action.userID]: { data: {}, isPending: true, isSucess: false } } })
     case CONST.REQUEST_USER_DATA_SUCCESS:
-      return Object.assign({}, state, { data: action.payload, isPending: false, isSucess: true })
+      // state.users[action.userID] = { data: action.payload , isPending: false, isSucess: true }
+      // return state
+      return Object.assign({},  { users: { ...state.users, [action.userID]: { data: action.payload, isPending: false, isSucess: true } } })
     case CONST.REQUEST_USER_DATA_FAILED:
-      return Object.assign({}, state, { error: action.payload, isPending: false, isSucess: false, data: {} })
+      // state.users[action.userID] = { error: action.payload, isPending: false, isSucess: false, data: {} }
+      return Object.assign({},  { users: { ...state.users, [action.userID]: { error: action.payload, isPending: false, isSucess: false, data: {} } } })
+    // return state
     default:
       return state
   }
 }
+

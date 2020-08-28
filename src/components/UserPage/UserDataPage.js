@@ -8,13 +8,12 @@ import { requestUserData, requestAllRecipesByUser, requestLikeRecipe, requestUnl
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        isPending: state.user.isPending,
-        user: state.user.data,
-        isSucess: state.user.isSucess,
+        // isPending: state.user.isPending,
+        user: state.user.users[ownProps.match.params.id],
+        // isSucess: state.user.isSucess,
         isRecipesPending: state.allByUser.isPending,
         recipes: state.allByUser.recipes,
-        isRecipesSucess: state.allByUser.isSucess,
-        id: ownProps
+        isRecipesSucess: state.allByUser.isSucess
     }
 }
 
@@ -41,11 +40,11 @@ class userDataPage extends React.Component {
     }
 
     render() {
-        const { user, isPending, isSucess, isRecipesPending, recipes, isRecipesSucess, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
+        const { user, isRecipesPending, recipes, isRecipesSucess, onRequestLikeRecipe, onRequestUnlikeRecipe } = this.props;
         return (
             <div >
-                {isPending ? <Loading /> : !isSucess ? <NotFound /> :
-                    <DetailsCard user={user} />}
+                {!user || user.isPending ? <Loading /> : !user.isSucess ? <NotFound /> :
+                    <DetailsCard user={user.data} />}
                 {isRecipesPending ? <Loading /> : !isRecipesSucess ? <NotFound /> :
                     <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />}
 
