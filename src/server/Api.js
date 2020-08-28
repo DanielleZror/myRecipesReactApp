@@ -44,7 +44,7 @@ module.exports = {
 
         app.get('/api/recipe/allByUser', function (req, res) {
             let match = { $match: { userID: req.query.userID } };
-            let query = QUERY.createJoinQuery(match, req.query.userID)
+            let query = QUERY.createJoinQuery(match, req.query.myUserID)
             DB.selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION)
             function sendRes(result) {
                 res.send(result);
@@ -85,6 +85,15 @@ module.exports = {
 
             let query = QUERY.createJoinQuery(match, req.query.userID);
             DB.selectWithJoinFromDB(sendRes, query, GLOBAL.RECIPES_COLLECTION);
+            function sendRes(result) {
+                res.send(result);
+            }
+        })
+
+        app.get('/api/user/search', function (req, res) {
+            var regex = new RegExp(req.query.search);
+            let query = { Name: { $regex: regex } } 
+            DB.selectFromDB(sendRes, query, GLOBAL.USERS_COLLECTION);
             function sendRes(result) {
                 res.send(result);
             }

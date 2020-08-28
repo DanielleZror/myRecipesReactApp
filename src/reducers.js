@@ -213,6 +213,25 @@ export const requestSearchRecipes = (state = initialStateSearchRecipes, action =
   }
 }
 
+const initialStateSearchUsers = {
+  users: [],
+  isPending: true,
+  error: ''
+}
+
+export const requestSearchUsers = (state = initialStateSearchUsers, action = {}) => {
+  switch (action.type) {
+    case CONST.REQUEST_USER_SEARCH_PENDING:
+      return Object.assign({}, state, { isPending: true })
+    case CONST.REQUEST_USER_SEARCH_SUCCESS:
+      return Object.assign({}, state, { users: action.payload, isPending: false })
+    case CONST.REQUEST_USER_SEARCH_FAILED:
+      return Object.assign({}, state, { error: action.payload })
+    default:
+      return state
+  }
+}
+
 const initialStateDeleteRecipe = {
   isSucess: false,
   recipeID: '',

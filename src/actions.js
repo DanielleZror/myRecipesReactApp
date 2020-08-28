@@ -3,10 +3,11 @@ import * as CONST from './constants'
 
 export const setSearchField = (text) => ({ type: CONST.CHANGE_SEARCH_FIELD, payload: text })
 
-export const requestAllRecipesByUser = (userID, dispatch) => {
+export const requestAllRecipesByUser = (userID, myUserID, dispatch) => {
   dispatch({ type: CONST.REQUEST_RECIPES_BY_USER_PENDING })
   axios.get(`/api/recipe/allByUser`, {
     params: {
+      myUserID: myUserID,
       userID: userID
     }
   })
@@ -146,6 +147,16 @@ export const requestSearchRecipes = (userID, search, dispatch) => {
     .catch(error => dispatch({ type: CONST.REQUEST_SEARCH_FAILED, payload: error }))
 }
 
+export const requestSearchUsers = (search, dispatch) => {
+  dispatch({ type: CONST.REQUEST_USER_SEARCH_PENDING })
+  axios.get(`/api/user/search`, {
+    params: {
+      search: search
+    }
+  })
+    .then(res => dispatch({ type: CONST.REQUEST_USER_SEARCH_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: CONST.REQUEST_USER_SEARCH_FAILED, payload: error }))
+}
 
 export const requestUserData = (userID, dispatch) => {
   dispatch({ type: CONST.REQUEST_USER_DATA_PENDING, userID: userID })

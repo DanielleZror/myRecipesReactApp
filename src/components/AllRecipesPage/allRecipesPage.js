@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
-    onRequestAllRecipesByUser: (userID) => requestAllRecipesByUser(userID, dispatch),
+    onRequestAllRecipesByUser: (userID, myUserID) => requestAllRecipesByUser(userID, myUserID, dispatch),
     onRequestLikeRecipe: (like) => requestLikeRecipe(like, dispatch),
     onRequestUnlikeRecipe: (unlike) => requestUnlikeRecipe(unlike, dispatch)
   }
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class allRecipesPage extends React.Component {
   componentDidMount() {
-    this.props.onRequestAllRecipesByUser(JSON.parse(sessionStorage.userData).userID);
+    this.props.onRequestAllRecipesByUser(JSON.parse(sessionStorage.userData).userID, JSON.parse(sessionStorage.userData).userID);
   }
 
   render() {

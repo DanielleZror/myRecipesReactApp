@@ -62,6 +62,7 @@ article{
   display: inline-block;
   line-height: 1em;
   margin: 5px;
+  padding-right: 1em;
 }
 
 .title{
@@ -118,4 +119,8 @@ article{
 
 .recipe-card a:hover {
   color: pink;
+}
+
+.icon-list{
+  margin-right: 0.3em;
 }

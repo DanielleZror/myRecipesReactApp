@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './allDetailsCard.css';
 import Ingredient from './Ingredient';
 import Preparation from './Preparation'
@@ -42,18 +41,11 @@ const DetailsCard = (props) => {
                 <h2>{props.oneRecipe.Name || "Name"}</h2>
                 <h3>{props.oneRecipe.Description || "Description"}</h3>
                 <ul>
-                    <li> <FaRegClock /></li>
-                    <li>{((parseInt(props.oneRecipe.TimeHours) || 0) !== 0 ? `${props.oneRecipe.TimeHours} Hours ` : " ") +
+                    <li> <FaRegClock className="icon-list"/>{((parseInt(props.oneRecipe.TimeHours) || 0) !== 0 ? `${props.oneRecipe.TimeHours} Hours ` : " ") +
                         ((parseInt(props.oneRecipe.TimeMinutes) || 0) !== 0 ? `${props.oneRecipe.TimeMinutes} Minuts` : " ")} </li>
-                    <li></li>
-                    <li> <FaRegHeart /></li>
-                    <li>{props.oneRecipe.numOfSaves || 0}</li>
-                    <li></li>
-                    <li> <GiHotMeal /></li>
-                    <li>{props.oneRecipe.NumberOfDishes || 0}</li>
-                    <li></li>
-                    <li> <FaRegUserCircle /></li>
-                    <li><User userID={props.oneRecipe.userID}/></li>
+                    <li><FaRegHeart className="icon-list"/> {props.oneRecipe.numOfSaves || 0}</li>
+                    <li><GiHotMeal className="icon-list"/>{props.oneRecipe.NumberOfDishes || 0}</li>
+                    <li><FaRegUserCircle className="icon-list"/><User userID={props.oneRecipe.userID}/></li>
 
                 </ul>
                 <Share recipeName={props.oneRecipe.Name} />

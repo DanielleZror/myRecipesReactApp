@@ -13,18 +13,35 @@
     position: relative;
 }
 
-.user-card h2, .user-card h3 {
+.user-card-list {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #fff;
+    box-shadow: none;
+}
+
+.user-card h2, .user-card h3, .user-card-list h2, .user-card-list h3 {
     margin-bottom: 0.3em !important;
     text-align: center;
     text-transform: uppercase;
 }
 
-.user-card h2 {
+.user-card h2{
     font-size: 1.5em !important;
     font-weight: 900 !important;
 }
+
+.user-card-list h2{
+    font-size: 1em !important;
+    font-weight: 900 !important;
+}
   
-.user-card h3 {
+.user-card h3{
+    font-size: 1.5em !important;
+    color: #63555d !important;
+}
+
+.user-card-list h3{
     font-size: 1em !important;
     color: #63555d !important;
 }
@@ -45,4 +62,15 @@
     display: inline-block;
     line-height: 1em;
     margin: 5px;
+  }
+
+  .user-card-list article ul {
+    list-style: none;
+    padding: 0;
+    display: list-item !important;
+  }
+
+  .user-card-list article ul li {
+    display: list-item !important;
+    line-height: 3em;
   }
