@@ -257,27 +257,16 @@ export const requestUpdateRecipe = (state = initialStateUpdateUser, action) => {
 
 const initialStateUserById = {
   users: {}
-  // data: {},
-  // isPending: true,
-  // isSucess: false,
-  // error: ''
 }
 
 export const requestUserData = (state = initialStateUserById, action) => {
   switch (action.type) {
     case CONST.REQUEST_USER_DATA_PENDING:
-      // state.users[action.userID] = { data: {}, isPending: true, isSucess: false }
-      // return state
-      // Object.assign(myState, myState, {users: {...myState.users, ["danielle2"]: amitPayload}})
       return Object.assign({},  { users: { ...state.users, [action.userID]: { data: {}, isPending: true, isSucess: false } } })
     case CONST.REQUEST_USER_DATA_SUCCESS:
-      // state.users[action.userID] = { data: action.payload , isPending: false, isSucess: true }
-      // return state
       return Object.assign({},  { users: { ...state.users, [action.userID]: { data: action.payload, isPending: false, isSucess: true } } })
     case CONST.REQUEST_USER_DATA_FAILED:
-      // state.users[action.userID] = { error: action.payload, isPending: false, isSucess: false, data: {} }
       return Object.assign({},  { users: { ...state.users, [action.userID]: { error: action.payload, isPending: false, isSucess: false, data: {} } } })
-    // return state
     default:
       return state
   }

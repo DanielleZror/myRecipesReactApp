@@ -44,7 +44,7 @@ class userDataPage extends React.Component {
         return (
             <div >
                 {!user || user.isPending ? <Loading /> : !user.isSucess ? <NotFound /> :
-                    <DetailsCard user={user.data} />}
+                    <DetailsCard user={user.data} numberOfRecipes={recipes ? recipes.length : 0}/>}
                 {isRecipesPending ? <Loading /> : !isRecipesSucess ? <NotFound /> :
                     <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />}
 

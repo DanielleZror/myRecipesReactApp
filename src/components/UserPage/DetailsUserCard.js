@@ -13,7 +13,7 @@ const DetailsCard = (props) => {
                 <div className="separator"></div>
                 <ul>
                     <li> <AiOutlineNumber /></li>
-                    <li> num of recipe</li>
+                    <li> {props.numberOfRecipes} </li>
                     <li></li>
                     <li> <GiShadowFollower /></li>
                     <li> num of followers</li>
