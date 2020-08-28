@@ -29,8 +29,10 @@ const MyNavbar = () => {
                         <Nav.Link eventKey="4" as={Link} to="/saved">Saved</Nav.Link>
                     </Nav>
                     <Form inline>
-                        <Search/>
-                        <span id="userName" className="nav-link disabled">{JSON.parse(sessionStorage.userData).Name}</span>
+                        <Search />
+                        <Link id="userName" to={`/user/${JSON.parse(sessionStorage.userData).userID}`} >
+                            <span className="nav-link disabled">{JSON.parse(sessionStorage.userData).Name}</span>
+                        </Link>
                         <span id="logOut" className="nav-link" onClick={logout}>Logout</span>
                     </Form>
                 </Navbar.Collapse>
