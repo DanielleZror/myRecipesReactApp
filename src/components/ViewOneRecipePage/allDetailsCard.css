@@ -19,7 +19,6 @@
   border : 1px solid #C3C3C3;
 }
 
-
 aside {
     position: relative;
 }
@@ -110,4 +109,13 @@ article{
 
 .fa-icon-recipe:hover {
   color: red;
+}
+
+.recipe-card a {
+  color: #7C3B61;
+  text-decoration: underline
+}
+
+.recipe-card a:hover {
+  color: pink;
 }
