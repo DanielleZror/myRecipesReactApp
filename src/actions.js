@@ -168,3 +168,10 @@ export const requestUserData = (userID, dispatch) => {
     .then(res => dispatch({ type: CONST.REQUEST_USER_DATA_SUCCESS, userID: userID, payload: res.data }))
     .catch(error => dispatch({ type: CONST.REQUEST_USER_DATA_FAILED, userID: userID, payload: error }))
 }
+
+export const requestParams = (dispatch) => {
+  dispatch({ type: CONST.REQUEST_PARAMS_PENDING })
+  axios.get(`/api/params`)
+    .then(res => dispatch({ type: CONST.REQUEST_PARAMS_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: CONST.REQUEST_PARAMS_FAILED, payload: error }))
+}

@@ -163,6 +163,17 @@ module.exports = {
             }
         })
 
+        app.get('/api/params', function (req, res) {
+            DB.selectFromDB(sendRes, {}, GLOBAL.PARAMS_COLLECTION);
+            function sendRes(result) {
+                if (result.length === 0) {
+                    res.status(500).send('not found');
+                } else {
+                    res.send(result[0]);
+                }
+            }
+        })
+
         app.post('/api/recipe/update', upload.any(), function (req, res) {
             let data = JSON.parse(req.body.recipe)
             let recipeID = data.recipeID

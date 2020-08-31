@@ -291,3 +291,22 @@ export const requestUserData = (state = initialStateUserById, action) => {
   }
 }
 
+
+const initialStateParams = {
+  isSucess: false,
+  params: {},
+  error: ''
+}
+
+export const requestParams = (state = initialStateParams, action) => {
+  switch (action.type) {
+    case CONST.REQUEST_PARAMS_PENDING:
+      return Object.assign({}, state, { isSucess: false })
+    case CONST.REQUEST_PARAMS_SUCCESS:
+      return Object.assign({}, state, { params: action.payload, isSucess: true })
+    case CONST.REQUEST_PARAMS_FAILED:
+      return Object.assign({}, state, { error: action.payload, isSucess: false })
+    default:
+      return state
+  }
+}
