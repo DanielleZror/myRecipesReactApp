@@ -30,20 +30,18 @@ class AddIngredients extends React.Component {
         }
     }
 
-    onChange = (event, value, what) => {
+    onChange = (event, value, name, index) => {
         if (event) {
             let ingredients = this.state.ingredients
-            let index = parseInt(event.target.id.split('-')[1])
-            let name = event.target.id.split('-')[0]
             switch (name) {
                 case ("amount"):
-                    ingredients.find(row => row.id === index).amount = event.target.value
+                    ingredients.find(row => row.id === index).amount = value
                     break;
                 case ("item"):
-                    ingredients.find(row => row.id === index).item = event.target.value || value
+                    ingredients.find(row => row.id === index).item = value
                     break;
                 case ("unit"):
-                    ingredients.find(row => row.id === index).unit = event.target.value || value
+                    ingredients.find(row => row.id === index).unit = value
                     break;
                 default:
                     break;
@@ -97,27 +95,24 @@ class AddIngredients extends React.Component {
                             {this.state.ingredients.map((row) => (
                                 <tr key={row.id}>
                                     <td>
-                                        <Autocomplete
+                                        <CssTextField 
                                             className="add-input"
-                                            id={`amount-${row.id}`}
-                                            freeSolo={true}
-                                            onInputChange={this.onChange}
-                                            inputValue={row.amount || ""}
-                                            renderInput={(params) =>
-                                                <CssTextField {...params} type="number" step="0.25" min="0" max="1000"
-                                                    label="Amount" required />}
-                                        />
+                                            onChange={(e) => { this.onChange(e, e.target.value, "amount", row.id) }}
+                                            InputProps={{ inputProps: { min: 0, max: 10, step: "0.25" } }}
+                                            value={row.amount || ""}
+                                            id={`amount-${row.id}`} type="number"
+                                            label="Amount" required />
                                     </td>
                                     <td>
                                         {this.props.params.Units ?
-                                            <Autocomplete 
+                                            <Autocomplete
                                                 className="add-input"
                                                 id={`unit-${row.id}`}
                                                 options={this.props.params.Units}
                                                 getOptionLabel={(option) => option}
                                                 freeSolo={true}
                                                 autoSelect={true}
-                                                onInputChange={this.onChange}
+                                                onInputChange={(e, v) => { this.onChange(e, v, "unit", row.id) }}
                                                 inputValue={row.unit || ""}
                                                 renderInput={(params) =>
                                                     <CssTextField {...params} label="Units" name="unit" required />}
@@ -132,7 +127,7 @@ class AddIngredients extends React.Component {
                                                 getOptionLabel={(option) => option}
                                                 freeSolo={true}
                                                 autoSelect={true}
-                                                onInputChange={this.onChange}
+                                                onInputChange={(e, v) => { this.onChange(e, v, "item", row.id) }}
                                                 inputValue={row.item || ""}
                                                 renderInput={(params) =>
                                                     <CssTextField {...params} label="Items" required />}

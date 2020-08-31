@@ -99,6 +99,7 @@
 
 .times {
   margin-right: 1rem !important;
+  width: 20%;
 }
 
 .add-input:focus, .save-btn:focus, .add-btn:focus { 

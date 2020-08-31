@@ -146,13 +146,14 @@ class AddCard extends React.Component {
             <div className='container'>
               <form className="add-form" onSubmit={this.onSubmit}>
                 <CssTextField id="Name" label="Recipe's name" fullWidth={true} className="add-input"
-                  defaultValue={this.state.Name || this.state.Name === "" ? this.state.Name : this.props.recipeToEdit.Name || ""}
+                  value={this.state.Name || this.state.Name === "" ? this.state.Name : this.props.recipeToEdit.Name || ""}
                   onChange={this.onChange} required />
                 <CssTextField id="Description" label="Description" multiline={true} fullWidth={true} className="add-input"
-                  defaultValue={this.state.Description || this.state.Description === "" ? this.state.Description : this.props.recipeToEdit.Description || ""}
+                  value={this.state.Description || this.state.Description === "" ? this.state.Description : this.props.recipeToEdit.Description || ""}
                   onChange={this.onChange} required />
-                <CssTextField id="NumberOfDishes" label="Number of dishes" type="number" min="1" max="1000" fullWidth={true} className="add-input"
-                  defaultValue={this.state.NumberOfDishes || this.state.NumberOfDishes === "" ? this.state.NumberOfDishes : this.props.recipeToEdit.NumberOfDishes || ""}
+                <CssTextField id="NumberOfDishes" label="Number of dishes" fullWidth={true} className="add-input"
+                  InputProps={{ inputProps: { min: 1, max: 1000} }}
+                  value={this.state.NumberOfDishes || this.state.NumberOfDishes === "" ? this.state.NumberOfDishes : this.props.recipeToEdit.NumberOfDishes || ""}
                   onChange={this.onChange} required />
                 {/* <div className="separator"></div> */}
                 {/* <div className='form-row'>
@@ -167,11 +168,13 @@ class AddCard extends React.Component {
                   </div>
                 </div> */}
                 <div className='form-row'>
-                  <CssTextField id="TimeHours" label="Hours" type="number" min='0' max='24' className="add-input times" 
-                    defaultValue={this.state.TimeHours || this.state.TimeHours === "" ? this.state.TimeHours : this.props.recipeToEdit.TimeHours || ""}
+                  <CssTextField id="TimeHours" label="Hours" type="number" className="add-input times" 
+                    InputProps={{ inputProps: { min: 0, max: 24} }}
+                    value={this.state.TimeHours || this.state.TimeHours === "" ? this.state.TimeHours : this.props.recipeToEdit.TimeHours || ""}
                     onChange={this.onChange} w required />
-                  <CssTextField id="TimeMinutes" label="Minutes" type="number" min='0' max='59' className="add-input times"
-                    defaultValue={this.state.TimeMinutes || this.state.TimeMinutes === "" ? this.state.TimeMinutes : this.props.recipeToEdit.TimeMinutes || ""}
+                  <CssTextField id="TimeMinutes" label="Minutes" type="number" className="add-input times"
+                    InputProps={{ inputProps: { min: 0, max: 59} }}
+                    value={this.state.TimeMinutes || this.state.TimeMinutes === "" ? this.state.TimeMinutes : this.props.recipeToEdit.TimeMinutes || ""}
                     onChange={this.onChange} required />
                 </div>
                 {/* <div className="separator"></div> */}

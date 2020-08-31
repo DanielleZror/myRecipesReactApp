@@ -83,8 +83,8 @@ class AddPreparation extends React.Component {
                                     <td>
                                         <CssTextField
                                             id={`details-${row.id}`}
-                                            label={`Preparation step ${row.id + 1}`}
-                                            defaultValue={row.details || ""}
+                                            label={`Preparation step ${i + 1}`}
+                                            value={row.details || ""}
                                             multiline={true}
                                             onChange={this.onChange}
                                             className="add-input"
