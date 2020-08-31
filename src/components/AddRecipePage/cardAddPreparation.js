@@ -2,6 +2,23 @@ import React from 'react';
 import './addRecipePage.css'
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAdd } from 'react-icons/io';
+import { TextField, withStyles } from '@material-ui/core';
+
+const CssTextField = withStyles({
+    root: {
+        '& label.Mui-focused': {
+            color: '#CB8EB2',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#CB8EB2',
+        },
+        // '&:hover': {
+        //   color: '#CB8EB2',
+        //   borderBottomColor: '#CB8EB2',
+        // },
+
+    },
+})(TextField);
 
 class AddPreparation extends React.Component {
     constructor(props) {
@@ -64,11 +81,15 @@ class AddPreparation extends React.Component {
                             {this.state.preparation.map((row, i) => (
                                 <tr key={row.id}>
                                     <td>
-                                        {i + 1}
-                                    </td>
-                                    <td>
-                                        <textarea type="text" id={`details-${row.id}`} className="form-control add-input"
-                                            placeholder="Write a preparation step" rows='2' name="details" onChange={this.onChange} autoComplete="off" value={row.details || ""} required />
+                                        <CssTextField
+                                            id={`details-${row.id}`}
+                                            label={`Preparation step ${row.id + 1}`}
+                                            defaultValue={row.details || ""}
+                                            multiline={true}
+                                            onChange={this.onChange}
+                                            className="add-input"
+                                            fullWidth={true}
+                                            required />
                                     </td>
                                     <td>
                                         {this.state.preparation.length > 1 ? <button className="remove-btn btn-danger remove" type="button"
