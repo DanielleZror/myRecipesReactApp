@@ -5,7 +5,8 @@ const Search = (props) => {
   
     return (
         <div className="center">
-            <input 
+            <input
+                className="search-box" 
                 type="search"
                 placeholder="search in your recipes"
                 onChange={props.onChange}/> 

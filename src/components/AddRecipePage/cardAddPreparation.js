@@ -12,6 +12,9 @@ const CssTextField = withStyles({
         '& .MuiInput-underline:after': {
             borderBottomColor: '#CB8EB2',
         },
+        '& .MuiInputLabel-shrink': {
+            transform: 'translate(0, 8.5px) scale(0.75)',
+          }
         // '&:hover': {
         //   color: '#CB8EB2',
         //   borderBottomColor: '#CB8EB2',
@@ -24,7 +27,7 @@ class AddPreparation extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            rows: 1,
+            maxID: 1,
             preparation: [{ id: 0, details: null }]
         }
     }
@@ -39,10 +42,10 @@ class AddPreparation extends React.Component {
 
     addRow = () => {
         let preparation = this.state.preparation
-        preparation.push({ id: this.state.rows, details: null })
-        let numberOfRows = this.state.rows
-        numberOfRows++
-        this.setState({ rows: numberOfRows }, (() => { document.getElementById(`details-${this.state.rows - 1}`).focus() }))
+        preparation.push({ id: this.state.maxID, details: null })
+        let maxIDCounter = this.state.maxID
+        maxIDCounter++
+        this.setState({ maxID: maxIDCounter }, (() => { document.getElementById(`details-${this.state.maxID - 1}`).focus() }))
         this.setState({ preparation: preparation })
     }
 
@@ -57,24 +60,24 @@ class AddPreparation extends React.Component {
     componentDidMount() {
         if (this.props.value) {
             this.setState({ preparation: this.props.value })
-            this.setState({ rows: this.props.value.length })
+            this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1})
         }
     }
     componentDidUpdate(prevProps) {
         if (JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)) {
             if (this.props.value) {
                 this.setState({ preparation: this.props.value })
-                this.setState({ rows: this.props.value.length })
+                this.setState({maxID: this.props.value[this.props.value.length - 1].id + 1 })
             } else {
                 this.setState({ preparation: [{ id: 0, details: null }] })
-                this.setState({ rows: 1 })
+                this.setState({ maxID: 1 })
             }
         }
     }
     render() {
 
         return (
-            <div>
+            <div className="border">
                 <div className="add-preparation">
                     <table className="table-preparation">
                         <tbody>

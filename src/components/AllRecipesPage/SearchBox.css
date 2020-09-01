@@ -4,7 +4,7 @@
     margin-bottom: 3em;
 }
 
-input{
+.search-box{
     width: 20em;
     height: 2.5em;
     font-family: 'Quicksand', sans-serif;
@@ -12,7 +12,7 @@ input{
     border: 3px solid white;
 }
 
-input:focus {
+.search-box:focus {
     outline: none !important;
     border-color: white;
     box-shadow: 0 0 10px white;

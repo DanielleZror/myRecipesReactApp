@@ -13,6 +13,9 @@ const CssTextField = withStyles({
         '& .MuiInput-underline:after': {
             borderBottomColor: '#CB8EB2',
         },
+        '& .MuiInputLabel-shrink': {
+            transform: 'translate(0, 8.5px) scale(0.75)',
+        }
         // '&:hover': {
         //   color: '#CB8EB2',
         //   borderBottomColor: '#CB8EB2',
@@ -25,7 +28,7 @@ class AddIngredients extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            rows: 1,
+            maxID: 1,
             ingredients: [{ id: 0, amount: null, unit: null, item: null }]
         }
     }
@@ -53,10 +56,10 @@ class AddIngredients extends React.Component {
 
     addRow = () => {
         let ingredients = this.state.ingredients
-        ingredients.push({ id: this.state.rows, amount: null, unit: null, item: null })
-        let numberOfRows = this.state.rows
-        numberOfRows++
-        this.setState({ rows: numberOfRows }, (() => { document.getElementById(`amount-${this.state.rows - 1}`).focus() }))
+        ingredients.push({ id: this.state.maxID, amount: null, unit: null, item: null })
+        let maxIDCounter = this.state.maxID
+        maxIDCounter++
+        this.setState({ maxID: maxIDCounter }, (() => { document.getElementById(`amount-${this.state.maxID - 1}`).focus() }))
         this.setState({ ingredients: ingredients })
     }
 
@@ -71,7 +74,7 @@ class AddIngredients extends React.Component {
     componentDidMount() {
         if (this.props.value) {
             this.setState({ ingredients: this.props.value })
-            this.setState({ rows: this.props.value.length })
+            this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1})
         }
     }
 
@@ -79,27 +82,28 @@ class AddIngredients extends React.Component {
         if (JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)) {
             if (this.props.value) {
                 this.setState({ ingredients: this.props.value })
-                this.setState({ rows: this.props.value.length })
+                this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1 })
             } else {
                 this.setState({ ingredients: [{ id: 0, amount: null, unit: null, item: null }] })
-                this.setState({ rows: 1 })
+                this.setState({ maxID: 1 })
             }
         }
     }
     render() {
         return (
-            <div>
+            <div className="border">
                 <div className="add-ingredients">
                     <table className="table-ingredients">
                         <tbody>
                             {this.state.ingredients.map((row) => (
                                 <tr key={row.id}>
                                     <td>
-                                        <CssTextField 
+                                        <CssTextField
                                             className="add-input"
                                             onChange={(e) => { this.onChange(e, e.target.value, "amount", row.id) }}
                                             InputProps={{ inputProps: { min: 0, max: 10, step: "0.25" } }}
                                             value={row.amount || ""}
+                                            fullWidth={true}
                                             id={`amount-${row.id}`} type="number"
                                             label="Amount" required />
                                     </td>
@@ -111,6 +115,7 @@ class AddIngredients extends React.Component {
                                                 options={this.props.params.Units}
                                                 getOptionLabel={(option) => option}
                                                 freeSolo={true}
+                                                fullWidth={true}
                                                 autoSelect={true}
                                                 onInputChange={(e, v) => { this.onChange(e, v, "unit", row.id) }}
                                                 inputValue={row.unit || ""}
@@ -126,6 +131,7 @@ class AddIngredients extends React.Component {
                                                 options={this.props.params.Items}
                                                 getOptionLabel={(option) => option}
                                                 freeSolo={true}
+                                                fullWidth={true}
                                                 autoSelect={true}
                                                 onInputChange={(e, v) => { this.onChange(e, v, "item", row.id) }}
                                                 inputValue={row.item || ""}
