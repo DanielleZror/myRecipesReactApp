@@ -4,6 +4,7 @@ import CardsList from '../CardsList/CardsList.js'
 import UsersList from '../CardsList/user/usersList'
 import Loading from '../Loading/Loading'
 import NotFound from '../NotFound/notFound'
+import './searchResult.css'
 import { requestSearchRecipes, requestLikeRecipe, requestUnlikeRecipe, requestSearchUsers } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -42,12 +43,33 @@ class resultSearchPage extends React.Component {
         const { recipes, isPending, onRequestLikeRecipe, onRequestUnlikeRecipe, users, usersIsPending } = this.props;
 
         return (
-            <div >
-                {isPending ? <Loading /> : recipes.length === 0 ? <NotFound from="search"/> :
-                    <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />
-                }
-                {usersIsPending ? <Loading/> : users.length === 0 ? <NotFound from="search"/> :
-                    <UsersList users={users}/>}
+            <div>
+                {/* <div class="tabs">
+                    <div class="tab">
+                        <input type="radio" id="tab-1" name="tab-group-1" checked />
+                        <label for="tab-1">Tab One</label>
+                        <div class="content">
+                            {isPending ? <Loading /> : recipes.length === 0 ? <NotFound from="search" /> :
+                                <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />}
+                        </div>
+                    </div>
+                    <div class="tab">
+                        <input type="radio" id="tab-2" name="tab-group-1" />
+                        <label for="tab-2">Tab Two</label>
+                        <div class="content">
+                            <p>Stuff for Tab Two</p>
+                            <img src="//placekitten.com/200/100" />
+                        </div>
+                    </div> */}
+                {/* </div> */}
+                <div className="search-result">
+                    {isPending ? <Loading /> : recipes.length === 0 ? <NotFound from="search" /> :
+                        <CardsList recipes={recipes} nameClass="list-all-page" onLike={onRequestLikeRecipe} onUnlike={onRequestUnlikeRecipe} />}
+                </div>
+                <div className="search-result">
+                    {usersIsPending ? <Loading /> : users.length === 0 ? <NotFound from="search" /> :
+                        <UsersList users={users} />}
+                </div>
             </div>
         );
     }

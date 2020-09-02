@@ -40,7 +40,7 @@ module.exports = {
     REQUEST_SAVED_RECIPES_PENDING: 'REQUEST_SAVED_RECIPES_PENDING',
     REQUEST_SAVED_RECIPES_SUCCESS: 'REQUEST_SAVED_RECIPES_SUCCESS',
     REQUEST_SAVED_RECIPES_FAILED: 'REQUEST_SAVED_RECIPES_FAILED',
-    
+
     REQUEST_POPULAR_RECIPES_PENDING: 'REQUEST_POPULAR_RECIPES_PENDING',
     REQUEST_POPULAR_RECIPES_SUCCESS: 'REQUEST_POPULAR_RECIPES_SUCCESS',
     REQUEST_POPULAR_RECIPES_FAILED: 'REQUEST_POPULAR_RECIPES_FAILED',
@@ -48,8 +48,8 @@ module.exports = {
     POPULAR_RECIPES_NUMBER: 3,
     RECIPES_COLLECTION: "recipes",
     USERS_COLLECTION: "users",
-    SAVED_COLLECTION: "savedRecipes", 
-    PARAMS_COLLECTION: "params", 
+    SAVED_COLLECTION: "savedRecipes",
+    PARAMS_COLLECTION: "params",
 
     REQUEST_RECIPES_PENDING: 'REQUEST_RECIPES_PENDING',
     REQUEST_RECIPES_SUCCESS: 'REQUEST_RECIPES_SUCCESS',
@@ -75,6 +75,26 @@ module.exports = {
     MAX_FILES: 3,
 
     EDIT_MODE: "edit",
-    ADD_MODE: "add"
+    ADD_MODE: "add",
+    ROOT: {
+        '& label.Mui-focused': {
+            color: '#CB8EB2',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#CB8EB2',
+        },
+        '& .MuiTextField-root': {
+            marginRight: '10px',
+        },
+        '& .MuiInputBase-input': {
+            fontFamily: ['Quicksand', 'sans-serif'],
+        },
+        '& .MuiInputLabel-shrink': {
+            transform: 'translate(0, 8.5px) scale(0.75)',
+        },
+        '& .MuiFormLabel-root': {
+            fontFamily: ['Quicksand', 'sans-serif'],
+        }
+    }
 
 }

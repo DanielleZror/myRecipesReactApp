@@ -4,11 +4,10 @@ import CardPreparation from './cardAddPreparation'
 import Loading from '../Loading/Loading'
 import NotFound from '../NotFound/notFound'
 import './addRecipePage.css';
-import { MAX_FILES, EDIT_MODE, ADD_MODE } from '../../constants'
+import { MAX_FILES, EDIT_MODE, ADD_MODE, ROOT } from '../../constants'
 import { requestByIdRecipe, requestResetByIdRecipeState, requestParams } from '../../actions'
-import { TextField, withStyles, FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
+import { TextField, withStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
-// import { withStyles } from '@material-ui/core/styles';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -31,28 +30,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const CssTextField = withStyles({
-  root: {
-    '& label.Mui-focused': {
-      color: '#CB8EB2',
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#CB8EB2',
-    },
-    '& .MuiTextField-root': {
-      marginRight: '10px',
-    },
-    '& .MuiInputBase-input': {
-      fontFamily: ['Quicksand', 'sans-serif'],
-    },
-    '& .MuiInputLabel-shrink': {
-      transform: 'translate(0, 8.5px) scale(0.75)',
-    }
-    // '&:hover': {
-    //   color: '#CB8EB2',
-    //   borderBottomColor: '#CB8EB2',
-    // },
-
-  },
+  root: ROOT
 })(TextField);
 
 class AddCard extends React.Component {
@@ -155,13 +133,12 @@ class AddCard extends React.Component {
                   <CssTextField id="Description" label="Description" multiline={true} fullWidth={true} className="add-input"
                     value={this.state.Description || this.state.Description === "" ? this.state.Description : this.props.recipeToEdit.Description || ""}
                     onChange={this.onChange} required />
-                  <CssTextField id="NumberOfDishes" label="Number of dishes" fullWidth={true} className="add-input"
+                  <CssTextField id="NumberOfDishes" label="Number of dishes" fullWidth={true} className="add-input" type="number"
                     InputProps={{ inputProps: { min: 1, max: 1000 } }}
                     value={this.state.NumberOfDishes || this.state.NumberOfDishes === "" ? this.state.NumberOfDishes : this.props.recipeToEdit.NumberOfDishes || ""}
                     onChange={this.onChange} required />
                 </div>
                 <h5>Time</h5>
-                {/* <div className="separator"></div> */}
                 <div className="border">
                   <div className='form-row'>
                     <CssTextField id="PrepTimeHours" label="Preparation hours" type="number" className="add-input times"
@@ -186,16 +163,12 @@ class AddCard extends React.Component {
                 </div>
                 <h5>Photos</h5>
                 <div className="border">
-                  {/* <CssTextField id="Img" label={this.state.label || (this.props.recipeToEdit.Img ? this.props.recipeToEdit.Img.length + " files" : null) || "Choose..."}
-                    type="file" className="custom-file-label"
-                    InputProps={{ inputProps: { accept: 'image/*', multiple: true } }}
-                    onChange={this.onLoad} required /> */}
                   <div className='custom-file' id='myfile' >
                     <input type='file' name="photo" className='form-control add-input' onChange={this.onLoad} accept='image/*' id='Img'
                       required={this.props.mode === ADD_MODE ? true : false} multiple />
                     <label className={this.state.filesValidetion ? 'custom-file-label' : 'custom-file-label files-not-valid'}
                       id='photo' htmlFor='Img' >
-                      {this.state.label || (this.props.recipeToEdit.Img ? this.props.recipeToEdit.Img.length + " files" : null) || "Photos..."}</label>
+                      {this.state.label || (this.props.recipeToEdit.Img ? this.props.recipeToEdit.Img.length + " files" : null) || "Photos... *"}</label>
                   </div>
                 </div>
                 <h5>Ingredients</h5>

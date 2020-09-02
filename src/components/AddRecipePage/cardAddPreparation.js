@@ -1,26 +1,12 @@
 import React from 'react';
 import './addRecipePage.css'
+import { ROOT } from '../../constants'
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAdd } from 'react-icons/io';
 import { TextField, withStyles } from '@material-ui/core';
 
 const CssTextField = withStyles({
-    root: {
-        '& label.Mui-focused': {
-            color: '#CB8EB2',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: '#CB8EB2',
-        },
-        '& .MuiInputLabel-shrink': {
-            transform: 'translate(0, 8.5px) scale(0.75)',
-          }
-        // '&:hover': {
-        //   color: '#CB8EB2',
-        //   borderBottomColor: '#CB8EB2',
-        // },
-
-    },
+    root: ROOT
 })(TextField);
 
 class AddPreparation extends React.Component {
@@ -60,14 +46,14 @@ class AddPreparation extends React.Component {
     componentDidMount() {
         if (this.props.value) {
             this.setState({ preparation: this.props.value })
-            this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1})
+            this.setState({ maxID: parseInt(this.props.value[this.props.value.length - 1].id) + 1 })
         }
     }
     componentDidUpdate(prevProps) {
         if (JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)) {
             if (this.props.value) {
                 this.setState({ preparation: this.props.value })
-                this.setState({maxID: this.props.value[this.props.value.length - 1].id + 1 })
+                this.setState({ maxID: parseInt(this.props.value[this.props.value.length - 1].id) + 1 })
             } else {
                 this.setState({ preparation: [{ id: 0, details: null }] })
                 this.setState({ maxID: 1 })

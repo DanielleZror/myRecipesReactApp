@@ -56,7 +56,10 @@
   color: red;
   border: none;
   border-radius: 4px !important;
-  ;
+}
+
+.td-remove{
+  width: 20px;
 }
 
 .add-btn:hover, .add-btn:focus, .add-btn:active, .add-btn.active{
@@ -102,7 +105,6 @@
 .add-input {
   border-radius: 0px !important;
   border: none;
-  /* border-bottom: 1px solid #CB8EB2 !important; */
   margin-bottom: .5rem !important;
   position: relative;
   z-index: 3;
@@ -110,7 +112,7 @@
 
 .times {
   margin-right: 1rem !important;
-  width: 30%;
+  width: 35%;
 }
 
 .add-input:focus, .save-btn:focus, .add-btn:focus { 
@@ -120,10 +122,18 @@
 
 .custom-file-label{
   border: none;
-  border-bottom: 1px solid #CB8EB2 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.54) !important;
   border-radius: 0px !important;
+  padding: .7rem 0 0;
+  color: rgba(0, 0, 0, 0.54) ;
 }
 
+input:valid + .custom-file-label{
+  padding: 0;
+  line-height: 3;
+  font-size: initial;
+  color: black;
+}
 .files-not-valid {
   border-color: red !important;
   color: red !important;
@@ -170,16 +180,15 @@ input#Img {
   width: 1%;
 }
 
-.large-list {
-  max-height: 50px;
-  overflow-y: auto;
-}
-
 .input-row {
   padding: 15px 0;
   position: relative;
 }
 
+.custom-file-label:hover {
+  border-bottom: 2px solid black!important;
+}
+/* 
 .label-helper {
   position: absolute;
   opacity: 0;
@@ -201,6 +210,6 @@ input#Img {
     content: "X";
     font-size: 14px;
     line-height: 1;
-    padding-left: 12px; }
+    padding-left: 12px; } */
 
    

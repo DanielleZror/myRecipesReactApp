@@ -1,27 +1,13 @@
 import React from 'react';
 import './addRecipePage.css'
+import { ROOT } from '../../constants'
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdAdd } from 'react-icons/io';
 import { Autocomplete } from '@material-ui/lab';
 import { TextField, withStyles } from '@material-ui/core';
 
 const CssTextField = withStyles({
-    root: {
-        '& label.Mui-focused': {
-            color: '#CB8EB2',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: '#CB8EB2',
-        },
-        '& .MuiInputLabel-shrink': {
-            transform: 'translate(0, 8.5px) scale(0.75)',
-        }
-        // '&:hover': {
-        //   color: '#CB8EB2',
-        //   borderBottomColor: '#CB8EB2',
-        // },
-
-    },
+    root: ROOT
 })(TextField);
 
 class AddIngredients extends React.Component {
@@ -74,7 +60,7 @@ class AddIngredients extends React.Component {
     componentDidMount() {
         if (this.props.value) {
             this.setState({ ingredients: this.props.value })
-            this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1})
+            this.setState({ maxID: parseInt(this.props.value[this.props.value.length - 1].id) + 1 })
         }
     }
 
@@ -82,7 +68,7 @@ class AddIngredients extends React.Component {
         if (JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)) {
             if (this.props.value) {
                 this.setState({ ingredients: this.props.value })
-                this.setState({ maxID: this.props.value[this.props.value.length - 1].id + 1 })
+                this.setState({ maxID: parseInt(this.props.value[this.props.value.length - 1].id) + 1 })
             } else {
                 this.setState({ ingredients: [{ id: 0, amount: null, unit: null, item: null }] })
                 this.setState({ maxID: 1 })
@@ -140,8 +126,8 @@ class AddIngredients extends React.Component {
                                             />
                                             : null}
                                     </td>
-                                    <td>
-                                        {this.state.ingredients.length > 1 ? <button className="remove-btn btn-danger remove" type="button"
+                                    <td className="td-remove">
+                                        {this.state.ingredients.length > 1 ? <button className="remove-btn btn-danger" type="button"
                                             id={`remove-${row.id}`} onClick={this.removeRow}>
                                             <RiDeleteBinLine /></button> : null}
                                     </td>
